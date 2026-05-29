@@ -230,11 +230,23 @@ function encodeCode128BModules(value: string): string {
     (startCodeB + dataCodes.reduce((total, code, index) => total + code * (index + 1), 0)) % 103
   const codes = [startCodeB, ...dataCodes, checksum, 106]
 
-  return codes.map((code) => widthPatternToModules(CODE128_PATTERNS[code])).join('')
+  return codes.map((code) => {
+    const pattern = CODE128_PATTERNS[code]
+
+    if (!pattern) {
+      throw new Error('Code 128 encoding failed.')
+    }
+
+    return widthPatternToModules(pattern)
+  }).join('')
 }
 
 function encodeEan13Modules(value: string): string {
   const firstDigit = value[0]
+  if (!firstDigit) {
+    throw new Error('EAN-13 encoding requires numeric input.')
+  }
+
   const parity = EAN_LEFT_PARITY[firstDigit]
 
   if (!parity) {
