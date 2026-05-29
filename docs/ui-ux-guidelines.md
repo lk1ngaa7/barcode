@@ -80,7 +80,7 @@ MVP 只做这些页面：
 2. `/code-128-barcode-generator`  
    默认 Code 128
 
-3. `/upc-barcode-generator`  
+3. `/upc-a-barcode-generator`  
    默认 UPC-A
 
 4. `/ean-13-barcode-generator`  

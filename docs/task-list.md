@@ -32,9 +32,9 @@ Codex 必须按任务顺序逐步实现，每次只完成一个任务，不要�
 - package.json scripts
 - Cloudflare Pages 静态生成兼容
 
-### 建议技术
+### 技术要求
 
-- Nuxt 3 或 Nuxt 4
+- Nuxt 4
 - Vue 3
 - Tailwind CSS
 - pnpm
