@@ -1,7 +1,7 @@
 <template>
   <header class="border-b border-gray-200 bg-white">
     <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-      <NuxtLink to="/" class="text-base font-semibold text-gray-950">
+      <NuxtLink to="/" class="inline-flex min-h-11 items-center text-base font-semibold text-gray-950">
         Barcode Generator
       </NuxtLink>
       <nav class="hidden items-center gap-6 text-sm font-medium text-gray-600 md:flex" aria-label="Main navigation">

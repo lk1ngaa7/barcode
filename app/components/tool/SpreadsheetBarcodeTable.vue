@@ -184,16 +184,3 @@ const emit = defineEmits<{
     </div>
   </div>
 </template>
-
-<style scoped>
-.spreadsheet-preview {
-  overflow-x: auto;
-}
-
-.spreadsheet-preview :deep(svg) {
-  display: block;
-  height: auto;
-  max-width: 190px;
-  margin: 0 auto;
-}
-</style>

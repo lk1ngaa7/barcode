@@ -36,16 +36,3 @@ defineProps<{
     </p>
   </div>
 </template>
-
-<style scoped>
-.barcode-preview {
-  overflow-x: auto;
-}
-
-.barcode-preview :deep(svg) {
-  display: block;
-  height: auto;
-  max-width: 100%;
-  margin: 0 auto;
-}
-</style>

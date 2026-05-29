@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { BARCODE_TYPES, type BarcodeType } from '../../../utils/barcodeTypes'
 
 const model = defineModel<BarcodeType>({ required: true })
 
 const barcodeTypes = Object.values(BARCODE_TYPES)
+const selectedType = computed(() => BARCODE_TYPES[model.value])
 </script>
 
 <template>
@@ -12,11 +14,11 @@ const barcodeTypes = Object.values(BARCODE_TYPES)
       Barcode Type
     </legend>
 
-    <div class="grid gap-2 sm:grid-cols-3">
+    <div class="grid grid-cols-3 gap-2">
       <label
         v-for="type in barcodeTypes"
         :key="type.id"
-        class="flex cursor-pointer rounded-xl border bg-white p-3 transition"
+        class="flex min-h-11 cursor-pointer items-center justify-center rounded-xl border bg-white p-2 transition sm:items-start sm:justify-start sm:p-3"
         :class="model === type.id ? 'border-blue-600 ring-2 ring-blue-100' : 'border-gray-200 hover:border-gray-300'"
       >
         <input
@@ -27,10 +29,14 @@ const barcodeTypes = Object.values(BARCODE_TYPES)
           :value="type.id"
         >
         <span class="grid gap-1">
-          <span class="text-sm font-semibold text-gray-950">{{ type.label }}</span>
-          <span class="text-xs leading-5 text-gray-600">{{ type.description }}</span>
+          <span class="text-center text-sm font-semibold text-gray-950 sm:text-left">{{ type.label }}</span>
+          <span class="hidden text-xs leading-5 text-gray-600 sm:block">{{ type.description }}</span>
         </span>
       </label>
     </div>
+
+    <p class="text-xs leading-5 text-gray-600 sm:hidden">
+      {{ selectedType.description }}
+    </p>
   </fieldset>
 </template>

@@ -703,6 +703,8 @@ Create printable barcodes and barcode labels as PDF for products and inventory.
 
 ## 9. UI/UX 要求
 
+当前实现状态：Task 09 已完成。
+
 页面风格：
 
 - 干净
@@ -730,9 +732,19 @@ Label Sheet
 
 不要把 SEO 内容放在工具前面。
 
+已实现能力：
+
+- 375px 移动端下工具区优先显示，首页无横向滚动。
+- Barcode Type 在移动端使用紧凑三列选择器，并保留当前类型说明。
+- 主要输入框、textarea、select、工具 tab 和下载/导出按钮均满足 44px 基础触控高度。
+- Single、Bulk、Excel、Label 预览均限制在容器内，不产生页面横向溢出。
+- Bulk 和 Excel 结果在移动端使用卡片式可读布局。
+
 ---
 
 ## 10. 非功能需求
+
+当前实现状态：Task 09 已完成。
 
 性能：
 
@@ -753,6 +765,13 @@ Label Sheet
 隐私：
 
 - 不上传用户输入
+
+已验证性能：
+
+- Lighthouse mobile performance：gzip 静态输出下 Performance 99。
+- Lighthouse mobile LCP：1.8s。
+- Lighthouse mobile CLS：0。
+- Chrome performance trace：移动端 Fast 4G + 4x CPU 下首页 LCP 268ms，CLS 0.00。
 - 不保存 barcode value
 - 不需要登录
 - 在页面明确说明本地处理

@@ -583,6 +583,8 @@ Free online barcode tools for products, inventory, and labels.
 
 ## 17. 移动端要求
 
+当前实现状态：Task 09 已完成。
+
 必须满足：
 
 - 输入框高度至少 44px
@@ -594,6 +596,14 @@ Free online barcode tools for products, inventory, and labels.
 - 不出现严重横向滚动
 
 不建议 MVP 做 sticky CTA。
+
+已实现：
+
+- 375px 宽度下首页、Bulk、Excel、Label 页面均无横向滚动。
+- 移动端 Barcode Type 使用三列紧凑布局，并显示当前类型说明。
+- 工具 tab、输入框、textarea、select、下载按钮和导出按钮均满足 44px 基础触控高度。
+- Barcode、Bulk、Spreadsheet、Label 预览均限制在容器内。
+- Bulk 和 Excel 在移动端使用卡片式结果布局。
 
 ---
 

@@ -497,6 +497,8 @@ Terms 页面说明：
 
 ## Task 09 - 移动端与性能优化
 
+状态：已完成。
+
 ### 目标
 
 优化移动端体验和性能。
@@ -519,6 +521,27 @@ Terms 页面说明：
 - 工具按钮清晰
 - 批量页面移动端可操作
 - 构建成功
+
+### 完成记录
+
+已完成：
+
+- 移动端首页 intro 高度已压缩，工具区和 Barcode Value 输入在 375px 首屏内更早出现。
+- 移动端 Barcode Type 选择器改为三列紧凑布局，并保留当前选中类型说明。
+- Header、Footer、工具 tab、输入框和按钮触控目标已统一满足 44px 基础要求。
+- 条码预览、Bulk 预览、Excel 预览和 Label 预览已限制横向溢出。
+- Bulk 和 Excel 移动端继续使用卡片式预览布局，375px 下无横向滚动。
+- SEO 内容使用 `content-visibility` 延后渲染，降低首屏渲染成本。
+- Nuxt 静态输出启用 inline styles 和 client payload extraction，减少首屏阻塞请求。
+
+已验证：
+
+- `pnpm typecheck` 通过。
+- `pnpm generate` 通过。
+- 375px 宽度下检查 `/`、`/bulk-barcode-generator`、`/barcode-generator-for-excel`、`/barcode-label-generator`，页面 `scrollWidth` 等于视口宽度，无横向滚动。
+- 375px 宽度下首页、Bulk、Excel、Label 主要可见输入框和按钮高度均不低于 44px。
+- Chrome performance trace：移动端 Fast 4G + 4x CPU 下首页 LCP 268ms，CLS 0.00。
+- Lighthouse mobile performance：gzip 静态输出下 Performance 99，LCP 1.8s，CLS 0。
 
 ---
 

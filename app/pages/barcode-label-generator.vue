@@ -12,14 +12,14 @@ useToolPageHead(page)
   <div>
     <LabelDesigner>
       <template #intro>
-        <div class="space-y-3">
-          <p class="text-sm font-semibold uppercase tracking-wide text-blue-600">
+        <div class="space-y-2 sm:space-y-3">
+          <p class="text-xs font-semibold uppercase leading-5 tracking-wide text-blue-600 sm:text-sm">
             {{ page.trustNote }}
           </p>
-          <h1 class="max-w-3xl text-4xl font-bold tracking-normal text-gray-950 sm:text-5xl">
+          <h1 class="max-w-3xl text-3xl font-bold leading-tight tracking-normal text-gray-950 sm:text-5xl">
             {{ page.h1 }}
           </h1>
-          <p class="max-w-2xl text-lg leading-8 text-gray-600">
+          <p class="max-w-2xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8">
             {{ page.subtitle }}
           </p>
         </div>

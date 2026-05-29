@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="mx-auto max-w-6xl space-y-10 px-4 pb-12 sm:px-6 lg:px-8">
+  <div class="seo-content mx-auto max-w-6xl space-y-10 px-4 pb-12 sm:px-6 lg:px-8">
     <section class="grid gap-4 md:grid-cols-3">
       <article
         v-for="section in page.sections"

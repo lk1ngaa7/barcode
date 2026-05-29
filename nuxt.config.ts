@@ -16,6 +16,12 @@ export default defineNuxtConfig({
       publicDir: 'dist'
     }
   },
+  features: {
+    inlineStyles: true
+  },
+  experimental: {
+    payloadExtraction: 'client'
+  },
   vite: {
     plugins: [tailwindcss()]
   },

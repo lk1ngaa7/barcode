@@ -173,19 +173,19 @@ function sanitizeFilePart(value: string): string {
 </script>
 
 <template>
-  <section class="mx-auto grid max-w-6xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8 lg:py-12">
-    <div class="space-y-6">
+  <section class="mx-auto grid max-w-6xl gap-6 px-4 py-5 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-8 lg:px-8 lg:py-12">
+    <div class="min-w-0 space-y-5 sm:space-y-6">
       <slot name="intro" />
 
       <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
         <div class="mb-5 flex flex-wrap gap-2 border-b border-gray-200 pb-4 text-sm font-medium">
-          <button class="min-h-11 rounded-xl bg-blue-600 px-4 text-white" type="button">
+          <button class="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-white" type="button">
             Single Barcode
           </button>
-          <NuxtLink class="min-h-11 rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator">
+          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator">
             Bulk Barcodes
           </NuxtLink>
-          <NuxtLink class="min-h-11 rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator">
+          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator">
             Label Sheet
           </NuxtLink>
         </div>
@@ -214,8 +214,8 @@ function sanitizeFilePart(value: string): string {
             >
           </label>
 
-          <label class="flex items-center gap-3 text-sm font-medium text-gray-700">
-            <input v-model="showText" class="h-4 w-4 rounded border-gray-300 text-blue-600" type="checkbox">
+          <label class="flex min-h-11 items-center gap-3 text-sm font-medium text-gray-700">
+            <input v-model="showText" class="h-5 w-5 rounded border-gray-300 text-blue-600" type="checkbox">
             Show text below barcode
           </label>
 
@@ -231,7 +231,7 @@ function sanitizeFilePart(value: string): string {
       </div>
     </div>
 
-    <aside class="space-y-4 lg:pt-2">
+    <aside class="min-w-0 space-y-4 lg:pt-2">
       <BarcodePreview
         :svg="previewSvg"
         :value="validation.normalizedValue"

@@ -424,6 +424,8 @@ FAQ 内容必须和页面主题相关。
 
 ## 5. UI/UX 验收
 
+当前验收状态：已通过 Task 09 验收。
+
 必须满足：
 
 - 工具在首屏可见。
@@ -439,9 +441,20 @@ FAQ 内容必须和页面主题相关。
 - 不出现弹窗广告。
 - 不在输入框和预览之间插广告。
 
+已验证：
+
+- 375px 宽度下首页工具区可见，Barcode Type 可选择，Barcode Value 输入框可用。
+- 375px 宽度下首页无横向滚动。
+- 375px 宽度下 Bulk 页面可操作，并使用移动端卡片布局展示行预览。
+- 375px 宽度下 Excel 页面可操作，并使用移动端卡片布局展示字段和预览。
+- 375px 宽度下 Label 页面输入、选择和预览不横向溢出。
+- 主要文本输入框、textarea、select、按钮和工具 tab 高度均不低于 44px。
+
 ---
 
 ## 6. 移动端验收
+
+当前验收状态：已通过 Task 09 验收。
 
 在 375px 宽度下必须满足：
 
@@ -455,9 +468,17 @@ FAQ 内容必须和页面主题相关。
 - 表格或卡片布局可读。
 - 页面无横向滚动。
 
+已验证：
+
+- `/`、`/bulk-barcode-generator`、`/barcode-generator-for-excel`、`/barcode-label-generator` 在 375px 宽度下 `scrollWidth` 等于视口宽度。
+- 条码预览 SVG、Bulk 预览 SVG、Excel 预览 SVG 和 Label 预览 SVG 均限制在容器内。
+- Bulk 表格在移动端切换为卡片布局，行号、状态、错误信息和下载按钮可读可操作。
+
 ---
 
 ## 7. 性能验收
+
+当前验收状态：已通过 Task 09 验收。
 
 目标：
 
@@ -481,6 +502,13 @@ pnpm generate
 ```
 
 必须成功。
+
+已验证：
+
+- `pnpm generate` 成功，静态输出目录为 `dist`。
+- `pnpm typecheck` 成功。
+- Chrome performance trace：移动端 Fast 4G + 4x CPU 下首页 LCP 268ms，CLS 0.00。
+- Lighthouse mobile performance：gzip 静态输出下 Performance 99，LCP 1.8s，CLS 0。
 
 ---
 

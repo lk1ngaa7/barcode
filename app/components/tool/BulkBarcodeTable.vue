@@ -113,7 +113,7 @@ const emit = defineEmits<{
           :class="row.isValid ? 'border-gray-200 bg-white' : 'border-red-200 bg-red-50'"
         >
           <div class="flex items-start justify-between gap-3">
-            <div>
+            <div class="min-w-0">
               <p class="text-xs font-semibold uppercase text-gray-500">
                 Line {{ row.lineNumber }}
               </p>
@@ -153,16 +153,3 @@ const emit = defineEmits<{
     </div>
   </div>
 </template>
-
-<style scoped>
-.bulk-preview {
-  overflow-x: auto;
-}
-
-.bulk-preview :deep(svg) {
-  display: block;
-  height: auto;
-  max-width: 220px;
-  margin: 0 auto;
-}
-</style>
