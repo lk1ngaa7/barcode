@@ -68,6 +68,18 @@ const excelTool: RelatedTool = {
   path: '/barcode-generator-for-excel'
 }
 
+const labelTool: RelatedTool = {
+  title: 'Barcode Label Generator',
+  description: 'Create printable barcode labels with simple product and inventory templates.',
+  path: '/barcode-label-generator'
+}
+
+const printableTool: RelatedTool = {
+  title: 'Printable Barcode Generator',
+  description: 'Export barcode labels as print-ready US Letter or A4 PDF sheets.',
+  path: '/printable-barcode-generator'
+}
+
 export const toolPages = {
   home: {
     path: '/',
@@ -108,7 +120,7 @@ export const toolPages = {
         answer: 'Yes. Valid barcodes can be downloaded as PNG, SVG, or a basic printable PDF.'
       }
     ],
-    relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool, excelTool]
+    relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool, excelTool, labelTool]
   },
   code128: {
     path: '/code-128-barcode-generator',
@@ -149,7 +161,7 @@ export const toolPages = {
         answer: 'No. Code 128 is flexible for custom values, while UPC-A is a strict 12-digit retail product barcode.'
       }
     ],
-    relatedTools: [homeTool, upcATool, ean13Tool, bulkTool, excelTool]
+    relatedTools: [homeTool, upcATool, ean13Tool, bulkTool, excelTool, labelTool]
   },
   upcA: {
     path: '/upc-a-barcode-generator',
@@ -189,7 +201,7 @@ export const toolPages = {
         answer: 'Yes. After the UPC-A value is valid, you can download PNG, SVG, or PDF.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool, excelTool]
+    relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool, excelTool, labelTool]
   },
   ean13: {
     path: '/ean-13-barcode-generator',
@@ -229,7 +241,7 @@ export const toolPages = {
         answer: 'No. EAN-13 only supports numeric digits. Use Code 128 for custom alphanumeric values.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool, bulkTool, excelTool]
+    relatedTools: [homeTool, code128Tool, upcATool, bulkTool, excelTool, labelTool]
   },
   bulk: {
     path: '/bulk-barcode-generator',
@@ -270,7 +282,7 @@ export const toolPages = {
         answer: 'Invalid rows are marked with an error message. Valid rows can still be previewed and exported.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool, ean13Tool, excelTool]
+    relatedTools: [homeTool, code128Tool, upcATool, ean13Tool, excelTool, labelTool]
   },
   excel: {
     path: '/barcode-generator-for-excel',
@@ -310,7 +322,87 @@ export const toolPages = {
         answer: 'No. The pasted rows are parsed and validated in your browser.'
       }
     ],
-    relatedTools: [homeTool, bulkTool, code128Tool, upcATool, ean13Tool]
+    relatedTools: [homeTool, bulkTool, labelTool, code128Tool, upcATool]
+  },
+  label: {
+    path: '/barcode-label-generator',
+    title: 'Barcode Label Generator | Print Barcode Labels Online',
+    description:
+      'Create printable barcode labels for products, inventory, shelves, and small business workflows. Choose a basic label template and export PDF sheets.',
+    h1: 'Barcode Label Generator',
+    subtitle: 'Create printable barcode labels for products, inventory, shelves, and small business workflows.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'SKU001',
+    sections: [
+      {
+        title: 'Design simple barcode labels',
+        body: 'Choose Simple, Product, or Inventory templates and preview the barcode label before exporting a PDF sheet.'
+      },
+      {
+        title: 'Basic label sizes',
+        body: 'The MVP supports 2 x 1 inch and 3 x 2 inch labels on US Letter or A4 paper.'
+      },
+      {
+        title: 'Printable PDF sheets',
+        body: 'Valid barcode labels can be exported as a basic print-ready PDF with repeated labels on the selected paper size.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Which label templates are available?',
+        answer: 'The MVP includes Simple, Product, and Inventory barcode label templates.'
+      },
+      {
+        question: 'Can I choose A4 paper?',
+        answer: 'Yes. You can export label sheets for US Letter or A4 paper.'
+      },
+      {
+        question: 'Does this include Avery templates?',
+        answer: 'No. Advanced Avery templates are outside the MVP scope.'
+      }
+    ],
+    relatedTools: [printableTool, homeTool, bulkTool, excelTool, code128Tool]
+  },
+  printable: {
+    path: '/printable-barcode-generator',
+    title: 'Printable Barcode Generator | Export Barcode Labels as PDF',
+    description:
+      'Create printable barcodes and barcode labels as PDF for products and inventory. Choose label size, paper size, and a basic label template.',
+    h1: 'Printable Barcode Generator',
+    subtitle: 'Create printable barcodes and barcode labels as PDF for products and inventory.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'SKU001',
+    sections: [
+      {
+        title: 'Export barcode labels as PDF',
+        body: 'Create a barcode label preview, then export repeated labels on US Letter or A4 paper.'
+      },
+      {
+        title: 'Choose a print-friendly layout',
+        body: 'Use 2 x 1 inch labels for compact SKU labels or 3 x 2 inch labels when product or location text needs more room.'
+      },
+      {
+        title: 'Browser-based label generation',
+        body: 'The barcode and label PDF are generated in your browser without uploading your barcode value.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Can I export a printable PDF?',
+        answer: 'Yes. Valid barcode labels can be exported as a basic PDF label sheet.'
+      },
+      {
+        question: 'Which paper sizes are supported?',
+        answer: 'The printable generator supports US Letter and A4 paper in the MVP.'
+      },
+      {
+        question: 'Should I use Fit to page when printing?',
+        answer: 'No. For best results, print at 100% scale and disable Fit to page.'
+      }
+    ],
+    relatedTools: [labelTool, homeTool, bulkTool, excelTool, code128Tool]
   }
 } satisfies Record<string, ToolPageContent>
 

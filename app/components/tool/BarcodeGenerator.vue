@@ -182,12 +182,12 @@ function sanitizeFilePart(value: string): string {
           <button class="min-h-11 rounded-xl bg-blue-600 px-4 text-white" type="button">
             Single Barcode
           </button>
-          <button class="min-h-11 rounded-xl px-4 text-gray-500" type="button" disabled>
+          <NuxtLink class="min-h-11 rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator">
             Bulk Barcodes
-          </button>
-          <button class="min-h-11 rounded-xl px-4 text-gray-500" type="button" disabled>
+          </NuxtLink>
+          <NuxtLink class="min-h-11 rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator">
             Label Sheet
-          </button>
+          </NuxtLink>
         </div>
 
         <div class="grid gap-5">

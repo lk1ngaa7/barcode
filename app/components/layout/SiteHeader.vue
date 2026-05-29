@@ -14,9 +14,9 @@
         <NuxtLink to="/barcode-generator-for-excel" class="hover:text-blue-600">
           Excel Generator
         </NuxtLink>
-        <span class="text-gray-400">
+        <NuxtLink to="/barcode-label-generator" class="hover:text-blue-600">
           Label Generator
-        </span>
+        </NuxtLink>
         <span class="text-gray-400">
           Guides
         </span>

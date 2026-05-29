@@ -1,5 +1,11 @@
 import { type BarcodeType } from './barcodeTypes'
 import { encodeBarcodeModules } from './exportSvg'
+import {
+  getLabelTextLines,
+  LABEL_SIZES,
+  PAPER_SIZES,
+  type LabelDesign
+} from './labelTemplates'
 
 export interface BulkBarcodePdfItem {
   value: string
@@ -37,6 +43,94 @@ export function createBulkBarcodePdf(type: BarcodeType, items: BulkBarcodePdfIte
   const pageCommands = buildBulkPages(type, items)
 
   return new Blob([buildPdf(pageCommands, LETTER_WIDTH, LETTER_HEIGHT)], { type: 'application/pdf' })
+}
+
+export function createLabelSheetPdf(design: LabelDesign, normalizedValue: string): Blob {
+  const paper = PAPER_SIZES[design.paperSize]
+  const commands = buildLabelSheetPage(design, normalizedValue, paper.width, paper.height)
+
+  return new Blob([buildPdf([commands], paper.width, paper.height)], { type: 'application/pdf' })
+}
+
+function buildLabelSheetPage(design: LabelDesign, normalizedValue: string, pageWidth: number, pageHeight: number): string {
+  const labelSize = LABEL_SIZES[design.labelSize]
+  const labelWidth = labelSize.widthInches * 72
+  const labelHeight = labelSize.heightInches * 72
+  const marginX = 36
+  const marginTop = 36
+  const marginBottom = 54
+  const gapX = 8
+  const gapY = 8
+  const columns = Math.max(1, Math.floor((pageWidth - marginX * 2 + gapX) / (labelWidth + gapX)))
+  const rows = Math.max(1, Math.floor((pageHeight - marginTop - marginBottom + gapY) / (labelHeight + gapY)))
+  const labelCount = rows * columns
+  const commands = [
+    '1 1 1 rg',
+    `0 0 ${pageWidth} ${pageHeight} re f`
+  ]
+
+  for (let index = 0; index < labelCount; index += 1) {
+    const row = Math.floor(index / columns)
+    const column = index % columns
+    const x = marginX + column * (labelWidth + gapX)
+    const y = pageHeight - marginTop - (row + 1) * labelHeight - row * gapY
+
+    commands.push(...designedLabelToPdfCommands(design, normalizedValue, x, y, labelWidth, labelHeight))
+  }
+
+  commands.push('/F1 9 Tf')
+  commands.push(`BT 36 24 Td (${escapePdfText(PRINT_HINT)}) Tj ET`)
+
+  return commands.join('\n')
+}
+
+function designedLabelToPdfCommands(
+  design: LabelDesign,
+  normalizedValue: string,
+  x: number,
+  y: number,
+  width: number,
+  height: number
+): string[] {
+  const padding = 8
+  const modules = encodeBarcodeModules(design.barcodeType, normalizedValue)
+  const textLines = getLabelTextLines(design, normalizedValue)
+  const hasTopLine = design.template !== 'simple'
+  const hasLocationLine = design.template === 'inventory'
+  const topLine = hasTopLine ? textLines[0] : ''
+  const bottomLine = normalizedValue
+  const locationLine = hasLocationLine ? textLines[1] : ''
+  const topTextY = y + height - padding - 11
+  const bottomTextY = y + padding + 5
+  const locationTextY = y + padding + 19
+  const barcodeTop = hasTopLine ? topTextY - 9 : y + height - padding
+  const barcodeBottom = y + padding + (hasLocationLine ? 34 : 20)
+  const barHeight = Math.max(24, barcodeTop - barcodeBottom)
+  const moduleWidth = Math.min(1.6, (width - padding * 2) / modules.length)
+  const barcodeWidth = modules.length * moduleWidth
+  const startX = x + (width - barcodeWidth) / 2
+  const commands = [
+    '0.898 0.906 0.922 RG',
+    `${formatPdfNumber(x)} ${formatPdfNumber(y)} ${formatPdfNumber(width)} ${formatPdfNumber(height)} re S`,
+    '0.067 0.094 0.153 rg'
+  ]
+
+  if (topLine) {
+    commands.push('/F1 9 Tf')
+    commands.push(`BT ${centerTextXInBox(topLine, x, width)} ${formatPdfNumber(topTextY)} Td (${escapePdfText(trimPdfText(topLine, 34))}) Tj ET`)
+  }
+
+  commands.push(...modulesToPdfRects(modules, startX, barcodeBottom, moduleWidth, barHeight))
+
+  if (locationLine) {
+    commands.push('/F1 8 Tf')
+    commands.push(`BT ${centerTextXInBox(locationLine, x, width)} ${formatPdfNumber(locationTextY)} Td (${escapePdfText(trimPdfText(locationLine, 38))}) Tj ET`)
+  }
+
+  commands.push('/F1 8 Tf')
+  commands.push(`BT ${centerTextXInBox(bottomLine, x, width)} ${formatPdfNumber(bottomTextY)} Td (${escapePdfText(trimPdfText(bottomLine, 38))}) Tj ET`)
+
+  return commands
 }
 
 function buildBulkPages(type: BarcodeType, items: BulkBarcodePdfItem[]): string[] {
@@ -177,4 +271,8 @@ function formatPdfNumber(value: number): string {
 
 function escapePdfText(value: string): string {
   return value.replaceAll('\\', '\\\\').replaceAll('(', '\\(').replaceAll(')', '\\)')
+}
+
+function trimPdfText(value: string, maxLength: number): string {
+  return value.length > maxLength ? `${value.slice(0, maxLength - 3)}...` : value
 }
