@@ -62,6 +62,12 @@ const bulkTool: RelatedTool = {
   path: '/bulk-barcode-generator'
 }
 
+const excelTool: RelatedTool = {
+  title: 'Barcode Generator for Excel',
+  description: 'Paste rows from Excel or Google Sheets and generate barcodes from spreadsheet columns.',
+  path: '/barcode-generator-for-excel'
+}
+
 export const toolPages = {
   home: {
     path: '/',
@@ -102,7 +108,7 @@ export const toolPages = {
         answer: 'Yes. Valid barcodes can be downloaded as PNG, SVG, or a basic printable PDF.'
       }
     ],
-    relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool]
+    relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool, excelTool]
   },
   code128: {
     path: '/code-128-barcode-generator',
@@ -143,7 +149,7 @@ export const toolPages = {
         answer: 'No. Code 128 is flexible for custom values, while UPC-A is a strict 12-digit retail product barcode.'
       }
     ],
-    relatedTools: [homeTool, upcATool, ean13Tool, bulkTool]
+    relatedTools: [homeTool, upcATool, ean13Tool, bulkTool, excelTool]
   },
   upcA: {
     path: '/upc-a-barcode-generator',
@@ -183,7 +189,7 @@ export const toolPages = {
         answer: 'Yes. After the UPC-A value is valid, you can download PNG, SVG, or PDF.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool]
+    relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool, excelTool]
   },
   ean13: {
     path: '/ean-13-barcode-generator',
@@ -223,7 +229,7 @@ export const toolPages = {
         answer: 'No. EAN-13 only supports numeric digits. Use Code 128 for custom alphanumeric values.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool, bulkTool]
+    relatedTools: [homeTool, code128Tool, upcATool, bulkTool, excelTool]
   },
   bulk: {
     path: '/bulk-barcode-generator',
@@ -264,7 +270,47 @@ export const toolPages = {
         answer: 'Invalid rows are marked with an error message. Valid rows can still be previewed and exported.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool, ean13Tool]
+    relatedTools: [homeTool, code128Tool, upcATool, ean13Tool, excelTool]
+  },
+  excel: {
+    path: '/barcode-generator-for-excel',
+    title: 'Barcode Generator for Excel | Create Barcodes from Spreadsheets',
+    description:
+      'Paste your Excel or Google Sheets product list and generate barcodes in bulk. Map barcode values, label text, and extra text from spreadsheet columns.',
+    h1: 'Barcode Generator for Excel',
+    subtitle: 'Paste your Excel or Google Sheets product list and generate barcodes in bulk.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'SKU001',
+    sections: [
+      {
+        title: 'Paste rows from Excel or Google Sheets',
+        body: 'Copy spreadsheet rows and paste them directly into the tool. Tab-delimited rows from spreadsheet apps and comma-separated rows are parsed automatically.'
+      },
+      {
+        title: 'Simple column mapping',
+        body: 'Column 1 is used as the barcode value, column 2 as label text, and column 3 as extra text for product notes such as price or variant.'
+      },
+      {
+        title: 'Check spreadsheet rows before exporting',
+        body: 'Each row is validated against the selected barcode type so invalid product codes are marked before you export a printable PDF.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Can I upload an Excel file?',
+        answer: 'No. For the MVP, copy rows from Excel or Google Sheets and paste them into the browser-based tool.'
+      },
+      {
+        question: 'Which columns does the Excel barcode generator use?',
+        answer: 'The first column is Barcode Value, the second column is Label Text, and the third column is Extra Text.'
+      },
+      {
+        question: 'Are spreadsheet rows uploaded to a server?',
+        answer: 'No. The pasted rows are parsed and validated in your browser.'
+      }
+    ],
+    relatedTools: [homeTool, bulkTool, code128Tool, upcATool, ean13Tool]
   }
 } satisfies Record<string, ToolPageContent>
 

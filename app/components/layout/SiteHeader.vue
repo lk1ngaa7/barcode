@@ -11,6 +11,9 @@
         <NuxtLink to="/bulk-barcode-generator" class="hover:text-blue-600">
           Bulk Generator
         </NuxtLink>
+        <NuxtLink to="/barcode-generator-for-excel" class="hover:text-blue-600">
+          Excel Generator
+        </NuxtLink>
         <span class="text-gray-400">
           Label Generator
         </span>
