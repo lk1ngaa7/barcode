@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useAnalytics } from '../../composables/useAnalytics'
 import { type BarcodeType } from '../../../utils/barcodeTypes'
 import type { BulkBarcodeRow } from '../../../utils/bulkBarcode'
 import { createBulkBarcodePdf } from '../../../utils/exportPdf'
@@ -15,6 +16,7 @@ const sampleInput = 'SKU001\nSKU002\nSKU003'
 const selectedType = ref<BarcodeType>('code128')
 const draftInput = ref(sampleInput)
 const committedInput = ref(sampleInput)
+const analytics = useAnalytics()
 
 const rawValues = computed(() => parseBulkValues(committedInput.value))
 const draftRowCount = computed(() => parseBulkValues(draftInput.value).length)
@@ -26,8 +28,31 @@ const validCount = computed(() => validRows.value.length)
 const errorCount = computed(() => rows.value.length - validCount.value)
 const canExportPdf = computed(() => validCount.value > 0 && rawValues.value.length <= BULK_LIMIT)
 
+watch(selectedType, (nextType, previousType) => {
+  analytics.track('barcode_type_change', {
+    from_type: previousType,
+    to_type: nextType,
+    tool: 'bulk'
+  })
+})
+
 function generateBarcodes(): void {
   committedInput.value = draftInput.value
+  analytics.track('bulk_generate', {
+    barcode_type: selectedType.value,
+    row_count: rawValues.value.length,
+    valid_count: validCount.value,
+    error_count: errorCount.value,
+    over_limit: rawValues.value.length > BULK_LIMIT
+  })
+
+  if (errorCount.value > 0) {
+    analytics.track('barcode_validation_error', {
+      barcode_type: selectedType.value,
+      error_count: errorCount.value,
+      tool: 'bulk'
+    })
+  }
 }
 
 function clearInput(): void {
@@ -49,6 +74,11 @@ function exportPdf(): void {
   )
 
   downloadBlob(pdf, 'bulk-barcodes.pdf')
+  analytics.track('export_pdf', {
+    barcode_type: selectedType.value,
+    row_count: validRows.value.length,
+    tool: 'bulk'
+  })
 }
 
 function downloadSvg(row: BulkBarcodeRow): void {
@@ -65,6 +95,18 @@ function downloadSvg(row: BulkBarcodeRow): void {
   }).svg
 
   downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), `barcode-${sanitizeFilePart(row.normalizedValue)}.svg`)
+  analytics.track('download_svg', {
+    barcode_type: selectedType.value,
+    value_length: row.normalizedValue.length,
+    tool: 'bulk'
+  })
+}
+
+function trackBulkPaste(value: string): void {
+  analytics.track('bulk_paste', {
+    row_count: parseBulkValues(value).length,
+    has_multiple_rows: /\r?\n/.test(value)
+  })
 }
 
 function parseBulkValues(input: string): Array<{ lineNumber: number, value: string }> {
@@ -146,6 +188,7 @@ function sanitizeFilePart(value: string): string {
               :over-limit="overLimit"
               @generate="generateBarcodes"
               @clear="clearInput"
+              @paste="trackBulkPaste"
             />
           </div>
         </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useAnalytics } from '../../composables/useAnalytics'
 import { BARCODE_TYPES, type BarcodeType } from '../../../utils/barcodeTypes'
 import { createSingleBarcodePdf } from '../../../utils/exportPdf'
 import { exportBarcodeSvg } from '../../../utils/exportSvg'
@@ -24,6 +25,9 @@ const labelText = ref('')
 const showText = ref(true)
 const isWorking = ref(false)
 const downloadError = ref('')
+const analytics = useAnalytics()
+const lastGeneratedKey = ref('')
+const lastValidationErrorKey = ref('')
 
 const validation = computed(() => validateBarcode(selectedType.value, barcodeValue.value))
 const currentTypeDefinition = computed(() => BARCODE_TYPES[selectedType.value])
@@ -52,10 +56,44 @@ watch(selectedType, (nextType, previousType) => {
   }
 
   downloadError.value = ''
+  analytics.track('barcode_type_change', {
+    from_type: previousType,
+    to_type: nextType,
+    tool: 'single'
+  })
 })
 
 watch([barcodeValue, showText, labelText], () => {
   downloadError.value = ''
+})
+
+watch(validation, (nextValidation) => {
+  if (nextValidation.isValid) {
+    const generatedKey = `${selectedType.value}:${nextValidation.normalizedValue.length}:${nextValidation.wasCheckDigitAdded}`
+
+    if (generatedKey !== lastGeneratedKey.value) {
+      analytics.track('barcode_generate', {
+        barcode_type: selectedType.value,
+        value_length: nextValidation.normalizedValue.length,
+        check_digit_added: nextValidation.wasCheckDigitAdded,
+        tool: 'single'
+      })
+      lastGeneratedKey.value = generatedKey
+    }
+
+    return
+  }
+
+  const errorKey = `${selectedType.value}:${nextValidation.error}`
+
+  if (nextValidation.error && errorKey !== lastValidationErrorKey.value) {
+    analytics.track('barcode_validation_error', {
+      barcode_type: selectedType.value,
+      error_message: nextValidation.error,
+      tool: 'single'
+    })
+    lastValidationErrorKey.value = errorKey
+  }
 })
 
 function downloadSvg(): void {
@@ -72,6 +110,11 @@ function downloadSvg(): void {
   }).svg
 
   downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), `barcode-${safeFileValue.value}.svg`)
+  analytics.track('download_svg', {
+    barcode_type: selectedType.value,
+    value_length: validation.value.normalizedValue.length,
+    tool: 'single'
+  })
 }
 
 async function downloadPng(): Promise<void> {
@@ -92,6 +135,11 @@ async function downloadPng(): Promise<void> {
     const blob = await svgToPngBlob(svgResult.svg, svgResult.width, svgResult.height)
 
     downloadBlob(blob, `barcode-${safeFileValue.value}.png`)
+    analytics.track('download_png', {
+      barcode_type: selectedType.value,
+      value_length: validation.value.normalizedValue.length,
+      tool: 'single'
+    })
   } catch (error) {
     downloadError.value = error instanceof Error ? error.message : 'PNG download failed. Try SVG instead.'
   } finally {
@@ -111,6 +159,11 @@ function exportPdf(): void {
   )
 
   downloadBlob(pdf, `barcode-${safeFileValue.value}.pdf`)
+  analytics.track('export_pdf', {
+    barcode_type: selectedType.value,
+    value_length: validation.value.normalizedValue.length,
+    tool: 'single'
+  })
 }
 
 function downloadBlob(blob: Blob, filename: string): void {

@@ -10,10 +10,15 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
   generate: []
   clear: []
+  pasteDetected: [value: string]
 }>()
 
 function handleInput(event: Event): void {
   emit('update:modelValue', (event.target as HTMLTextAreaElement).value)
+}
+
+function handlePaste(event: ClipboardEvent): void {
+  emit('pasteDetected', event.clipboardData?.getData('text') || '')
 }
 </script>
 
@@ -30,6 +35,7 @@ function handleInput(event: Event): void {
         aria-describedby="spreadsheet-barcode-help spreadsheet-barcode-limit"
         spellcheck="false"
         @input="handleInput"
+        @paste="handlePaste"
       />
       <span id="spreadsheet-barcode-help" class="text-xs font-normal leading-5 text-gray-500">
         Paste from Excel or Google Sheets. Column 1 is Barcode Value, column 2 is Label Text, and column 3 is Extra Text.

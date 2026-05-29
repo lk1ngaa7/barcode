@@ -104,6 +104,8 @@ MVP 要验证：
 5. Bulk / Excel / Label 方向是否有使用行为。
 6. 页面体验是否比现有竞品更顺滑。
 
+当前实现状态：Task 10 已完成基础事件埋点。事件用于验证生成、下载、批量、Excel、Label 和 Related Tools 的使用行为；事件 payload 不包含用户输入的 barcode value 或标签文本。
+
 ---
 
 ## 5. MVP 页面范围
@@ -442,6 +444,44 @@ SKU001
 - `/privacy` 和 `/terms` 均有唯一 title、description、H1、canonical。
 - `/privacy` 明确说明 barcode 数据在浏览器处理、不上传、不保存输入，以及可能使用匿名统计。
 - `/terms` 明确说明工具按现状提供、用户自行确认 barcode 适用性、不提供 GS1 UPC/EAN 注册、不保证所有零售系统接受。
+
+---
+
+## 7.1 埋点与上线准备
+
+当前实现状态：Task 10 已完成。
+
+MVP 包含以下匿名事件：
+
+```text
+barcode_generate
+barcode_type_change
+barcode_validation_error
+download_png
+download_svg
+export_pdf
+bulk_paste
+bulk_generate
+excel_paste_detected
+label_template_select
+related_tool_click
+```
+
+埋点原则：
+
+- 不上传 barcode value。
+- 不上传 label text、product name、location text 或 spreadsheet cell 内容。
+- 只记录页面路径、条码类型、行数、错误数、模板、纸张、值长度等元数据。
+- 第三方统计不可用时不影响工具使用。
+- 本地 QA 可监听 `barcode:analytics` 浏览器事件。
+
+上线准备：
+
+- Cloudflare Pages 使用 `pnpm generate`。
+- 输出目录为 `dist`。
+- Node.js 版本建议 20+。
+- 上线前运行 `pnpm typecheck` 和 `pnpm generate`。
+- 生产域名 HTTPS、生效后的 sitemap 提交和 GSC 添加步骤记录在 `docs/deployment.md`。
 
 ---
 

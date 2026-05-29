@@ -547,6 +547,8 @@ Terms 页面说明：
 
 ## Task 10 - 埋点与上线准备
 
+状态：已完成。
+
 ### 目标
 
 加入基础埋点并准备上线。
@@ -582,3 +584,24 @@ related_tool_click
 - 不阻塞工具使用
 - 生产构建成功
 - 部署说明清晰
+
+### 完成记录
+
+已完成：
+
+- 新增匿名客户端埋点封装，支持 `dataLayer`、`gtag`、`plausible` 和本地 `barcode:analytics` QA 事件。
+- 已接入 `barcode_generate`、`barcode_type_change`、`barcode_validation_error`、`download_png`、`download_svg`、`export_pdf`、`bulk_paste`、`bulk_generate`、`excel_paste_detected`、`label_template_select`、`related_tool_click`。
+- 埋点 payload 只包含页面路径、条码类型、行数、错误数、模板、纸张、值长度等元数据，不包含 barcode value、label text、product name 或 spreadsheet cell 内容。
+- 埋点异常会被吞掉，不阻塞条码生成、预览、下载或 PDF 导出。
+- 新增 `docs/deployment.md`，整理 Cloudflare Pages 配置、自定义域名 HTTPS、GSC、sitemap 提交、抓取检查和上线 smoke test。
+
+已验证：
+
+- `pnpm typecheck` 通过。
+- `pnpm generate` 通过。
+- 通过浏览器本地 QA 监听 `barcode:analytics`，确认核心事件可触发且不包含用户输入值。
+
+未做：
+
+- 未接入具体第三方统计脚本或账号配置。
+- 未实际部署 Cloudflare Pages、自定义域名或 GSC，因为这些需要生产账号和域名权限。

@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { useAnalytics } from '../../composables/useAnalytics'
 import type { RelatedTool } from '../../../utils/seoPages'
 
 defineProps<{
   tools: RelatedTool[]
 }>()
+
+const analytics = useAnalytics()
+
+function trackRelatedToolClick(tool: RelatedTool): void {
+  analytics.track('related_tool_click', {
+    target_path: tool.path,
+    target_title: tool.title
+  })
+}
 </script>
 
 <template>
@@ -23,6 +33,7 @@ defineProps<{
         :key="tool.path"
         :to="tool.path"
         class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md"
+        @click="trackRelatedToolClick(tool)"
       >
         <span class="text-base font-semibold text-gray-950">
           {{ tool.title }}

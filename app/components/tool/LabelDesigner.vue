@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useAnalytics } from '../../composables/useAnalytics'
 import { BARCODE_TYPES, type BarcodeType } from '../../../utils/barcodeTypes'
 import { createLabelSheetPdf } from '../../../utils/exportPdf'
 import { exportBarcodeSvg } from '../../../utils/exportSvg'
@@ -36,6 +37,9 @@ const paperSize = ref<PaperSize>(props.defaultPaper)
 const productName = ref('Black T-Shirt')
 const locationText = ref('Aisle 3 / Bin 12')
 const exportError = ref('')
+const analytics = useAnalytics()
+const lastGeneratedKey = ref('')
+const lastValidationErrorKey = ref('')
 
 const validation = computed(() => validateBarcode(selectedType.value, barcodeValue.value))
 const currentTypeDefinition = computed(() => BARCODE_TYPES[selectedType.value])
@@ -75,10 +79,51 @@ watch(selectedType, (nextType, previousType) => {
   }
 
   exportError.value = ''
+  analytics.track('barcode_type_change', {
+    from_type: previousType,
+    to_type: nextType,
+    tool: 'label'
+  })
 })
 
 watch([barcodeValue, template, labelSize, paperSize, productName, locationText], () => {
   exportError.value = ''
+})
+
+watch(template, (nextTemplate, previousTemplate) => {
+  analytics.track('label_template_select', {
+    from_template: previousTemplate,
+    to_template: nextTemplate
+  })
+})
+
+watch(validation, (nextValidation) => {
+  if (nextValidation.isValid) {
+    const generatedKey = `${selectedType.value}:${nextValidation.normalizedValue.length}:${template.value}`
+
+    if (generatedKey !== lastGeneratedKey.value) {
+      analytics.track('barcode_generate', {
+        barcode_type: selectedType.value,
+        value_length: nextValidation.normalizedValue.length,
+        label_template: template.value,
+        tool: 'label'
+      })
+      lastGeneratedKey.value = generatedKey
+    }
+
+    return
+  }
+
+  const errorKey = `${selectedType.value}:${nextValidation.error}`
+
+  if (nextValidation.error && errorKey !== lastValidationErrorKey.value) {
+    analytics.track('barcode_validation_error', {
+      barcode_type: selectedType.value,
+      error_message: nextValidation.error,
+      tool: 'label'
+    })
+    lastValidationErrorKey.value = errorKey
+  }
 })
 
 function exportPdf(): void {
@@ -98,6 +143,14 @@ function exportPdf(): void {
     }, validation.value.normalizedValue)
 
     downloadBlob(pdf, `barcode-labels-${sanitizeFilePart(validation.value.normalizedValue)}.pdf`)
+    analytics.track('export_pdf', {
+      barcode_type: selectedType.value,
+      value_length: validation.value.normalizedValue.length,
+      label_template: template.value,
+      label_size: labelSize.value,
+      paper_size: paperSize.value,
+      tool: 'label'
+    })
   } catch (error) {
     exportError.value = error instanceof Error ? error.message : 'PDF export failed. Check the barcode value and try again.'
   }

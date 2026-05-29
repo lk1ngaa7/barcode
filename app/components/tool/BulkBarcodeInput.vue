@@ -10,10 +10,15 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
   generate: []
   clear: []
+  paste: [value: string]
 }>()
 
 function handleInput(event: Event): void {
   emit('update:modelValue', (event.target as HTMLTextAreaElement).value)
+}
+
+function handlePaste(event: ClipboardEvent): void {
+  emit('paste', event.clipboardData?.getData('text') || '')
 }
 </script>
 
@@ -30,6 +35,7 @@ function handleInput(event: Event): void {
         aria-describedby="bulk-barcode-help bulk-barcode-limit"
         spellcheck="false"
         @input="handleInput"
+        @paste="handlePaste"
       />
       <span id="bulk-barcode-help" class="text-xs font-normal leading-5 text-gray-500">
         Enter one barcode value per line. Empty lines are skipped.

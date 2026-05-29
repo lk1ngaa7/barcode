@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useAnalytics } from '../../composables/useAnalytics'
 import { type BarcodeType } from '../../../utils/barcodeTypes'
 import { createBulkBarcodePdf } from '../../../utils/exportPdf'
 import { exportBarcodeSvg } from '../../../utils/exportSvg'
@@ -16,6 +17,7 @@ const sampleInput = 'SKU001\tBlack T-Shirt\t$19.99\nSKU002\tWhite Mug\t$12.99\nS
 const selectedType = ref<BarcodeType>('code128')
 const draftInput = ref(sampleInput)
 const committedInput = ref(sampleInput)
+const analytics = useAnalytics()
 
 const draftRows = computed(() => parseSpreadsheetPaste(draftInput.value))
 const parsedRows = computed(() => parseSpreadsheetPaste(committedInput.value))
@@ -28,8 +30,32 @@ const validCount = computed(() => validRows.value.length)
 const errorCount = computed(() => rows.value.length - validCount.value)
 const canExportPdf = computed(() => validCount.value > 0 && parsedRows.value.length <= ROW_LIMIT)
 
+watch(selectedType, (nextType, previousType) => {
+  analytics.track('barcode_type_change', {
+    from_type: previousType,
+    to_type: nextType,
+    tool: 'excel'
+  })
+})
+
 function generateBarcodes(): void {
   committedInput.value = draftInput.value
+  analytics.track('bulk_generate', {
+    barcode_type: selectedType.value,
+    row_count: parsedRows.value.length,
+    valid_count: validCount.value,
+    error_count: errorCount.value,
+    over_limit: parsedRows.value.length > ROW_LIMIT,
+    tool: 'excel'
+  })
+
+  if (errorCount.value > 0) {
+    analytics.track('barcode_validation_error', {
+      barcode_type: selectedType.value,
+      error_count: errorCount.value,
+      tool: 'excel'
+    })
+  }
 }
 
 function clearInput(): void {
@@ -51,6 +77,11 @@ function exportPdf(): void {
   )
 
   downloadBlob(pdf, 'excel-spreadsheet-barcodes.pdf')
+  analytics.track('export_pdf', {
+    barcode_type: selectedType.value,
+    row_count: validRows.value.length,
+    tool: 'excel'
+  })
 }
 
 function downloadSvg(row: SpreadsheetBarcodeRow): void {
@@ -68,6 +99,19 @@ function downloadSvg(row: SpreadsheetBarcodeRow): void {
   }).svg
 
   downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), `barcode-${sanitizeFilePart(row.normalizedValue)}.svg`)
+  analytics.track('download_svg', {
+    barcode_type: selectedType.value,
+    value_length: row.normalizedValue.length,
+    tool: 'excel'
+  })
+}
+
+function trackSpreadsheetPaste(value: string): void {
+  analytics.track('excel_paste_detected', {
+    row_count: parseSpreadsheetPaste(value).length,
+    has_tabs: value.includes('\t'),
+    has_commas: value.includes(',')
+  })
 }
 
 function createSpreadsheetRow(type: BarcodeType, row: ReturnType<typeof parseSpreadsheetPaste>[number]): SpreadsheetBarcodeRow {
@@ -157,6 +201,7 @@ function sanitizeFilePart(value: string): string {
               :over-limit="overLimit"
               @generate="generateBarcodes"
               @clear="clearInput"
+              @paste-detected="trackSpreadsheetPaste"
             />
           </div>
         </div>

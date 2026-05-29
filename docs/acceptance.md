@@ -533,6 +533,8 @@ Your barcode data is processed in your browser and is not uploaded to our server
 
 ## 9. 部署验收
 
+当前验收状态：已通过 Task 10 本地上线准备验收。
+
 必须满足：
 
 - 项目可以在本地运行。
@@ -557,6 +559,50 @@ pnpm generate
 pnpm typecheck
 pnpm lint
 ```
+
+已验证：
+
+- `pnpm typecheck` 成功。
+- `pnpm generate` 成功，静态输出目录为 `dist`。
+- `dist/sitemap.xml` 和 `dist/robots.txt` 存在。
+- 新增 `docs/deployment.md`，覆盖 Cloudflare Pages build command、output directory、Node.js 版本、自定义域名 HTTPS、GSC、sitemap 提交、抓取检查和上线 smoke test。
+- 本地浏览器 QA 确认埋点事件通过 `barcode:analytics` 触发，且不会阻塞工具使用。
+
+未验证：
+
+- 未实际部署到 Cloudflare Pages。
+- 未实际配置自定义域名 HTTPS。
+- 未实际添加 Google Search Console 或提交 sitemap。
+
+### 9.1 埋点验收
+
+当前验收状态：已通过 Task 10 本地验收。
+
+必须存在的事件：
+
+```text
+barcode_generate
+barcode_type_change
+barcode_validation_error
+download_png
+download_svg
+export_pdf
+bulk_paste
+bulk_generate
+excel_paste_detected
+label_template_select
+related_tool_click
+```
+
+已实现：
+
+- 单个条码页触发生成、类型切换、校验错误、PNG 下载、SVG 下载和 PDF 导出事件。
+- Bulk 页面触发类型切换、粘贴、批量生成、校验错误、SVG 下载和 PDF 导出事件。
+- Excel 页面触发类型切换、Excel 粘贴识别、批量生成、校验错误、SVG 下载和 PDF 导出事件。
+- Label 页面触发生成、类型切换、校验错误、模板选择和 PDF 导出事件。
+- Related Tools 点击触发 `related_tool_click`。
+- 埋点 payload 不包含 barcode value、label text、product name、location text 或 spreadsheet cell 内容。
+- 未配置第三方统计时仍会派发本地 `barcode:analytics` 事件，方便 QA。
 
 ---
 
