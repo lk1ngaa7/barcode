@@ -56,6 +56,12 @@ const ean13Tool: RelatedTool = {
   path: '/ean-13-barcode-generator'
 }
 
+const bulkTool: RelatedTool = {
+  title: 'Bulk Barcode Generator',
+  description: 'Paste up to 100 values and generate barcode previews in one batch.',
+  path: '/bulk-barcode-generator'
+}
+
 export const toolPages = {
   home: {
     path: '/',
@@ -96,7 +102,7 @@ export const toolPages = {
         answer: 'Yes. Valid barcodes can be downloaded as PNG, SVG, or a basic printable PDF.'
       }
     ],
-    relatedTools: [code128Tool, upcATool, ean13Tool]
+    relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool]
   },
   code128: {
     path: '/code-128-barcode-generator',
@@ -137,7 +143,7 @@ export const toolPages = {
         answer: 'No. Code 128 is flexible for custom values, while UPC-A is a strict 12-digit retail product barcode.'
       }
     ],
-    relatedTools: [homeTool, upcATool, ean13Tool]
+    relatedTools: [homeTool, upcATool, ean13Tool, bulkTool]
   },
   upcA: {
     path: '/upc-a-barcode-generator',
@@ -177,7 +183,7 @@ export const toolPages = {
         answer: 'Yes. After the UPC-A value is valid, you can download PNG, SVG, or PDF.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, ean13Tool]
+    relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool]
   },
   ean13: {
     path: '/ean-13-barcode-generator',
@@ -217,7 +223,48 @@ export const toolPages = {
         answer: 'No. EAN-13 only supports numeric digits. Use Code 128 for custom alphanumeric values.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool]
+    relatedTools: [homeTool, code128Tool, upcATool, bulkTool]
+  },
+  bulk: {
+    path: '/bulk-barcode-generator',
+    title: 'Bulk Barcode Generator | Generate Up to 100 Barcodes Online',
+    description:
+      'Paste multiple barcode values and generate up to 100 Code 128, UPC-A, or EAN-13 barcodes online. Preview valid rows and export a printable PDF.',
+    h1: 'Bulk Barcode Generator',
+    subtitle:
+      'Paste one barcode value per line, validate up to 100 rows, preview each barcode, and export a basic printable PDF.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'SKU001',
+    sections: [
+      {
+        title: 'Generate many barcodes at once',
+        body: 'Paste one SKU, inventory ID, UPC-A value, or EAN-13 value per line and generate a batch preview without uploading your data.'
+      },
+      {
+        title: 'Fix invalid rows quickly',
+        body: 'Each row is checked against the selected barcode type, with clear error messages for values that need to be corrected.'
+      },
+      {
+        title: 'Export a basic printable PDF',
+        body: 'Valid rows can be exported into a simple US Letter PDF with barcode values shown under each barcode.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'How many barcodes can I generate at once?',
+        answer: 'This bulk generator supports up to 100 barcode values at a time for the MVP.'
+      },
+      {
+        question: 'What format should I paste?',
+        answer: 'Paste one barcode value per line, such as SKU001, SKU002, and SKU003.'
+      },
+      {
+        question: 'What happens to invalid rows?',
+        answer: 'Invalid rows are marked with an error message. Valid rows can still be previewed and exported.'
+      }
+    ],
+    relatedTools: [homeTool, code128Tool, upcATool, ean13Tool]
   }
 } satisfies Record<string, ToolPageContent>
 

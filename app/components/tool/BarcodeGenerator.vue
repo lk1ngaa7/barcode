@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { BARCODE_TYPES, type BarcodeType } from '../../../utils/barcodeTypes'
-import { encodeBarcodeModules, exportBarcodeSvg } from '../../../utils/exportSvg'
+import { createSingleBarcodePdf } from '../../../utils/exportPdf'
+import { exportBarcodeSvg } from '../../../utils/exportSvg'
 import { validateBarcode } from '../../../utils/validateBarcode'
 import BarcodeDownloadActions from './BarcodeDownloadActions.vue'
 import BarcodeInput from './BarcodeInput.vue'
@@ -103,7 +104,7 @@ function exportPdf(): void {
     return
   }
 
-  const pdf = createBarcodePdf(
+  const pdf = createSingleBarcodePdf(
     selectedType.value,
     validation.value.normalizedValue,
     showText.value ? normalizedText.value : ''
@@ -164,96 +165,6 @@ async function svgToPngBlob(svg: string, width: number, height: number): Promise
       reject(new Error('PNG export failed. Try SVG instead.'))
     }, 'image/png')
   })
-}
-
-function createBarcodePdf(type: BarcodeType, value: string, text: string): Blob {
-  const pageWidth = 612
-  const pageHeight = 792
-  const modules = encodeBarcodeModules(type, value)
-  const moduleWidth = Math.min(3, 468 / modules.length)
-  const barHeight = 120
-  const barcodeWidth = modules.length * moduleWidth
-  const startX = (pageWidth - barcodeWidth) / 2
-  const startY = 520
-  const commands = [
-    '1 1 1 rg',
-    `0 0 ${pageWidth} ${pageHeight} re f`,
-    '0.067 0.094 0.153 rg',
-    ...modulesToPdfRects(modules, startX, startY, moduleWidth, barHeight),
-    '0.067 0.094 0.153 rg',
-    '/F1 16 Tf',
-    `BT ${centerTextX(text || value, pageWidth)} ${startY - 34} Td (${escapePdfText(text || value)}) Tj ET`,
-    '/F1 10 Tf',
-    `BT 72 72 Td (${escapePdfText('For best results, print at 100% scale and disable "Fit to page".')}) Tj ET`
-  ].join('\n')
-
-  return new Blob([buildPdf(commands, pageWidth, pageHeight)], { type: 'application/pdf' })
-}
-
-function modulesToPdfRects(
-  modules: string,
-  startX: number,
-  startY: number,
-  moduleWidth: number,
-  height: number
-): string[] {
-  const rects: string[] = []
-  let runStart = -1
-
-  for (let index = 0; index <= modules.length; index += 1) {
-    const isBar = modules[index] === '1'
-
-    if (isBar && runStart === -1) {
-      runStart = index
-    }
-
-    if ((!isBar || index === modules.length) && runStart !== -1) {
-      const width = (index - runStart) * moduleWidth
-      rects.push(`${formatPdfNumber(startX + runStart * moduleWidth)} ${startY} ${formatPdfNumber(width)} ${height} re f`)
-      runStart = -1
-    }
-  }
-
-  return rects
-}
-
-function buildPdf(content: string, pageWidth: number, pageHeight: number): string {
-  const objects = [
-    '<< /Type /Catalog /Pages 2 0 R >>',
-    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-    `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>`,
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
-    `<< /Length ${content.length} >>\nstream\n${content}\nendstream`
-  ]
-  const parts = ['%PDF-1.4\n']
-  const offsets = [0]
-
-  for (const [index, object] of objects.entries()) {
-    offsets.push(parts.join('').length)
-    parts.push(`${index + 1} 0 obj\n${object}\nendobj\n`)
-  }
-
-  const xrefOffset = parts.join('').length
-  parts.push(`xref\n0 ${objects.length + 1}\n`)
-  parts.push('0000000000 65535 f \n')
-  for (let index = 1; index < offsets.length; index += 1) {
-    parts.push(`${String(offsets[index]).padStart(10, '0')} 00000 n \n`)
-  }
-  parts.push(`trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`)
-
-  return parts.join('')
-}
-
-function centerTextX(text: string, pageWidth: number): number {
-  return Math.max(72, (pageWidth - text.length * 7) / 2)
-}
-
-function formatPdfNumber(value: number): string {
-  return value.toFixed(2).replace(/\.?0+$/, '')
-}
-
-function escapePdfText(value: string): string {
-  return value.replaceAll('\\', '\\\\').replaceAll('(', '\\(').replaceAll(')', '\\)')
 }
 
 function sanitizeFilePart(value: string): string {

@@ -8,9 +8,9 @@
         <NuxtLink to="/" class="hover:text-blue-600">
           Barcode Generator
         </NuxtLink>
-        <span class="text-gray-400">
+        <NuxtLink to="/bulk-barcode-generator" class="hover:text-blue-600">
           Bulk Generator
-        </span>
+        </NuxtLink>
         <span class="text-gray-400">
           Label Generator
         </span>
