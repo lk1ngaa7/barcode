@@ -9,8 +9,16 @@ import BarcodePreview from './BarcodePreview.vue'
 import BarcodeTypeSelector from './BarcodeTypeSelector.vue'
 import BarcodeValidationMessage from './BarcodeValidationMessage.vue'
 
-const selectedType = ref<BarcodeType>('code128')
-const barcodeValue = ref(BARCODE_TYPES.code128.example)
+const props = withDefaults(defineProps<{
+  defaultType?: BarcodeType
+  defaultValue?: string
+}>(), {
+  defaultType: 'code128',
+  defaultValue: ''
+})
+
+const selectedType = ref<BarcodeType>(props.defaultType)
+const barcodeValue = ref(props.defaultValue || BARCODE_TYPES[props.defaultType].example)
 const labelText = ref('')
 const showText = ref(true)
 const isWorking = ref(false)

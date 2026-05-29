@@ -2,7 +2,7 @@
 import ToolPage from '~/components/seo/ToolPage.vue'
 import { toolPages } from '../../utils/seoPages'
 
-const page = toolPages.home
+const page = toolPages.code128
 
 useToolPageHead(page)
 </script>

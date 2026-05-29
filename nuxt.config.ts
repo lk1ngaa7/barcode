@@ -5,6 +5,11 @@ export default defineNuxtConfig({
   srcDir: 'app/',
   css: ['~/assets/css/main.css'],
   modules: [],
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://barcode-generator.pages.dev'
+    }
+  },
   nitro: {
     preset: 'static',
     output: {
