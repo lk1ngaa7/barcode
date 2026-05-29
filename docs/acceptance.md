@@ -224,6 +224,20 @@ Extra Text = $19.99
 - 标签预览显示文字。
 - 可以导出 PDF。
 
+当前验收状态：已通过 Task 07 验收。
+
+已验证：
+
+- `/barcode-label-generator` 可选择 Simple / Product / Inventory。
+- `/printable-barcode-generator` 默认进入 printable label 场景。
+- 2 x 1 inch / 3 x 2 inch 可切换。
+- US Letter / A4 可切换。
+- 标签预览显示条码和文字。
+- PDF 导出包含条码和文字。
+- 无效输入时 PDF 导出不可用。
+- 两个页面均有唯一 title、description、H1、canonical。
+- 两个页面均有 FAQ Schema、SoftwareApplication Schema、BreadcrumbList Schema。
+
 ---
 
 ## 3. 页面验收
@@ -333,6 +347,8 @@ Free Barcode Generator for Products, Inventory, and Labels
 
 ## 4. SEO 验收
 
+当前验收状态：已通过 Task 08 验收。
+
 每个公开工具页必须满足：
 
 - 唯一 title
@@ -347,6 +363,17 @@ Free Barcode Generator for Products, Inventory, and Labels
 - Related Tools 内链
 - 页面源码中包含主要文本内容
 - 工具在首屏可见
+
+已验证：
+
+- 8 个工具页均生成 canonical URL。
+- 8 个工具页均生成 Open Graph title 和 Open Graph description。
+- 8 个工具页均生成 FAQ Schema、SoftwareApplication Schema、BreadcrumbList Schema。
+- `dist/sitemap.xml` 包含首页、所有工具页、Privacy 和 Terms。
+- `dist/robots.txt` 允许抓取公开页面，并包含 Sitemap。
+- `/privacy` 可静态生成，并说明浏览器本地处理、不上传、不保存输入和匿名统计。
+- `/terms` 可静态生成，并说明按现状提供、用户自行确认适用性、不提供 GS1 注册和不保证零售系统接受。
+- `pnpm generate` 成功。
 
 ---
 

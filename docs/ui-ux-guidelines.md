@@ -274,6 +274,8 @@ MVP 不做 ZIP 下载。
 
 ### Label Sheet
 
+当前实现状态：Task 07 已完成。
+
 MVP 模板：
 
 - Simple
@@ -302,6 +304,22 @@ PDF 提示：
 ```txt
 For best results, print at 100% scale and disable “Fit to page”.
 ```
+
+已实现页面：
+
+- `/barcode-label-generator`
+- `/printable-barcode-generator`
+
+已实现交互：
+
+- 选择模板。
+- 选择标签尺寸。
+- 选择纸张。
+- 输入 barcode value。
+- 输入模板文字。
+- 实时标签预览。
+- 合法输入时导出 PDF。
+- 非法输入时禁用 PDF 导出。
 
 ---
 

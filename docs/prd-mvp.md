@@ -335,6 +335,8 @@ You can generate up to 100 barcodes at once in this version.
 
 ### 6.7 Barcode Label Generator
 
+当前实现状态：MVP 已完成。
+
 MVP 支持 3 个基础标签模板：
 
 #### Simple
@@ -371,6 +373,20 @@ SKU001
 - US Letter
 - A4
 
+已实现能力：
+
+- `/barcode-label-generator` 用于创建基础可打印 barcode labels。
+- `/printable-barcode-generator` 用于导出 printable barcode labels as PDF。
+- 标签预览会显示条码、barcode value 和模板对应文字。
+- PDF 导出支持 US Letter 和 A4。
+- PDF 导出包含打印提示。
+
+明确不包含：
+
+- Avery 高级模板。
+- 高级打印设置。
+- 用户账号、云端保存或服务端处理。
+
 ---
 
 ### 6.8 Excel / Google Sheets 粘贴解析
@@ -402,6 +418,8 @@ SKU001
 
 ## 7. 页面 SEO 要求
 
+当前实现状态：Task 08 已完成。
+
 每个公开页面必须有：
 
 - 唯一 title
@@ -414,6 +432,16 @@ SKU001
 - SoftwareApplication Schema
 - BreadcrumbList Schema
 - Related Tools 内链
+
+已实现能力：
+
+- `public/sitemap.xml` 覆盖首页、所有工具页、Privacy 和 Terms。
+- `public/robots.txt` 允许公开页面抓取，并声明 Sitemap。
+- 8 个工具页均输出 canonical、Open Graph title、Open Graph description。
+- 8 个工具页均输出 FAQ Schema、SoftwareApplication Schema、BreadcrumbList Schema。
+- `/privacy` 和 `/terms` 均有唯一 title、description、H1、canonical。
+- `/privacy` 明确说明 barcode 数据在浏览器处理、不上传、不保存输入，以及可能使用匿名统计。
+- `/terms` 明确说明工具按现状提供、用户自行确认 barcode 适用性、不提供 GS1 UPC/EAN 注册、不保证所有零售系统接受。
 
 ---
 

@@ -326,6 +326,8 @@ SKU003    Phone Case       $9.99
 
 ## Task 07 - 基础标签生成器
 
+状态：已完成。
+
 ### 目标
 
 实现基础 Barcode Label Generator。
@@ -403,9 +405,33 @@ A4
 - Label 页面有唯一 title、description、H1
 - Printable 页面有唯一 title、description、H1
 
+### 完成记录
+
+已完成：
+
+- 新增 `/barcode-label-generator` 页面。
+- 新增 `/printable-barcode-generator` 页面。
+- 新增 `components/tool/LabelDesigner.vue`。
+- 新增 `components/tool/PdfExportPanel.vue`。
+- 支持 Simple / Product / Inventory 三种基础模板。
+- 支持 2 x 1 inch / 3 x 2 inch 标签尺寸。
+- 支持 US Letter / A4 纸张。
+- 支持标签预览。
+- 支持导出包含条码和文字的 PDF。
+- 两个页面均接入唯一 title、description、H1、canonical。
+- 两个页面均接入 FAQ Schema、SoftwareApplication Schema、BreadcrumbList Schema。
+
+未做：
+
+- 未做 Avery 高级模板。
+- 未做高级打印设置。
+- 未做批量 ZIP 下载。
+
 ---
 
 ## Task 08 - SEO 基建
+
+状态：已完成。
 
 ### 目标
 
@@ -446,6 +472,26 @@ Terms 页面说明：
 - Privacy 页面可访问
 - Terms 页面可访问
 - `pnpm generate` 成功
+
+### 完成记录
+
+已完成：
+
+- 新增 `public/sitemap.xml`。
+- 更新 `public/robots.txt`，允许抓取公开页面并声明 Sitemap。
+- 所有 8 个工具页均输出 canonical URL。
+- 所有 8 个工具页均输出 FAQ Schema、SoftwareApplication Schema、BreadcrumbList Schema。
+- `/privacy` 页面已替换占位内容，并说明浏览器本地处理、不上传、不保存输入和匿名统计。
+- `/terms` 页面已替换占位内容，并说明按现状提供、用户自行确认适用性、不提供 GS1 注册和不保证所有零售系统接受。
+- `/privacy` 和 `/terms` 均接入唯一 title、description、canonical 和 Open Graph metadata。
+
+已验证：
+
+- `pnpm typecheck` 通过。
+- `pnpm generate` 通过。
+- `dist/sitemap.xml` 包含首页、所有工具页、Privacy 和 Terms。
+- `dist/robots.txt` 可访问并包含 Sitemap。
+- 每个工具页生成 3 个 JSON-LD script。
 
 ---
 
