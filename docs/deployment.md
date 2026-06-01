@@ -76,6 +76,24 @@ After production HTTPS is available:
 4. Use URL Inspection on the homepage and main tool pages.
 5. Confirm pages are not blocked by `/robots.txt`.
 
+## IndexNow
+
+Crawler Hints is enabled in Cloudflare for automatic IndexNow hints.
+
+The project also includes a manual IndexNow submission script for deployments that add, update, or delete SEO pages:
+
+```bash
+pnpm indexnow
+```
+
+The script reads URLs from `public/sitemap.xml`, verifies the URLs match the sitemap host, reads the key from `public/indexnow-key.txt`, and posts the URL list to `https://api.indexnow.org/indexnow`.
+
+The public key file must stay reachable at:
+
+```text
+https://www.barcode-mint.com/indexnow-key.txt
+```
+
 ## Launch Smoke Test
 
 Check these production URLs after deployment:

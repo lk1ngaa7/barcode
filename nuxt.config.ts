@@ -41,6 +41,14 @@ export default defineNuxtConfig({
           name: 'description',
           content:
             'Create free barcodes online for products, inventory, and labels. Generate Code 128, UPC-A, and EAN-13 barcodes and download as PNG, SVG, or PDF.'
+        },
+        {
+          name: 'google-site-verification',
+          content: '0669NpPiUiYnlZNfS3_hW1FdaYNip5UlEshlQwZKtqc'
+        },
+        {
+          name: 'yandex-verification',
+          content: '1caeb07a6917187c'
         }
       ]
     }
