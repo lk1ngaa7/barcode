@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://barcode-generator.pages.dev/sitemap.xml
+Sitemap: https://www.barcode-mint.com/sitemap.xml

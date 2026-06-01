@@ -28,7 +28,7 @@ export interface ToolPageContent {
   relatedTools: RelatedTool[]
 }
 
-export const SITE_URL = 'https://barcode-generator.pages.dev'
+export const SITE_URL = 'https://www.barcode-mint.com'
 
 const commonTrustNote = 'No sign-up required · Works in your browser · PNG, SVG, PDF'
 

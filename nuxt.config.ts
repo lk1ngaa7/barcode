@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   modules: [],
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://barcode-generator.pages.dev'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.barcode-mint.com'
     }
   },
   nitro: {

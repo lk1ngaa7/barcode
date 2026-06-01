@@ -53,6 +53,12 @@ The client analytics hook is non-blocking. If no analytics provider is installed
 
 ## Custom Domain and HTTPS
 
+Current production domain:
+
+```text
+https://www.barcode-mint.com
+```
+
 After the first Cloudflare Pages deployment:
 
 1. Add the production custom domain in Cloudflare Pages.
