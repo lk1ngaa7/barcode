@@ -70,13 +70,13 @@ const excelTool: RelatedTool = {
 
 const labelTool: RelatedTool = {
   title: 'Barcode Label Generator',
-  description: 'Create printable barcode labels with simple product and inventory templates.',
+  description: 'Design product and inventory barcode labels with template fields.',
   path: '/barcode-label-generator'
 }
 
 const printableTool: RelatedTool = {
   title: 'Printable Barcode Generator',
-  description: 'Export barcode labels as print-ready US Letter or A4 PDF sheets.',
+  description: 'Create print-ready barcode PDFs for US Letter or A4 paper.',
   path: '/printable-barcode-generator'
 }
 
@@ -108,16 +108,24 @@ export const toolPages = {
     ],
     faqs: [
       {
-        question: 'Can I generate a barcode without signing up?',
-        answer: 'Yes. The generator works in your browser and does not require an account.'
+        question: 'What barcode types can I generate?',
+        answer: 'You can generate Code 128, UPC-A, and EAN-13 barcodes from the main tool.'
       },
       {
-        question: 'Which barcode type should I use for SKUs?',
-        answer: 'Code 128 is usually best for custom SKUs, inventory IDs, and values that include letters or symbols.'
+        question: 'Is this barcode generator free to use?',
+        answer: 'Yes. The tool is free to use and does not require sign-up or login.'
       },
       {
-        question: 'Can I download the barcode for printing?',
-        answer: 'Yes. Valid barcodes can be downloaded as PNG, SVG, or a basic printable PDF.'
+        question: 'Are barcode values uploaded to a server?',
+        answer: 'No. Barcode values are processed in your browser and are not uploaded to our servers.'
+      },
+      {
+        question: 'Can I create barcode labels from this page?',
+        answer: 'Yes. You can generate a barcode here, then use the label and printable tools for label layouts and PDF sheets.'
+      },
+      {
+        question: 'Should I use Code 128, UPC-A, or EAN-13?',
+        answer: 'Use Code 128 for custom SKUs and inventory IDs, UPC-A for 12-digit US retail product codes, and EAN-13 for 13-digit international product codes.'
       }
     ],
     relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool, excelTool, labelTool]
@@ -149,16 +157,24 @@ export const toolPages = {
     ],
     faqs: [
       {
-        question: 'What is Code 128 best used for?',
-        answer: 'Code 128 is best for SKUs, inventory labels, asset IDs, cartons, and internal tracking codes.'
-      },
-      {
-        question: 'Can Code 128 include letters?',
+        question: 'Can Code 128 encode letters and numbers?',
         answer: 'Yes. Code 128 supports letters, numbers, spaces, and common symbols up to 80 characters in this tool.'
       },
       {
-        question: 'Is Code 128 the same as UPC-A?',
-        answer: 'No. Code 128 is flexible for custom values, while UPC-A is a strict 12-digit retail product barcode.'
+        question: 'Is Code 128 good for SKU barcodes?',
+        answer: 'Yes. Code 128 is usually the best choice for custom SKUs because it can encode alphanumeric values such as SKU-001.'
+      },
+      {
+        question: 'Can I use Code 128 for inventory labels?',
+        answer: 'Yes. Code 128 is well suited for inventory labels, asset tags, shelf labels, cartons, and internal tracking codes.'
+      },
+      {
+        question: 'What is the difference between Code 128 and Code 39?',
+        answer: 'Code 128 is more compact and supports a broader character set, while Code 39 is older and commonly used for simpler alphanumeric labels.'
+      },
+      {
+        question: 'Can standard barcode scanners read Code 128?',
+        answer: 'Most modern barcode scanners can read Code 128, but you should test printed labels with the scanner and software used in your workflow.'
       }
     ],
     relatedTools: [homeTool, upcATool, ean13Tool, bulkTool, excelTool, labelTool]
@@ -189,16 +205,24 @@ export const toolPages = {
     ],
     faqs: [
       {
-        question: 'Can this tool calculate a UPC-A check digit?',
-        answer: 'Yes. Enter the first 11 digits and the tool will calculate the 12th check digit.'
+        question: 'How many digits are in a UPC-A barcode?',
+        answer: 'A standard UPC-A barcode has 12 numeric digits, including the final check digit.'
       },
       {
-        question: 'Why does UPC-A reject letters?',
-        answer: 'UPC-A is a numeric retail barcode format, so letters and symbols are not valid UPC-A values.'
+        question: 'Can I generate a UPC-A barcode from 11 digits?',
+        answer: 'Yes. Enter the first 11 digits and the tool will calculate the 12th check digit automatically.'
       },
       {
-        question: 'Can I download a UPC-A barcode as SVG?',
-        answer: 'Yes. After the UPC-A value is valid, you can download PNG, SVG, or PDF.'
+        question: 'What is a UPC-A check digit?',
+        answer: 'The check digit is the final digit of a UPC-A code. It is calculated from the first 11 digits and helps scanners detect typing or printing errors.'
+      },
+      {
+        question: 'Do I need a GS1 prefix for UPC-A barcodes?',
+        answer: 'This tool can create the barcode image, but it does not assign official UPC numbers or GS1 company prefixes. For formal retail use, use a valid UPC from GS1 or a compliant source accepted by your retailer.'
+      },
+      {
+        question: 'Can I use my own SKU as a UPC-A barcode?',
+        answer: 'Usually no. UPC-A only supports 12 numeric digits. Use Code 128 for custom SKUs that contain letters, dashes, or internal numbering.'
       }
     ],
     relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool, excelTool, labelTool]
@@ -229,16 +253,24 @@ export const toolPages = {
     ],
     faqs: [
       {
-        question: 'How many digits does EAN-13 require?',
-        answer: 'EAN-13 requires 13 numeric digits. You can enter 12 digits and let the tool calculate the final check digit.'
+        question: 'How many digits are in an EAN-13 barcode?',
+        answer: 'An EAN-13 barcode has 13 numeric digits, including the final check digit.'
       },
       {
-        question: 'Is EAN-13 different from UPC-A?',
-        answer: 'Yes. UPC-A is a 12-digit format commonly used in the United States, while EAN-13 uses 13 digits for international retail products.'
+        question: 'Can I generate an EAN-13 barcode from 12 digits?',
+        answer: 'Yes. Enter the first 12 digits and the tool will calculate the 13th check digit automatically.'
       },
       {
-        question: 'Can EAN-13 contain letters?',
-        answer: 'No. EAN-13 only supports numeric digits. Use Code 128 for custom alphanumeric values.'
+        question: 'What is an EAN-13 check digit?',
+        answer: 'The check digit is the final digit of an EAN-13 code. It is calculated from the first 12 digits and helps catch invalid product codes.'
+      },
+      {
+        question: 'What is the difference between EAN-13 and UPC-A?',
+        answer: 'UPC-A is a 12-digit format commonly used in the United States, while EAN-13 uses 13 digits for international retail products.'
+      },
+      {
+        question: 'Where are EAN-13 barcodes used?',
+        answer: 'EAN-13 is commonly used for retail products in Europe and many other international markets outside the United States.'
       }
     ],
     relatedTools: [homeTool, code128Tool, upcATool, bulkTool, excelTool, labelTool]
@@ -270,15 +302,23 @@ export const toolPages = {
     ],
     faqs: [
       {
-        question: 'How many barcodes can I generate at once?',
+        question: 'Can I generate multiple barcodes at once?',
+        answer: 'Yes. Paste one value per line, choose a barcode type, and generate a batch preview in the browser.'
+      },
+      {
+        question: 'How many barcodes can I generate in one batch?',
         answer: 'This bulk generator supports up to 100 barcode values at a time for the MVP.'
       },
       {
-        question: 'What format should I paste?',
-        answer: 'Paste one barcode value per line, such as SKU001, SKU002, and SKU003.'
+        question: 'Can I paste barcode values from Excel?',
+        answer: 'Yes. You can paste one value per line here, or use the Excel barcode generator when you need label text and extra spreadsheet columns.'
       },
       {
-        question: 'What happens to invalid rows?',
+        question: 'Can I export bulk barcodes as PDF?',
+        answer: 'Yes. Valid rows can be exported as a basic printable PDF, while invalid rows need to be fixed or skipped.'
+      },
+      {
+        question: 'What happens if one row has an invalid barcode value?',
         answer: 'Invalid rows are marked with an error message. Valid rows can still be previewed and exported.'
       }
     ],
@@ -310,52 +350,73 @@ export const toolPages = {
     ],
     faqs: [
       {
-        question: 'Can I upload an Excel file?',
-        answer: 'No. For the MVP, copy rows from Excel or Google Sheets and paste them into the browser-based tool.'
+        question: 'Can I paste data from Excel or Google Sheets?',
+        answer: 'Yes. Copy rows from Excel or Google Sheets and paste them directly into the browser-based tool.'
       },
       {
-        question: 'Which columns does the Excel barcode generator use?',
-        answer: 'The first column is Barcode Value, the second column is Label Text, and the third column is Extra Text.'
+        question: 'Which Excel column is used as the barcode value?',
+        answer: 'Column 1 is used as the Barcode Value. Column 2 becomes Label Text, and column 3 becomes Extra Text.'
       },
       {
-        question: 'Are spreadsheet rows uploaded to a server?',
+        question: 'Do I need to upload an Excel file?',
+        answer: 'No. The MVP does not upload xlsx files. Copy the spreadsheet rows and paste them into the page instead.'
+      },
+      {
+        question: 'Is my spreadsheet data uploaded to your server?',
         answer: 'No. The pasted rows are parsed and validated in your browser.'
+      },
+      {
+        question: 'Can I create barcode labels from Excel rows?',
+        answer: 'Yes. Spreadsheet rows can include barcode values, label text, and extra text that can be exported in a basic printable PDF.'
       }
     ],
     relatedTools: [homeTool, bulkTool, labelTool, code128Tool, upcATool]
   },
   label: {
     path: '/barcode-label-generator',
-    title: 'Barcode Label Generator | Print Barcode Labels Online',
+    title: 'Barcode Label Generator | Design Product & Inventory Labels',
     description:
-      'Create printable barcode labels for products, inventory, shelves, and small business workflows. Choose a basic label template and export PDF sheets.',
+      'Create product and inventory barcode labels with product names, SKUs, prices, locations, label sizes, and simple label templates.',
     h1: 'Barcode Label Generator',
-    subtitle: 'Create printable barcode labels for products, inventory, shelves, and small business workflows.',
+    subtitle:
+      'Design barcode labels for products, inventory, shelves, and assets with template fields such as product name, SKU, price, and location.',
     trustNote: commonTrustNote,
     defaultType: 'code128',
     defaultValue: 'SKU001',
     sections: [
       {
-        title: 'Design simple barcode labels',
-        body: 'Choose Simple, Product, or Inventory templates and preview the barcode label before exporting a PDF sheet.'
+        title: 'Design product and inventory labels',
+        body: 'Choose Simple, Product, or Inventory templates based on what the label needs to show, such as a SKU, product name, or stock location.'
       },
       {
-        title: 'Basic label sizes',
-        body: 'The MVP supports 2 x 1 inch and 3 x 2 inch labels on US Letter or A4 paper.'
+        title: 'Add label details',
+        body: 'Use product or item names for product labels and location text for inventory labels, shelf labels, asset tags, and small warehouse workflows.'
       },
       {
-        title: 'Printable PDF sheets',
-        body: 'Valid barcode labels can be exported as a basic print-ready PDF with repeated labels on the selected paper size.'
+        title: 'Pick a simple label layout',
+        body: 'Use compact 2 x 1 inch labels for SKUs and small packaging, or 3 x 2 inch labels when product or location text needs more room.'
       }
     ],
     faqs: [
       {
-        question: 'Which label templates are available?',
-        answer: 'The MVP includes Simple, Product, and Inventory barcode label templates.'
+        question: 'What can I include on a barcode label?',
+        answer: 'A label can include a barcode value, product or item name, and location text depending on the selected template.'
       },
       {
-        question: 'Can I choose A4 paper?',
-        answer: 'Yes. You can export label sheets for US Letter or A4 paper.'
+        question: 'Can I create product barcode labels?',
+        answer: 'Yes. Use the Product template to show a product name, barcode, and barcode value on the label.'
+      },
+      {
+        question: 'Can I create inventory barcode labels?',
+        answer: 'Yes. Use the Inventory template to show an item name, barcode, location text, and barcode value.'
+      },
+      {
+        question: 'Can I add product names or prices to the label?',
+        answer: 'You can add product names in the label field. For price or variant text, use the spreadsheet workflow where extra text can come from a separate column.'
+      },
+      {
+        question: 'What label size should I use for products?',
+        answer: 'Use 2 x 1 inch for compact SKU labels and 3 x 2 inch when the label needs more room for product or inventory text.'
       },
       {
         question: 'Does this include Avery templates?',
@@ -366,40 +427,49 @@ export const toolPages = {
   },
   printable: {
     path: '/printable-barcode-generator',
-    title: 'Printable Barcode Generator | Export Barcode Labels as PDF',
+    title: 'Printable Barcode Generator | Create Print-Ready Barcode PDFs',
     description:
-      'Create printable barcodes and barcode labels as PDF for products and inventory. Choose label size, paper size, and a basic label template.',
+      'Generate print-ready barcode PDFs for US Letter or A4 paper. Choose barcode type, label size, and print at 100% scale for clear scanning.',
     h1: 'Printable Barcode Generator',
-    subtitle: 'Create printable barcodes and barcode labels as PDF for products and inventory.',
+    subtitle:
+      'Create barcode PDF sheets for printing on US Letter or A4, with clear print settings and 100% scale guidance.',
     trustNote: commonTrustNote,
     defaultType: 'code128',
     defaultValue: 'SKU001',
     sections: [
       {
-        title: 'Export barcode labels as PDF',
-        body: 'Create a barcode label preview, then export repeated labels on US Letter or A4 paper.'
+        title: 'Create print-ready barcode PDFs',
+        body: 'Generate repeated barcode labels on a PDF sheet so you can print barcodes from a browser without installing label software.'
       },
       {
-        title: 'Choose a print-friendly layout',
-        body: 'Use 2 x 1 inch labels for compact SKU labels or 3 x 2 inch labels when product or location text needs more room.'
+        title: 'Use US Letter or A4 paper',
+        body: 'Choose the paper size before exporting so the PDF is prepared for common office printers and print workflows.'
       },
       {
-        title: 'Browser-based label generation',
-        body: 'The barcode and label PDF are generated in your browser without uploading your barcode value.'
+        title: 'Print at 100% scale',
+        body: 'For clearer scans, print the PDF at 100% scale and disable Fit to page so barcode bars are not resized unexpectedly.'
       }
     ],
     faqs: [
       {
-        question: 'Can I export a printable PDF?',
-        answer: 'Yes. Valid barcode labels can be exported as a basic PDF label sheet.'
+        question: 'How do I print a barcode from a PDF?',
+        answer: 'Generate a valid barcode, export the PDF, open it in your PDF viewer, and print it using the selected paper size.'
       },
       {
-        question: 'Which paper sizes are supported?',
-        answer: 'The printable generator supports US Letter and A4 paper in the MVP.'
+        question: 'Should I print barcodes at 100% scale?',
+        answer: 'Yes. Print at 100% scale and disable Fit to page so the barcode is not stretched or compressed.'
       },
       {
-        question: 'Should I use Fit to page when printing?',
-        answer: 'No. For best results, print at 100% scale and disable Fit to page.'
+        question: 'Can I export barcodes for US Letter or A4 paper?',
+        answer: 'Yes. The printable generator supports US Letter and A4 paper in the MVP.'
+      },
+      {
+        question: 'Why does my printed barcode look blurry?',
+        answer: 'Blurry barcodes are often caused by printer scaling, low-quality print settings, or resizing the PDF. Use 100% scale and a clean print mode when possible.'
+      },
+      {
+        question: 'Can I print multiple barcodes on one page?',
+        answer: 'Yes. The PDF export repeats the barcode label across the selected paper size when the barcode value is valid.'
       }
     ],
     relatedTools: [labelTool, homeTool, bulkTool, excelTool, code128Tool]

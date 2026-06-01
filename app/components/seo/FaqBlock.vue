@@ -13,7 +13,7 @@ defineProps<{
         Frequently asked questions
       </h2>
       <p class="mt-2 text-sm leading-6 text-gray-600">
-        Quick answers about creating and downloading this barcode type.
+        Quick answers about creating, downloading, and printing barcodes with this tool.
       </p>
     </div>
 
