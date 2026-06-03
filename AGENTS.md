@@ -104,6 +104,7 @@ MVP 阶段不需要 Cloudflare Workers、D1、KV、R2。
 13. 不要引入重型 UI 框架。
 14. 不要做登录、支付、数据库、后台 CMS。
 15. 不要把 MVP 做成重型 SaaS。
+16. 如果项目发生 UI 相关变化，必须在本地截图验证的同时，并行使用 `zai-mcp-server` 发起图片 UI/UX 审计检查；多个截图需要一次性并行批量分析。
 
 ---
 
@@ -288,6 +289,7 @@ EAN-13 requires 13 numeric digits, or 12 digits if you want us to calculate the 
 - 输入框和按钮移动端高度至少 44px。
 - 条码预览不能横向溢出。
 - Bulk 表格在移动端要转成卡片或可读布局。
+- 每次修改 UI、布局、样式、组件视觉状态或响应式行为后，必须提供桌面端和移动端截图，并并行调用 `zai-mcp-server` 对截图进行 UI/UX 审计。
 
 视觉建议：
 
