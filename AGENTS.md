@@ -70,6 +70,15 @@ Build output directory: dist
 Node.js version: 20+
 ```
 
+部署执行原则：
+
+- 本项目的 wrangler CLI 已经登录 Cloudflare，具备 Pages 写权限。
+- 每次完成代码或内容修改并通过本地验证后，必须自动部署到 Cloudflare Pages。
+- 部署前必须运行 `pnpm generate`，部署目录必须使用 `dist`。
+- 优先使用 `pnpm wrangler pages deploy dist --project-name <pages-project-name>` 部署。
+- 如果仓库中没有明确记录 Pages project name，先用 `pnpm wrangler pages project list` 查询，不要猜测。
+- 部署完成后必须访问正式域名 `https://www.barcode-mint.com` 验证线上内容已经更新。
+
 MVP 阶段不需要 Cloudflare Workers、D1、KV、R2。
 
 后续如果需要 API、支付、用户系统，再考虑 Cloudflare Workers / Pages Functions。
@@ -419,5 +428,6 @@ pnpm typecheck
 
 7. 验证通过后，使用清晰的 commit message 提交本次任务相关改动。
 8. 提交后 push 到当前分支对应的远端分支，除非用户明确要求不 push 或远端不可用。
-9. 不要擅自扩大任务范围。
-10. 不要在一个任务里实现多个阶段的功能。
+9. push 后必须使用 wrangler CLI 自动部署到 Cloudflare Pages，并验证生产站已更新。
+10. 不要擅自扩大任务范围。
+11. 不要在一个任务里实现多个阶段的功能。
