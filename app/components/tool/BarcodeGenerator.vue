@@ -231,15 +231,18 @@ function sanitizeFilePart(value: string): string {
       <slot name="intro" />
 
       <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-        <div class="mb-5 flex flex-wrap gap-2 border-b border-gray-200 pb-4 text-sm font-medium">
-          <button class="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-white" type="button">
-            Single Barcode
+        <div class="mb-5 grid grid-cols-3 gap-2 border-b border-gray-200 pb-4 text-sm font-medium">
+          <button class="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-3 py-3 text-white" type="button">
+            <span class="sm:hidden">Single</span>
+            <span class="hidden sm:inline">Single Barcode</span>
           </button>
-          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator">
-            Bulk Barcodes
+          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-3 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator">
+            <span class="sm:hidden">Bulk</span>
+            <span class="hidden sm:inline">Bulk Barcodes</span>
           </NuxtLink>
-          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator">
-            Label Sheet
+          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-3 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator">
+            <span class="sm:hidden">Labels</span>
+            <span class="hidden sm:inline">Label Sheet</span>
           </NuxtLink>
         </div>
 
@@ -256,21 +259,82 @@ function sanitizeFilePart(value: string): string {
             :invalid="!validation.isValid"
           />
 
-          <label class="grid gap-2 text-sm font-semibold text-gray-800" for="barcode-label">
-            Label Text <span class="font-normal text-gray-500">(optional)</span>
-            <input
-              id="barcode-label"
-              v-model="labelText"
-              class="min-h-11 rounded-xl border border-gray-300 bg-white px-3 text-base text-gray-950 shadow-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-              placeholder="Shown below the barcode"
-              autocomplete="off"
-            >
-          </label>
+          <p class="rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-sm leading-5 text-blue-900 sm:hidden">
+            Processed in your browser. Not uploaded.
+          </p>
 
-          <label class="flex min-h-11 items-center gap-3 text-sm font-medium text-gray-700">
-            <input v-model="showText" class="h-5 w-5 rounded border-gray-300 text-blue-600" type="checkbox">
-            Show text below barcode
-          </label>
+          <div class="grid grid-cols-[minmax(0,1fr)_72px_72px] gap-2 lg:hidden">
+            <button
+              class="min-h-11 rounded-xl bg-blue-600 px-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+              type="button"
+              :disabled="!validation.isValid || isWorking"
+              @click="downloadPng"
+            >
+              Download PNG
+            </button>
+            <button
+              class="min-h-11 rounded-xl border border-gray-300 px-3 text-sm font-semibold text-gray-800 transition hover:border-blue-600 hover:text-blue-700 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400"
+              type="button"
+              :disabled="!validation.isValid || isWorking"
+              @click="downloadSvg"
+            >
+              SVG
+            </button>
+            <button
+              class="min-h-11 rounded-xl border border-gray-300 px-3 text-sm font-semibold text-gray-800 transition hover:border-blue-600 hover:text-blue-700 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400"
+              type="button"
+              :disabled="!validation.isValid || isWorking"
+              @click="exportPdf"
+            >
+              PDF
+            </button>
+          </div>
+
+          <p class="text-xs leading-5 text-gray-500 lg:hidden">
+            Print PDFs at 100% scale.
+          </p>
+
+          <div class="hidden gap-5 lg:grid">
+            <label class="grid gap-2 text-sm font-semibold text-gray-800" for="barcode-label">
+              Label Text <span class="font-normal text-gray-500">(optional)</span>
+              <input
+                id="barcode-label"
+                v-model="labelText"
+                class="min-h-11 rounded-xl border border-gray-300 bg-white px-3 text-base text-gray-950 shadow-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                placeholder="Shown below the barcode"
+                autocomplete="off"
+              >
+            </label>
+
+            <label class="flex min-h-11 items-center gap-3 text-sm font-medium text-gray-700">
+              <input v-model="showText" class="size-5 rounded border-gray-300 text-blue-600" type="checkbox">
+              Show text below barcode
+            </label>
+          </div>
+
+          <details class="rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 lg:hidden">
+            <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-gray-800">
+              Label options
+              <span class="text-xs font-medium text-gray-500">Optional</span>
+            </summary>
+            <div class="grid gap-4 pb-2 pt-3">
+              <label class="grid gap-2 text-sm font-semibold text-gray-800" for="barcode-label-mobile">
+                Label Text <span class="font-normal text-gray-500">(optional)</span>
+                <input
+                  id="barcode-label-mobile"
+                  v-model="labelText"
+                  class="min-h-11 rounded-xl border border-gray-300 bg-white px-3 text-base text-gray-950 shadow-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  placeholder="Shown below the barcode"
+                  autocomplete="off"
+                >
+              </label>
+
+              <label class="flex min-h-11 items-center gap-3 text-sm font-medium text-gray-700">
+                <input v-model="showText" class="size-5 rounded border-gray-300 text-blue-600" type="checkbox">
+                Show text below barcode
+              </label>
+            </div>
+          </details>
 
           <BarcodeValidationMessage
             :id="inputDescriptionId"
@@ -280,11 +344,40 @@ function sanitizeFilePart(value: string): string {
           <p v-if="downloadError" class="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
             {{ downloadError }}
           </p>
+
+          <div class="border-t border-gray-200 pt-5 lg:hidden">
+            <div class="flex items-center justify-between gap-3">
+              <h2 class="text-base font-semibold text-gray-950">
+                Preview
+              </h2>
+              <span
+                class="rounded-full px-2.5 py-1 text-xs font-semibold"
+                :class="validation.isValid ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'"
+              >
+                {{ validation.isValid ? 'Ready' : 'Waiting' }}
+              </span>
+            </div>
+
+            <div class="mt-3 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-3">
+              <div
+                v-if="validation.isValid"
+                class="barcode-preview rounded-lg bg-white px-3 py-5 text-center"
+                v-html="previewSvg"
+              />
+              <div v-else class="rounded-lg bg-white px-4 py-8 text-center text-sm leading-6 text-gray-500">
+                Enter a valid barcode value to preview your barcode.
+              </div>
+            </div>
+
+            <p v-if="validation.isValid" class="mt-3 break-all text-center text-sm text-gray-600">
+              {{ validation.normalizedValue }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
-    <aside class="min-w-0 space-y-4 lg:pt-2">
+    <aside class="hidden min-w-0 space-y-4 lg:sticky lg:top-20 lg:block lg:self-start lg:pt-2">
       <BarcodePreview
         :svg="previewSvg"
         :value="validation.normalizedValue"
@@ -301,5 +394,6 @@ function sanitizeFilePart(value: string): string {
         Your barcode data is processed in your browser and is not uploaded to our servers.
       </p>
     </aside>
+
   </section>
 </template>
