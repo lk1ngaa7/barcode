@@ -47,12 +47,12 @@ export function createBulkBarcodePdf(type: BarcodeType, items: BulkBarcodePdfIte
 
 export function createLabelSheetPdf(design: LabelDesign, normalizedValue: string): Blob {
   const paper = PAPER_SIZES[design.paperSize]
-  const commands = buildLabelSheetPage(design, normalizedValue, paper.width, paper.height)
+  const commands = buildLabelSheetPages(design, normalizedValue, paper.width, paper.height)
 
-  return new Blob([buildPdf([commands], paper.width, paper.height)], { type: 'application/pdf' })
+  return new Blob([buildPdf(commands, paper.width, paper.height)], { type: 'application/pdf' })
 }
 
-function buildLabelSheetPage(design: LabelDesign, normalizedValue: string, pageWidth: number, pageHeight: number): string {
+function buildLabelSheetPages(design: LabelDesign, normalizedValue: string, pageWidth: number, pageHeight: number): string[] {
   const labelSize = LABEL_SIZES[design.labelSize]
   const labelWidth = labelSize.widthInches * 72
   const labelHeight = labelSize.heightInches * 72
@@ -63,25 +63,32 @@ function buildLabelSheetPage(design: LabelDesign, normalizedValue: string, pageW
   const gapY = 8
   const columns = Math.max(1, Math.floor((pageWidth - marginX * 2 + gapX) / (labelWidth + gapX)))
   const rows = Math.max(1, Math.floor((pageHeight - marginTop - marginBottom + gapY) / (labelHeight + gapY)))
-  const labelCount = rows * columns
-  const commands = [
-    '1 1 1 rg',
-    `0 0 ${pageWidth} ${pageHeight} re f`
-  ]
+  const sheetCapacity = rows * columns
+  const labelCount = Math.max(1, Math.min(design.quantity ?? sheetCapacity, 100))
+  const pages: string[] = []
 
-  for (let index = 0; index < labelCount; index += 1) {
-    const row = Math.floor(index / columns)
-    const column = index % columns
-    const x = marginX + column * (labelWidth + gapX)
-    const y = pageHeight - marginTop - (row + 1) * labelHeight - row * gapY
+  for (let pageStart = 0; pageStart < labelCount; pageStart += sheetCapacity) {
+    const pageLabelCount = Math.min(sheetCapacity, labelCount - pageStart)
+    const commands = [
+      '1 1 1 rg',
+      `0 0 ${pageWidth} ${pageHeight} re f`
+    ]
 
-    commands.push(...designedLabelToPdfCommands(design, normalizedValue, x, y, labelWidth, labelHeight))
+    for (let index = 0; index < pageLabelCount; index += 1) {
+      const row = Math.floor(index / columns)
+      const column = index % columns
+      const x = marginX + column * (labelWidth + gapX)
+      const y = pageHeight - marginTop - (row + 1) * labelHeight - row * gapY
+
+      commands.push(...designedLabelToPdfCommands(design, normalizedValue, x, y, labelWidth, labelHeight))
+    }
+
+    commands.push('/F1 9 Tf')
+    commands.push(`BT 36 24 Td (${escapePdfText(PRINT_HINT)}) Tj ET`)
+    pages.push(commands.join('\n'))
   }
 
-  commands.push('/F1 9 Tf')
-  commands.push(`BT 36 24 Td (${escapePdfText(PRINT_HINT)}) Tj ET`)
-
-  return commands.join('\n')
+  return pages
 }
 
 function designedLabelToPdfCommands(

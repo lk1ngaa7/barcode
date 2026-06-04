@@ -163,6 +163,66 @@ const EAN_LEFT_PARITY: Record<string, string> = {
   '9': 'LGGLGL'
 }
 
+const CODE39_PATTERNS: Record<string, string> = {
+  '0': 'nnnwwnwnn',
+  '1': 'wnnwnnnnw',
+  '2': 'nnwwnnnnw',
+  '3': 'wnwwnnnnn',
+  '4': 'nnnwwnnnw',
+  '5': 'wnnwwnnnn',
+  '6': 'nnwwwnnnn',
+  '7': 'nnnwnnwnw',
+  '8': 'wnnwnnwnn',
+  '9': 'nnwwnnwnn',
+  A: 'wnnnnwnnw',
+  B: 'nnwnnwnnw',
+  C: 'wnwnnwnnn',
+  D: 'nnnnwwnnw',
+  E: 'wnnnwwnnn',
+  F: 'nnwnwwnnn',
+  G: 'nnnnnwwnw',
+  H: 'wnnnnwwnn',
+  I: 'nnwnnwwnn',
+  J: 'nnnnwwwnn',
+  K: 'wnnnnnnww',
+  L: 'nnwnnnnww',
+  M: 'wnwnnnnwn',
+  N: 'nnnnwnnww',
+  O: 'wnnnwnnwn',
+  P: 'nnwnwnnwn',
+  Q: 'nnnnnnwww',
+  R: 'wnnnnnwwn',
+  S: 'nnwnnnwwn',
+  T: 'nnnnwnwwn',
+  U: 'wwnnnnnnw',
+  V: 'nwwnnnnnw',
+  W: 'wwwnnnnnn',
+  X: 'nwnnwnnnw',
+  Y: 'wwnnwnnnn',
+  Z: 'nwwnwnnnn',
+  '-': 'nwnnnnwnw',
+  '.': 'wwnnnnwnn',
+  ' ': 'nwwnnnwnn',
+  '$': 'nwnwnwnnn',
+  '/': 'nwnwnnnwn',
+  '+': 'nwnnnwnwn',
+  '%': 'nnnwnwnwn',
+  '*': 'nwnnwnwnn'
+}
+
+const ITF_PATTERNS: Record<string, string> = {
+  '0': 'nnwwn',
+  '1': 'wnnnw',
+  '2': 'nwnnw',
+  '3': 'wwnnn',
+  '4': 'nnwnw',
+  '5': 'wnwnn',
+  '6': 'nwwnn',
+  '7': 'nnnww',
+  '8': 'wnnwn',
+  '9': 'nwnwn'
+}
+
 export interface BarcodeSvgOptions {
   moduleWidth?: number
   height?: number
@@ -220,7 +280,15 @@ export function encodeBarcodeModules(type: BarcodeType, normalizedValue: string)
     return encodeEan13Modules(`0${normalizedValue}`)
   }
 
-  return encodeEan13Modules(normalizedValue)
+  if (type === 'ean-13') {
+    return encodeEan13Modules(normalizedValue)
+  }
+
+  if (type === 'code39') {
+    return encodeCode39Modules(normalizedValue)
+  }
+
+  return encodeItfModules(normalizedValue)
 }
 
 function encodeCode128BModules(value: string): string {
@@ -265,6 +333,60 @@ function encodeEan13Modules(value: string): string {
     .join('')
 
   return `101${leftModules}01010${rightModules}101`
+}
+
+function encodeCode39Modules(value: string): string {
+  return `*${value}*`
+    .split('')
+    .map((character) => {
+      const pattern = CODE39_PATTERNS[character]
+
+      if (!pattern) {
+        throw new Error('Code 39 encoding failed.')
+      }
+
+      return wideNarrowPatternToModules(pattern, 3)
+    })
+    .join('0')
+}
+
+function encodeItfModules(value: string): string {
+  const modules = ['1010']
+
+  for (let index = 0; index < value.length; index += 2) {
+    const barDigit = value[index]
+    const spaceDigit = value[index + 1]
+
+    if (barDigit === undefined || spaceDigit === undefined) {
+      throw new Error('ITF encoding requires an even number of digits.')
+    }
+
+    const bars = ITF_PATTERNS[barDigit]
+    const spaces = ITF_PATTERNS[spaceDigit]
+
+    if (!bars || !spaces) {
+      throw new Error('ITF encoding failed.')
+    }
+
+    for (let position = 0; position < 5; position += 1) {
+      modules.push('1'.repeat(bars[position] === 'w' ? 3 : 1))
+      modules.push('0'.repeat(spaces[position] === 'w' ? 3 : 1))
+    }
+  }
+
+  modules.push('11101')
+
+  return modules.join('')
+}
+
+function wideNarrowPatternToModules(pattern: string, wideWidth: number): string {
+  return pattern
+    .split('')
+    .map((width, index) => {
+      const module = index % 2 === 0 ? '1' : '0'
+      return module.repeat(width === 'w' ? wideWidth : 1)
+    })
+    .join('')
 }
 
 function widthPatternToModules(pattern: string): string {

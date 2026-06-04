@@ -32,6 +32,7 @@ export interface LabelDesign {
   paperSize: PaperSize
   productName: string
   locationText: string
+  quantity?: number
 }
 
 export const LABEL_TEMPLATES: Record<LabelTemplate, LabelTemplateDefinition> = {

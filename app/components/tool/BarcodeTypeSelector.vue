@@ -14,7 +14,7 @@ const selectedType = computed(() => BARCODE_TYPES[model.value])
       Barcode Type
     </legend>
 
-    <div class="grid grid-cols-3 gap-2">
+    <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-5">
       <label
         v-for="type in barcodeTypes"
         :key="type.id"

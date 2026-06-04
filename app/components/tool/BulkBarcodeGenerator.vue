@@ -105,7 +105,20 @@ function downloadSvg(row: BulkBarcodeRow): void {
 function trackBulkPaste(value: string): void {
   analytics.track('bulk_paste', {
     row_count: parseBulkValues(value).length,
-    has_multiple_rows: /\r?\n/.test(value)
+    has_multiple_rows: /\r?\n/.test(value),
+    has_tabs: value.includes('\t'),
+    has_commas: value.includes(',')
+  })
+  analytics.track('bulk_parse', {
+    row_count: parseBulkValues(value).length,
+    mode: 'bulk'
+  })
+}
+
+function trackCsvTemplateDownload(): void {
+  analytics.track('download_csv_template', {
+    tool: 'bulk',
+    format: 'csv'
   })
 }
 
@@ -114,7 +127,7 @@ function parseBulkValues(input: string): Array<{ lineNumber: number, value: stri
     .split(/\r?\n/)
     .map((line, index) => ({
       lineNumber: index + 1,
-      value: line.trim()
+      value: line.split(/\t|,/)[0]?.trim() || ''
     }))
     .filter((line) => line.value.length > 0)
 }
@@ -189,6 +202,7 @@ function sanitizeFilePart(value: string): string {
               @generate="generateBarcodes"
               @clear="clearInput"
               @paste="trackBulkPaste"
+              @download-csv-template="trackCsvTemplateDownload"
             />
           </div>
         </div>

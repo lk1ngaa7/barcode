@@ -11,6 +11,7 @@ const emit = defineEmits<{
   generate: []
   clear: []
   pasteDetected: [value: string]
+  downloadCsvTemplate: []
 }>()
 
 function handleInput(event: Event): void {
@@ -24,6 +25,22 @@ function handlePaste(event: ClipboardEvent): void {
 
 <template>
   <div class="grid gap-4">
+    <div class="rounded-xl border border-blue-100 bg-blue-50 p-3">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm leading-6 text-blue-950">
+          Use this template to prepare barcode values, label text, and extra text in Excel or Google Sheets.
+        </p>
+        <a
+          class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border border-blue-200 bg-white px-4 text-sm font-semibold text-blue-700 transition hover:border-blue-600 hover:text-blue-800"
+          href="/templates/barcode-template.csv"
+          download
+          @click="emit('downloadCsvTemplate')"
+        >
+          Download CSV Template
+        </a>
+      </div>
+    </div>
+
     <label class="grid gap-2 text-sm font-semibold text-gray-800" for="spreadsheet-barcode-values">
       Paste spreadsheet rows
       <textarea
@@ -49,7 +66,7 @@ function handlePaste(event: ClipboardEvent): void {
       role="status"
     >
       <template v-if="overLimit">
-        This tool can generate up to {{ limit }} spreadsheet rows at once. Remove {{ rowCount - limit }} row<span v-if="rowCount - limit !== 1">s</span> and try again.
+        You pasted more than {{ limit }} rows. This free browser tool currently supports up to {{ limit }} barcodes at once.
       </template>
       <template v-else>
         {{ rowCount }} of {{ limit }} spreadsheet rows detected.

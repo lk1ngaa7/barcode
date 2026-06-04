@@ -56,6 +56,18 @@ const ean13Tool: RelatedTool = {
   path: '/ean-13-barcode-generator'
 }
 
+const code39Tool: RelatedTool = {
+  title: 'Code 39 Barcode Generator',
+  description: 'Create Code 39 barcodes for inventory, industrial labels, and logistics.',
+  path: '/code-39-barcode-generator'
+}
+
+const itfTool: RelatedTool = {
+  title: 'ITF Barcode Generator',
+  description: 'Generate Interleaved 2 of 5 barcodes for cartons, shipping boxes, and packaging.',
+  path: '/itf-barcode-generator'
+}
+
 const bulkTool: RelatedTool = {
   title: 'Bulk Barcode Generator',
   description: 'Paste up to 100 values and generate barcode previews in one batch.',
@@ -83,7 +95,7 @@ const printableTool: RelatedTool = {
 export const toolPages = {
   home: {
     path: '/',
-    title: 'Free Barcode Generator | Create Barcode Labels Online',
+    title: 'Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint',
     description:
       'Create free barcodes online for products, inventory, and labels. Generate Code 128, UPC-A, and EAN-13 barcodes and download as PNG, SVG, or PDF.',
     h1: 'Free Barcode Generator for Products, Inventory, and Labels',
@@ -99,17 +111,21 @@ export const toolPages = {
       },
       {
         title: 'Supported barcode types',
-        body: 'Use Code 128 for custom SKUs and inventory labels, UPC-A for US retail products, and EAN-13 for international product codes.'
+        body: 'Use Code 128 or Code 39 for custom SKUs and inventory labels, UPC-A for US retail products, EAN-13 for international product codes, and ITF for cartons or packaging.'
       },
       {
         title: 'Printable barcode labels',
         body: 'Exports use a white background and clear barcode bars so the files are suitable for basic product and inventory label printing.'
+      },
+      {
+        title: 'Common ways to use Barcode Mint',
+        body: 'Create product SKU labels, warehouse inventory labels, retail UPC and EAN barcodes, Excel-based bulk barcode batches, and printable barcode label sheets.'
       }
     ],
     faqs: [
       {
         question: 'What barcode types can I generate?',
-        answer: 'You can generate Code 128, UPC-A, and EAN-13 barcodes from the main tool.'
+        answer: 'You can generate Code 128, UPC-A, EAN-13, Code 39, and ITF barcodes from the main tool.'
       },
       {
         question: 'Is this barcode generator free to use?',
@@ -128,14 +144,14 @@ export const toolPages = {
         answer: 'Use Code 128 for custom SKUs and inventory IDs, UPC-A for 12-digit US retail product codes, and EAN-13 for 13-digit international product codes.'
       }
     ],
-    relatedTools: [code128Tool, upcATool, ean13Tool, bulkTool, excelTool, labelTool]
+    relatedTools: [code128Tool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
   },
   code128: {
     path: '/code-128-barcode-generator',
-    title: 'Code 128 Barcode Generator | Free Online Barcode Tool',
+    title: 'Free Code 128 Barcode Generator | Barcode Mint',
     description:
       'Generate Code 128 barcodes online for SKUs, inventory labels, and product codes. Preview instantly and download as PNG, SVG, or PDF.',
-    h1: 'Code 128 Barcode Generator',
+    h1: 'Free Code 128 Barcode Generator',
     subtitle:
       'Generate Code 128 barcodes for SKUs, inventory labels, and product codes. Download as PNG, SVG, or PDF.',
     trustNote: commonTrustNote,
@@ -177,14 +193,14 @@ export const toolPages = {
         answer: 'Most modern barcode scanners can read Code 128, but you should test printed labels with the scanner and software used in your workflow.'
       }
     ],
-    relatedTools: [homeTool, upcATool, ean13Tool, bulkTool, excelTool, labelTool]
+    relatedTools: [homeTool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
   },
   upcA: {
     path: '/upc-a-barcode-generator',
-    title: 'UPC-A Barcode Generator | Free Online UPC Barcode Tool',
+    title: 'Free UPC-A Barcode Generator | Barcode Mint',
     description:
       'Create UPC-A barcodes online for 12-digit US retail product codes. Calculate check digits and download PNG, SVG, or PDF files.',
-    h1: 'UPC-A Barcode Generator',
+    h1: 'Free UPC-A Barcode Generator',
     subtitle: 'Create UPC-A barcodes online and download them as PNG, SVG, or PDF.',
     trustNote: commonTrustNote,
     defaultType: 'upc-a',
@@ -225,14 +241,14 @@ export const toolPages = {
         answer: 'Usually no. UPC-A only supports 12 numeric digits. Use Code 128 for custom SKUs that contain letters, dashes, or internal numbering.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, ean13Tool, bulkTool, excelTool, labelTool]
+    relatedTools: [homeTool, code128Tool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
   },
   ean13: {
     path: '/ean-13-barcode-generator',
-    title: 'EAN-13 Barcode Generator | Free Online EAN Barcode Tool',
+    title: 'Free EAN-13 Barcode Generator | Barcode Mint',
     description:
       'Create EAN-13 barcodes online for international product codes. Validate or calculate check digits and download PNG, SVG, or PDF.',
-    h1: 'EAN-13 Barcode Generator',
+    h1: 'Free EAN-13 Barcode Generator',
     subtitle: 'Create EAN-13 barcodes online for international product codes.',
     trustNote: commonTrustNote,
     defaultType: 'ean-13',
@@ -273,11 +289,101 @@ export const toolPages = {
         answer: 'EAN-13 is commonly used for retail products in Europe and many other international markets outside the United States.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool, bulkTool, excelTool, labelTool]
+    relatedTools: [homeTool, code128Tool, upcATool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
+  },
+  code39: {
+    path: '/code-39-barcode-generator',
+    title: 'Free Code 39 Barcode Generator | Barcode Mint',
+    description:
+      'Create Code 39 barcodes online for inventory, industrial labels, and logistics. Free browser-based barcode generator with PNG and SVG downloads.',
+    h1: 'Free Code 39 Barcode Generator',
+    subtitle:
+      'Create Code 39 barcodes online for inventory, industrial labels, and logistics. Download PNG, SVG, or PDF files.',
+    trustNote: commonTrustNote,
+    defaultType: 'code39',
+    defaultValue: 'SKU-001',
+    sections: [
+      {
+        title: 'Code 39 for inventory and logistics',
+        body: 'Code 39 is commonly used for inventory, industrial labels, and logistics. It supports uppercase letters, numbers, spaces, and a limited set of symbols.'
+      },
+      {
+        title: 'Supported Code 39 characters',
+        body: 'Use uppercase A-Z, numbers, spaces, and these symbols: - . $ / + %. Lowercase input is converted to uppercase before preview and download.'
+      },
+      {
+        title: 'Download printable files',
+        body: 'Generate a live preview in your browser and download the Code 39 barcode as a high-resolution PNG or scalable SVG.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'What is Code 39 used for?',
+        answer: 'Code 39 is commonly used for inventory, industrial labels, logistics, asset tags, and simple alphanumeric tracking codes.'
+      },
+      {
+        question: 'Can Code 39 encode lowercase letters?',
+        answer: 'This tool converts lowercase input to uppercase because standard Code 39 supports uppercase letters, numbers, spaces, and a limited symbol set.'
+      },
+      {
+        question: 'Which symbols does Code 39 support?',
+        answer: 'Code 39 supports spaces and these symbols in this tool: - . $ / + %.'
+      },
+      {
+        question: 'Can I download Code 39 as SVG?',
+        answer: 'Yes. Valid Code 39 values can be downloaded as SVG or PNG from the browser.'
+      }
+    ],
+    relatedTools: [homeTool, code128Tool, itfTool, bulkTool, excelTool, labelTool]
+  },
+  itf: {
+    path: '/itf-barcode-generator',
+    title: 'Free ITF Barcode Generator | Interleaved 2 of 5 | Barcode Mint',
+    description:
+      'Generate ITF and Interleaved 2 of 5 barcodes online for cartons, shipping boxes, and warehouse packaging. Free PNG and SVG downloads.',
+    h1: 'Free ITF Barcode Generator',
+    subtitle:
+      'Generate ITF and Interleaved 2 of 5 barcodes online for cartons, shipping boxes, and warehouse packaging.',
+    trustNote: commonTrustNote,
+    defaultType: 'itf',
+    defaultValue: '123456',
+    sections: [
+      {
+        title: 'ITF for cartons and packaging',
+        body: 'ITF, also known as Interleaved 2 of 5, is commonly used for cartons, shipping boxes, and warehouse packaging. It encodes numeric values only.'
+      },
+      {
+        title: 'Use an even number of digits',
+        body: 'ITF usually requires an even number of digits because pairs of digits are interleaved into the barcode pattern.'
+      },
+      {
+        title: 'Browser-based exports',
+        body: 'Validate the numeric value locally in your browser, then download a PNG or SVG barcode file for printing and packaging workflows.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'What is ITF used for?',
+        answer: 'ITF is commonly used for cartons, shipping boxes, warehouse packaging, and numeric logistics codes.'
+      },
+      {
+        question: 'Can ITF encode letters?',
+        answer: 'No. ITF encodes numeric values only. Use Code 128 or Code 39 for letters and SKU-style values.'
+      },
+      {
+        question: 'Why does ITF need an even number of digits?',
+        answer: 'Interleaved 2 of 5 encodes digits in pairs, so an odd number of digits should usually be fixed by adding a leading zero or checking the source code.'
+      },
+      {
+        question: 'Can I download ITF as SVG?',
+        answer: 'Yes. Valid ITF values can be downloaded as SVG or PNG from the browser.'
+      }
+    ],
+    relatedTools: [homeTool, code128Tool, code39Tool, bulkTool, excelTool, labelTool]
   },
   bulk: {
     path: '/bulk-barcode-generator',
-    title: 'Bulk Barcode Generator | Generate Up to 100 Barcodes Online',
+    title: 'Bulk Barcode Generator | Create Multiple Barcodes Online',
     description:
       'Paste multiple barcode values and generate up to 100 Code 128, UPC-A, or EAN-13 barcodes online. Preview valid rows and export a printable PDF.',
     h1: 'Bulk Barcode Generator',
@@ -326,7 +432,7 @@ export const toolPages = {
   },
   excel: {
     path: '/barcode-generator-for-excel',
-    title: 'Barcode Generator for Excel | Create Barcodes from Spreadsheets',
+    title: 'Barcode Generator for Excel | Paste SKUs and Export Barcodes',
     description:
       'Paste your Excel or Google Sheets product list and generate barcodes in bulk. Map barcode values, label text, and extra text from spreadsheet columns.',
     h1: 'Barcode Generator for Excel',
@@ -374,7 +480,7 @@ export const toolPages = {
   },
   label: {
     path: '/barcode-label-generator',
-    title: 'Barcode Label Generator | Design Product & Inventory Labels',
+    title: 'Barcode Label Generator | Printable Barcode Labels PDF',
     description:
       'Create product and inventory barcode labels with product names, SKUs, prices, locations, label sizes, and simple label templates.',
     h1: 'Barcode Label Generator',
@@ -481,7 +587,7 @@ export function absoluteUrl(path: string, siteUrl = SITE_URL): string {
 }
 
 export function buildToolPageSchema(page: ToolPageContent, siteUrl = SITE_URL): unknown[] {
-  return [
+  const pageSchemas: unknown[] = [
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -526,4 +632,30 @@ export function buildToolPageSchema(page: ToolPageContent, siteUrl = SITE_URL): 
       ]
     }
   ]
+
+  if (page.path === '/') {
+    pageSchemas.push(
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Barcode Mint',
+        url: absoluteUrl('/', siteUrl)
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Barcode Mint',
+        applicationCategory: 'BusinessApplication',
+        operatingSystem: 'Web',
+        url: absoluteUrl('/', siteUrl),
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD'
+        }
+      }
+    )
+  }
+
+  return pageSchemas
 }

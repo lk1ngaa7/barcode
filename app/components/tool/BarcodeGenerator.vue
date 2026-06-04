@@ -109,7 +109,7 @@ function downloadSvg(): void {
     text: normalizedText.value
   }).svg
 
-  downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), `barcode-${safeFileValue.value}.svg`)
+  downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), `barcode-${selectedType.value}-${safeFileValue.value}.svg`)
   analytics.track('download_svg', {
     barcode_type: selectedType.value,
     value_length: validation.value.normalizedValue.length,
@@ -134,7 +134,7 @@ async function downloadPng(): Promise<void> {
     })
     const blob = await svgToPngBlob(svgResult.svg, svgResult.width, svgResult.height)
 
-    downloadBlob(blob, `barcode-${safeFileValue.value}.png`)
+    downloadBlob(blob, `barcode-${selectedType.value}-${safeFileValue.value}.png`)
     analytics.track('download_png', {
       barcode_type: selectedType.value,
       value_length: validation.value.normalizedValue.length,
@@ -158,7 +158,7 @@ function exportPdf(): void {
     showText.value ? normalizedText.value : ''
   )
 
-  downloadBlob(pdf, `barcode-${safeFileValue.value}.pdf`)
+  downloadBlob(pdf, `barcode-${selectedType.value}-${safeFileValue.value}.pdf`)
   analytics.track('export_pdf', {
     barcode_type: selectedType.value,
     value_length: validation.value.normalizedValue.length,
@@ -263,7 +263,7 @@ function sanitizeFilePart(value: string): string {
             Processed in your browser. Not uploaded.
           </p>
 
-          <div class="grid grid-cols-[minmax(0,1fr)_72px_72px] gap-2 lg:hidden">
+          <div class="grid gap-2 sm:grid-cols-3 lg:hidden">
             <button
               class="min-h-11 rounded-xl bg-blue-600 px-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
               type="button"
@@ -278,7 +278,7 @@ function sanitizeFilePart(value: string): string {
               :disabled="!validation.isValid || isWorking"
               @click="downloadSvg"
             >
-              SVG
+              Download SVG
             </button>
             <button
               class="min-h-11 rounded-xl border border-gray-300 px-3 text-sm font-semibold text-gray-800 transition hover:border-blue-600 hover:text-blue-700 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400"
@@ -286,12 +286,12 @@ function sanitizeFilePart(value: string): string {
               :disabled="!validation.isValid || isWorking"
               @click="exportPdf"
             >
-              PDF
+              Export PDF
             </button>
           </div>
 
           <p class="text-xs leading-5 text-gray-500 lg:hidden">
-            Print PDFs at 100% scale.
+            {{ validation.isValid ? 'Print PDFs at 100% scale.' : 'Fix the barcode value before downloading.' }}
           </p>
 
           <div class="hidden gap-5 lg:grid">

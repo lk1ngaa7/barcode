@@ -15,6 +15,7 @@ import {
 
 const PRINTABLE_ASCII_PATTERN = /^[\x20-\x7E]+$/
 const DIGITS_ONLY_PATTERN = /^\d+$/
+const CODE39_PATTERN = /^[A-Z0-9 ./$+%-]+$/
 
 export interface BarcodeValidationResult {
   isValid: boolean
@@ -63,7 +64,15 @@ export function validateBarcode(type: BarcodeType, value: string): BarcodeValida
     return validateUpcA(value)
   }
 
-  return validateEan13(value)
+  if (type === 'ean-13') {
+    return validateEan13(value)
+  }
+
+  if (type === 'code39') {
+    return validateCode39(value)
+  }
+
+  return validateItf(value)
 }
 
 export function validateCode128(value: string): BarcodeValidationResult {
@@ -138,6 +147,38 @@ export function validateEan13(value: string): BarcodeValidationResult {
   }
 
   return createValidResult('ean-13', value, normalizedValue, normalizedValue.at(-1), false)
+}
+
+export function validateCode39(value: string): BarcodeValidationResult {
+  const normalizedValue = value.trim().toUpperCase()
+
+  if (!normalizedValue) {
+    return createErrorResult('code39', value, BARCODE_ERROR_MESSAGES.empty)
+  }
+
+  if (!CODE39_PATTERN.test(normalizedValue)) {
+    return createErrorResult('code39', value, BARCODE_ERROR_MESSAGES.code39Unsupported)
+  }
+
+  return createValidResult('code39', value, normalizedValue)
+}
+
+export function validateItf(value: string): BarcodeValidationResult {
+  const normalizedValue = value.trim()
+
+  if (!normalizedValue) {
+    return createErrorResult('itf', value, BARCODE_ERROR_MESSAGES.empty)
+  }
+
+  if (!DIGITS_ONLY_PATTERN.test(normalizedValue)) {
+    return createErrorResult('itf', value, BARCODE_ERROR_MESSAGES.itfNonNumeric)
+  }
+
+  if (normalizedValue.length % 2 !== 0) {
+    return createErrorResult('itf', value, BARCODE_ERROR_MESSAGES.itfOddLength)
+  }
+
+  return createValidResult('itf', value, normalizedValue)
 }
 
 function createValidResult(

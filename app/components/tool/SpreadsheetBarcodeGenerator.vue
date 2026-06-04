@@ -112,6 +112,17 @@ function trackSpreadsheetPaste(value: string): void {
     has_tabs: value.includes('\t'),
     has_commas: value.includes(',')
   })
+  analytics.track('bulk_parse', {
+    row_count: parseSpreadsheetPaste(value).length,
+    mode: 'excel'
+  })
+}
+
+function trackCsvTemplateDownload(): void {
+  analytics.track('download_csv_template', {
+    tool: 'excel',
+    format: 'csv'
+  })
 }
 
 function createSpreadsheetRow(type: BarcodeType, row: ReturnType<typeof parseSpreadsheetPaste>[number]): SpreadsheetBarcodeRow {
@@ -202,6 +213,7 @@ function sanitizeFilePart(value: string): string {
               @generate="generateBarcodes"
               @clear="clearInput"
               @paste-detected="trackSpreadsheetPaste"
+              @download-csv-template="trackCsvTemplateDownload"
             />
           </div>
         </div>

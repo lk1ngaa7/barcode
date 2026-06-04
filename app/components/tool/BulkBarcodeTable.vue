@@ -22,7 +22,7 @@ const emit = defineEmits<{
           Bulk Preview
         </h2>
         <p class="mt-1 text-sm text-gray-500">
-          {{ validCount }} valid · {{ errorCount }} error<span v-if="errorCount !== 1">s</span>
+          {{ rows.length }} row<span v-if="rows.length !== 1">s</span> detected · {{ validCount }} valid · {{ errorCount }} error<span v-if="errorCount !== 1">s</span>
         </p>
       </div>
       <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold uppercase text-gray-600">

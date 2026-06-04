@@ -45,7 +45,12 @@ const emit = defineEmits<{
     </div>
 
     <p class="mt-4 text-sm leading-6 text-gray-500">
-      For best results, print at 100% scale and disable "Fit to page".
+      <template v-if="disabled">
+        Fix the barcode value before downloading.
+      </template>
+      <template v-else>
+        For best results, print at 100% scale and disable "Fit to page".
+      </template>
     </p>
   </div>
 </template>
