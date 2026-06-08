@@ -4,12 +4,41 @@ import {
   getLabelTextLines,
   LABEL_SIZES,
   PAPER_SIZES,
-  type LabelDesign
+  type LabelDesign,
+  type LabelSize,
+  type LabelTemplate,
+  type PaperSize
 } from './labelTemplates'
+import type { VerticalSampleRow } from './verticalBarcodePages'
 
 export interface BulkBarcodePdfItem {
   value: string
   label?: string
+}
+
+export interface ScenarioLabelPdfItem extends VerticalSampleRow {
+  normalizedValue: string
+}
+
+export interface ScenarioLabelPdfOptions {
+  barcodeType: BarcodeType
+  template: LabelTemplate
+  labelSize: LabelSize
+  paperSize: PaperSize
+  items: ScenarioLabelPdfItem[]
+  layout?: {
+    marginTop: number
+    marginLeft: number
+    gapX: number
+    gapY: number
+    rows: number
+    columns: number
+  }
+  customTemplate?: {
+    staticLine: string
+    fieldOrder: string[]
+    visibleFields: Record<string, boolean>
+  }
 }
 
 const LETTER_WIDTH = 612
@@ -50,6 +79,29 @@ export function createLabelSheetPdf(design: LabelDesign, normalizedValue: string
   const commands = buildLabelSheetPages(design, normalizedValue, paper.width, paper.height)
 
   return new Blob([buildPdf(commands, paper.width, paper.height)], { type: 'application/pdf' })
+}
+
+export function createScenarioLabelSheetPdf(options: ScenarioLabelPdfOptions): Blob {
+  const paper = PAPER_SIZES[options.paperSize]
+  const commands = buildScenarioLabelSheetPages(options, paper.width, paper.height)
+
+  return new Blob([buildPdf(commands, paper.width, paper.height)], { type: 'application/pdf' })
+}
+
+export function validatePdfLayout(options: ScenarioLabelPdfOptions): string {
+  const paper = PAPER_SIZES[options.paperSize]
+  const labelSize = LABEL_SIZES[options.labelSize]
+  const labelWidth = labelSize.widthInches * 72
+  const labelHeight = labelSize.heightInches * 72
+  const layout = getScenarioLayout(options, paper.width, paper.height, labelWidth, labelHeight)
+  const usedWidth = layout.marginLeft * 2 + layout.columns * labelWidth + (layout.columns - 1) * layout.gapX
+  const usedHeight = layout.marginTop + 54 + layout.rows * labelHeight + (layout.rows - 1) * layout.gapY
+
+  if (usedWidth > paper.width || usedHeight > paper.height) {
+    return 'This label layout does not fit the selected paper. Reduce rows, columns, label size, margins, or gaps.'
+  }
+
+  return ''
 }
 
 function buildLabelSheetPages(design: LabelDesign, normalizedValue: string, pageWidth: number, pageHeight: number): string[] {
@@ -138,6 +190,154 @@ function designedLabelToPdfCommands(
   commands.push(`BT ${centerTextXInBox(bottomLine, x, width)} ${formatPdfNumber(bottomTextY)} Td (${escapePdfText(trimPdfText(bottomLine, 38))}) Tj ET`)
 
   return commands
+}
+
+function buildScenarioLabelSheetPages(options: ScenarioLabelPdfOptions, pageWidth: number, pageHeight: number): string[] {
+  const labelSize = LABEL_SIZES[options.labelSize]
+  const labelWidth = labelSize.widthInches * 72
+  const labelHeight = labelSize.heightInches * 72
+  const layout = getScenarioLayout(options, pageWidth, pageHeight, labelWidth, labelHeight)
+  const labelsPerPage = layout.rows * layout.columns
+  const pages: string[] = []
+  const items = options.items.slice(0, 100)
+
+  for (let pageStart = 0; pageStart < items.length; pageStart += labelsPerPage) {
+    const pageItems = items.slice(pageStart, pageStart + labelsPerPage)
+    const commands = [
+      '1 1 1 rg',
+      `0 0 ${pageWidth} ${pageHeight} re f`
+    ]
+
+    pageItems.forEach((item, index) => {
+      const row = Math.floor(index / layout.columns)
+      const column = index % layout.columns
+      const x = layout.marginLeft + column * (labelWidth + layout.gapX)
+      const y = pageHeight - layout.marginTop - (row + 1) * labelHeight - row * layout.gapY
+
+      commands.push(...scenarioLabelToPdfCommands(options, item, x, y, labelWidth, labelHeight))
+    })
+
+    commands.push('/F1 9 Tf')
+    commands.push(`BT 36 24 Td (${escapePdfText(PRINT_HINT)}) Tj ET`)
+    pages.push(commands.join('\n'))
+  }
+
+  return pages.length ? pages : ['1 1 1 rg\n0 0 612 792 re f']
+}
+
+function getScenarioLayout(options: ScenarioLabelPdfOptions, pageWidth: number, pageHeight: number, labelWidth: number, labelHeight: number): Required<ScenarioLabelPdfOptions>['layout'] {
+  if (options.layout) {
+    return options.layout
+  }
+
+  const marginLeft = 36
+  const marginTop = 36
+  const gapX = 8
+  const gapY = 8
+  const columns = Math.max(1, Math.floor((pageWidth - marginLeft * 2 + gapX) / (labelWidth + gapX)))
+  const rows = Math.max(1, Math.floor((pageHeight - marginTop - 54 + gapY) / (labelHeight + gapY)))
+
+  return { marginTop, marginLeft, gapX, gapY, rows, columns }
+}
+
+function scenarioLabelToPdfCommands(
+  options: ScenarioLabelPdfOptions,
+  item: ScenarioLabelPdfItem,
+  x: number,
+  y: number,
+  width: number,
+  height: number
+): string[] {
+  const padding = Math.max(5, Math.min(10, height * 0.08))
+  const lines = buildScenarioLines(options.template, item, options.customTemplate)
+  const modules = encodeBarcodeModules(options.barcodeType, item.normalizedValue)
+  const topLines = lines.top
+  const bottomLines = lines.bottom.length ? lines.bottom : [item.normalizedValue]
+  const topArea = topLines.length * 11
+  const bottomArea = bottomLines.length * 10
+  const barcodeBottom = y + padding + bottomArea + 4
+  const barcodeTop = y + height - padding - topArea - 4
+  const barHeight = Math.max(22, barcodeTop - barcodeBottom)
+  const moduleWidth = Math.min(1.55, (width - padding * 2) / modules.length)
+  const barcodeWidth = modules.length * moduleWidth
+  const startX = x + (width - barcodeWidth) / 2
+  const commands = [
+    '0.898 0.906 0.922 RG',
+    `${formatPdfNumber(x)} ${formatPdfNumber(y)} ${formatPdfNumber(width)} ${formatPdfNumber(height)} re S`,
+    '0.067 0.094 0.153 rg'
+  ]
+
+  topLines.forEach((line, index) => {
+    commands.push(index === 0 && options.template === 'lpn' ? '/F1 13 Tf' : '/F1 8 Tf')
+    commands.push(`BT ${centerTextXInBox(line, x, width)} ${formatPdfNumber(y + height - padding - 10 - index * 11)} Td (${escapePdfText(trimPdfText(line, 42))}) Tj ET`)
+  })
+
+  commands.push(...modulesToPdfRects(modules, startX, barcodeBottom, moduleWidth, barHeight))
+
+  bottomLines.forEach((line, index) => {
+    commands.push('/F1 8 Tf')
+    commands.push(`BT ${centerTextXInBox(line, x, width)} ${formatPdfNumber(y + padding + 4 + index * 10)} Td (${escapePdfText(trimPdfText(line, 44))}) Tj ET`)
+  })
+
+  return commands
+}
+
+function buildScenarioLines(
+  template: LabelTemplate,
+  item: ScenarioLabelPdfItem,
+  customTemplate?: ScenarioLabelPdfOptions['customTemplate']
+): { top: string[], bottom: string[] } {
+  if (customTemplate) {
+    const top = [
+      customTemplate.staticLine,
+      ...customTemplate.fieldOrder
+        .filter((field) => customTemplate.visibleFields[field])
+        .map((field) => String(item[field as keyof ScenarioLabelPdfItem] || ''))
+    ].filter(Boolean)
+
+    return { top, bottom: [item.normalizedValue] }
+  }
+
+  if (template === 'garment') {
+    return {
+      top: [
+        item.productName || item.labelText || 'Garment',
+        [item.style ? `Style: ${item.style}` : '', item.color ? `Color: ${item.color}` : '', item.size ? `Size: ${item.size}` : ''].filter(Boolean).join(' / ')
+      ].filter(Boolean),
+      bottom: [item.normalizedValue]
+    }
+  }
+
+  if (template === 'mrp') {
+    return {
+      top: [
+        item.productName || item.labelText || 'Product',
+        item.mrp ? `MRP / Price: ${item.mrp}` : '',
+        item.salePrice ? `Sale: ${item.salePrice}` : '',
+        item.packSize ? `Pack: ${item.packSize}` : ''
+      ].filter(Boolean),
+      bottom: [item.normalizedValue]
+    }
+  }
+
+  if (template === 'lpn') {
+    return {
+      top: [item.normalizedValue, item.warehouse ? `Warehouse: ${item.warehouse}` : ''],
+      bottom: [item.unitType || 'License Plate Number']
+    }
+  }
+
+  if (template === 'inventory') {
+    return {
+      top: [
+        item.productName || item.labelText || 'Item',
+        [item.location ? `Location: ${item.location}` : '', item.quantity ? `Qty: ${item.quantity}` : ''].filter(Boolean).join(' / ')
+      ].filter(Boolean),
+      bottom: [item.normalizedValue]
+    }
+  }
+
+  return { top: item.productName ? [item.productName] : [], bottom: [item.normalizedValue] }
 }
 
 function buildBulkPages(type: BarcodeType, items: BulkBarcodePdfItem[]): string[] {

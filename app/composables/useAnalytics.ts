@@ -6,6 +6,7 @@ export type AnalyticsEventName =
   | 'barcode_validation_error'
   | 'download_png'
   | 'download_svg'
+  | 'download_zip'
   | 'export_pdf'
   | 'download_csv_template'
   | 'bulk_parse'

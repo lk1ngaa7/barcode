@@ -1,7 +1,7 @@
 import type { BarcodeType } from './barcodeTypes'
 
-export type LabelTemplate = 'simple' | 'product' | 'inventory'
-export type LabelSize = '2x1' | '3x2'
+export type LabelTemplate = 'simple' | 'product' | 'inventory' | 'garment' | 'mrp' | 'lpn'
+export type LabelSize = '2x1' | '3x2' | '1x05' | '25x1' | '4x2' | '4x3'
 export type PaperSize = 'letter' | 'a4'
 
 export interface LabelTemplateDefinition {
@@ -33,6 +33,15 @@ export interface LabelDesign {
   productName: string
   locationText: string
   quantity?: number
+  salePrice?: string
+  mrp?: string
+  color?: string
+  size?: string
+  style?: string
+  packSize?: string
+  warehouse?: string
+  unitType?: string
+  category?: string
 }
 
 export const LABEL_TEMPLATES: Record<LabelTemplate, LabelTemplateDefinition> = {
@@ -48,8 +57,23 @@ export const LABEL_TEMPLATES: Record<LabelTemplate, LabelTemplateDefinition> = {
   },
   inventory: {
     id: 'inventory',
-    label: 'Inventory',
+    label: 'Inventory Label',
     description: 'Item name, barcode, location, and barcode value.'
+  },
+  garment: {
+    id: 'garment',
+    label: 'Garment Label',
+    description: 'Clothing SKU label with product name, style, color, and size.'
+  },
+  mrp: {
+    id: 'mrp',
+    label: 'MRP Price Sticker',
+    description: 'Product price sticker with MRP, sale price, pack size, and barcode.'
+  },
+  lpn: {
+    id: 'lpn',
+    label: 'LPN Warehouse Label',
+    description: 'Warehouse license plate label for pallets, cartons, bins, and inventory units.'
   }
 }
 
@@ -65,6 +89,30 @@ export const LABEL_SIZES: Record<LabelSize, LabelSizeDefinition> = {
     label: '3 x 2 inch',
     widthInches: 3,
     heightInches: 2
+  },
+  '1x05': {
+    id: '1x05',
+    label: '1 x 0.5 inch',
+    widthInches: 1,
+    heightInches: 0.5
+  },
+  '25x1': {
+    id: '25x1',
+    label: '2.5 x 1 inch',
+    widthInches: 2.5,
+    heightInches: 1
+  },
+  '4x2': {
+    id: '4x2',
+    label: '4 x 2 inch',
+    widthInches: 4,
+    heightInches: 2
+  },
+  '4x3': {
+    id: '4x3',
+    label: '4 x 3 inch',
+    widthInches: 4,
+    heightInches: 3
   }
 }
 
@@ -93,6 +141,34 @@ export function getLabelTextLines(design: Omit<LabelDesign, 'barcodeType' | 'lab
 
   if (design.template === 'inventory') {
     return [`Item: ${productName}`, `Location: ${locationText}`, normalizedValue]
+  }
+
+  if (design.template === 'garment') {
+    const details = [
+      design.style ? `Style: ${design.style}` : '',
+      design.color ? `Color: ${design.color}` : '',
+      design.size ? `Size: ${design.size}` : ''
+    ].filter(Boolean).join(' / ')
+
+    return [productName, details, normalizedValue].filter(Boolean)
+  }
+
+  if (design.template === 'mrp') {
+    return [
+      productName,
+      design.mrp ? `MRP / Price: ${design.mrp}` : '',
+      design.salePrice ? `Sale: ${design.salePrice}` : '',
+      design.packSize ? `Pack: ${design.packSize}` : '',
+      normalizedValue
+    ].filter(Boolean)
+  }
+
+  if (design.template === 'lpn') {
+    return [
+      normalizedValue,
+      design.warehouse ? `Warehouse: ${design.warehouse}` : '',
+      design.unitType || 'License Plate Number'
+    ].filter(Boolean)
   }
 
   return [normalizedValue]

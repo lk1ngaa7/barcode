@@ -1,0 +1,730 @@
+[
+  {
+    "page": "home",
+    "viewport": "desktop",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/home-desktop.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Choose the right barcode generator",
+        "found": true
+      },
+      {
+        "text": "Garment Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "MRP Sticker with Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "LPN Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Inventory Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "featured-tools",
+        "selector": "section[aria-labelledby=featured-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/home-featured-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "garment",
+    "viewport": "desktop",
+    "path": "/garment-barcode-generator",
+    "url": "http://127.0.0.1:4173/garment-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-desktop.png",
+    "title": "Free Garment Barcode Generator for Clothing Labels | Barcode Mint",
+    "h1": [
+      "Free Garment Barcode Generator for Clothing Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Garment Barcode Generator for Clothing Labels",
+        "found": true
+      },
+      {
+        "text": "Garment Label",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-tool-mode-desktop.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-preview-desktop.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "mrp",
+    "viewport": "desktop",
+    "path": "/mrp-sticker-with-barcode-generator",
+    "url": "http://127.0.0.1:4173/mrp-sticker-with-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-desktop.png",
+    "title": "Free MRP Sticker with Barcode Generator - Create Printable Price Labels",
+    "h1": [
+      "Free MRP Sticker with Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free MRP Sticker with Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "MRP Price Sticker",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-tool-mode-desktop.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-preview-desktop.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "lpn",
+    "viewport": "desktop",
+    "path": "/lpn-barcode-generator",
+    "url": "http://127.0.0.1:4173/lpn-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-desktop.png",
+    "title": "Free LPN Barcode Generator for Warehouse and Inventory Labels",
+    "h1": [
+      "Free LPN Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free LPN Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "LPN sequence generator",
+        "found": true
+      },
+      {
+        "text": "Generate LPN sequence",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-tool-mode-desktop.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-preview-desktop.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "inventory",
+    "viewport": "desktop",
+    "path": "/inventory-barcode-label-generator",
+    "url": "http://127.0.0.1:4173/inventory-barcode-label-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-desktop.png",
+    "title": "Free Inventory Barcode Label Generator for Products and Stock",
+    "h1": [
+      "Free Inventory Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Inventory Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Inventory Label",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-tool-mode-desktop.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-preview-desktop.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "label",
+    "viewport": "desktop",
+    "path": "/barcode-label-generator",
+    "url": "http://127.0.0.1:4173/barcode-label-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/label-desktop.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/label-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "excel",
+    "viewport": "desktop",
+    "path": "/barcode-generator-for-excel",
+    "url": "http://127.0.0.1:4173/barcode-generator-for-excel",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/excel-desktop.png",
+    "title": "Barcode Generator for Excel - Paste Spreadsheet Rows and Create Barcodes",
+    "h1": [
+      "Barcode Generator for Excel"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode Generator for Excel",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/excel-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "bulk",
+    "viewport": "desktop",
+    "path": "/bulk-barcode-generator",
+    "url": "http://127.0.0.1:4173/bulk-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/bulk-desktop.png",
+    "title": "Bulk Barcode Generator | Create Multiple Barcodes Online",
+    "h1": [
+      "Bulk Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Bulk Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/bulk-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "home",
+    "viewport": "mobile",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/home-mobile.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Choose the right barcode generator",
+        "found": true
+      },
+      {
+        "text": "Garment Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "MRP Sticker with Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "LPN Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Inventory Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "featured-tools",
+        "selector": "section[aria-labelledby=featured-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/home-featured-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "garment",
+    "viewport": "mobile",
+    "path": "/garment-barcode-generator",
+    "url": "http://127.0.0.1:4173/garment-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-mobile.png",
+    "title": "Free Garment Barcode Generator for Clothing Labels | Barcode Mint",
+    "h1": [
+      "Free Garment Barcode Generator for Clothing Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Garment Barcode Generator for Clothing Labels",
+        "found": true
+      },
+      {
+        "text": "Garment Label",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-tool-mode-mobile.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-preview-mobile.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/garment-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "mrp",
+    "viewport": "mobile",
+    "path": "/mrp-sticker-with-barcode-generator",
+    "url": "http://127.0.0.1:4173/mrp-sticker-with-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-mobile.png",
+    "title": "Free MRP Sticker with Barcode Generator - Create Printable Price Labels",
+    "h1": [
+      "Free MRP Sticker with Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free MRP Sticker with Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "MRP Price Sticker",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-tool-mode-mobile.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-preview-mobile.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/mrp-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "lpn",
+    "viewport": "mobile",
+    "path": "/lpn-barcode-generator",
+    "url": "http://127.0.0.1:4173/lpn-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-mobile.png",
+    "title": "Free LPN Barcode Generator for Warehouse and Inventory Labels",
+    "h1": [
+      "Free LPN Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free LPN Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "LPN sequence generator",
+        "found": true
+      },
+      {
+        "text": "Generate LPN sequence",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-tool-mode-mobile.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-preview-mobile.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/lpn-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "inventory",
+    "viewport": "mobile",
+    "path": "/inventory-barcode-label-generator",
+    "url": "http://127.0.0.1:4173/inventory-barcode-label-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-mobile.png",
+    "title": "Free Inventory Barcode Label Generator for Products and Stock",
+    "h1": [
+      "Free Inventory Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Inventory Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Inventory Label",
+        "found": true
+      },
+      {
+        "text": "Download ZIP",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "tool-mode",
+        "selector": "[aria-label=\"Barcode mode\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-tool-mode-mobile.png",
+        "found": true
+      },
+      {
+        "name": "preview",
+        "selector": "[aria-label=\"Barcode label preview\"]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-preview-mobile.png",
+        "found": true
+      },
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/inventory-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "label",
+    "viewport": "mobile",
+    "path": "/barcode-label-generator",
+    "url": "http://127.0.0.1:4173/barcode-label-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/label-mobile.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/label-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "excel",
+    "viewport": "mobile",
+    "path": "/barcode-generator-for-excel",
+    "url": "http://127.0.0.1:4173/barcode-generator-for-excel",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/excel-mobile.png",
+    "title": "Barcode Generator for Excel - Paste Spreadsheet Rows and Create Barcodes",
+    "h1": [
+      "Barcode Generator for Excel"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode Generator for Excel",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/excel-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "bulk",
+    "viewport": "mobile",
+    "path": "/bulk-barcode-generator",
+    "url": "http://127.0.0.1:4173/bulk-barcode-generator",
+    "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/bulk-mobile.png",
+    "title": "Bulk Barcode Generator | Create Multiple Barcodes Online",
+    "h1": [
+      "Bulk Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Bulk Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "section[aria-labelledby=related-tools-title]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/vertical-keyword-pages/bulk-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  }
+]

@@ -37,10 +37,10 @@ defineProps<{
       <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="max-w-2xl">
           <h2 id="featured-tools-title" class="text-2xl font-bold tracking-normal text-gray-950">
-            Choose the right barcode tool
+            Choose the right barcode generator
           </h2>
           <p class="mt-2 text-sm leading-6 text-gray-600">
-            Start with the barcode tool that matches what you want to create, print, or export.
+            Create printable barcode labels for products, clothing, inventory, warehouse operations, and price stickers.
           </p>
         </div>
 

@@ -105,6 +105,30 @@ const skuTool: RelatedTool = {
   path: '/sku-barcode-generator'
 }
 
+const garmentTool: RelatedTool = {
+  title: 'Garment Barcode Generator',
+  description: 'Create clothing barcode labels for SKUs, sizes, colors, and apparel inventory.',
+  path: '/garment-barcode-generator'
+}
+
+const mrpTool: RelatedTool = {
+  title: 'MRP Sticker with Barcode Generator',
+  description: 'Create printable price stickers with product names, MRP, and barcodes.',
+  path: '/mrp-sticker-with-barcode-generator'
+}
+
+const lpnTool: RelatedTool = {
+  title: 'LPN Barcode Generator',
+  description: 'Generate warehouse LPN barcodes for pallets, cartons, bins, and inventory units.',
+  path: '/lpn-barcode-generator'
+}
+
+const inventoryLabelTool: RelatedTool = {
+  title: 'Inventory Barcode Label Generator',
+  description: 'Create inventory barcode labels for products, stock rooms, and warehouse items.',
+  path: '/inventory-barcode-label-generator'
+}
+
 export const toolPages = {
   home: {
     path: '/',
@@ -118,6 +142,12 @@ export const toolPages = {
     defaultType: 'code128',
     defaultValue: 'SKU-001',
     featuredTools: [
+      garmentTool,
+      mrpTool,
+      lpnTool,
+      inventoryLabelTool,
+      skuTool,
+      excelTool,
       {
         title: 'Printable Barcode Generator',
         description: 'Generate and print barcodes online as PNG, SVG, or PDF.',
@@ -127,16 +157,6 @@ export const toolPages = {
         title: 'Barcode Label Generator',
         description: 'Create printable barcode labels for products, SKUs, inventory, and retail items.',
         path: '/barcode-label-generator'
-      },
-      {
-        title: 'SKU Barcode Generator',
-        description: 'Create Code 128 barcodes for custom SKU and inventory codes.',
-        path: '/sku-barcode-generator'
-      },
-      {
-        title: 'Barcode Generator for Excel',
-        description: 'Paste rows from Excel or Google Sheets and generate barcodes in bulk.',
-        path: '/barcode-generator-for-excel'
       },
       {
         title: 'Bulk Barcode Generator',
@@ -184,7 +204,7 @@ export const toolPages = {
         answer: 'Use Code 128 for custom SKUs and inventory IDs, UPC-A for 12-digit US retail product codes, and EAN-13 for 13-digit international product codes.'
       }
     ],
-    relatedTools: [printableTool, labelTool, skuTool, bulkTool, excelTool, code128Tool, upcATool, ean13Tool]
+    relatedTools: [garmentTool, mrpTool, lpnTool, inventoryLabelTool, printableTool, labelTool, skuTool, bulkTool, excelTool, code128Tool, upcATool, ean13Tool]
   },
   code128: {
     path: '/code-128-barcode-generator',
@@ -233,7 +253,7 @@ export const toolPages = {
         answer: 'Most modern barcode scanners can read Code 128, but you should test printed labels with the scanner and software used in your workflow.'
       }
     ],
-    relatedTools: [skuTool, homeTool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
+    relatedTools: [skuTool, garmentTool, inventoryLabelTool, lpnTool, homeTool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
   },
   sku: {
     path: '/sku-barcode-generator',
@@ -293,7 +313,7 @@ export const toolPages = {
         answer: 'Use Code 128 for your own SKU or inventory codes. Use UPC-A or EAN-13 only when you have standard numeric retail product codes.'
       }
     ],
-    relatedTools: [code128Tool, bulkTool, labelTool, excelTool, printableTool]
+    relatedTools: [code128Tool, garmentTool, inventoryLabelTool, lpnTool, bulkTool, labelTool, excelTool, printableTool]
   },
   upcA: {
     path: '/upc-a-barcode-generator',
@@ -535,7 +555,7 @@ export const toolPages = {
         answer: 'Invalid rows are marked with an error message. Valid rows can still be previewed and exported.'
       }
     ],
-    relatedTools: [excelTool, labelTool, skuTool, printableTool, code128Tool, homeTool]
+    relatedTools: [lpnTool, inventoryLabelTool, excelTool, labelTool, skuTool, printableTool, code128Tool, homeTool]
   },
   excel: {
     path: '/barcode-generator-for-excel',
@@ -605,7 +625,7 @@ export const toolPages = {
         answer: 'Yes. Valid spreadsheet rows can be exported as a basic printable PDF sheet. Invalid rows need to be fixed before they are included.'
       }
     ],
-    relatedTools: [bulkTool, labelTool, skuTool, printableTool, code128Tool]
+    relatedTools: [garmentTool, inventoryLabelTool, lpnTool, bulkTool, labelTool, skuTool, printableTool, code128Tool]
   },
   label: {
     path: '/barcode-label-generator',
@@ -662,7 +682,7 @@ export const toolPages = {
         answer: 'Yes. Use the Barcode Generator for Excel when your pasted rows include barcode values, label text, or extra product details.'
       }
     ],
-    relatedTools: [skuTool, printableTool, excelTool, bulkTool, code128Tool]
+    relatedTools: [garmentTool, mrpTool, inventoryLabelTool, skuTool, printableTool, excelTool, bulkTool, code128Tool]
   },
   printable: {
     path: '/printable-barcode-generator',
@@ -724,7 +744,252 @@ export const toolPages = {
         answer: 'Yes. Barcode Mint works in your browser and does not require sign-up or login.'
       }
     ],
-    relatedTools: [labelTool, bulkTool, excelTool, skuTool, code128Tool]
+    relatedTools: [mrpTool, inventoryLabelTool, garmentTool, labelTool, bulkTool, excelTool, skuTool, code128Tool]
+  },
+  garment: {
+    path: '/garment-barcode-generator',
+    title: 'Free Garment Barcode Generator for Clothing Labels | Barcode Mint',
+    description:
+      'Generate barcodes for clothing SKUs, sizes, colors, and apparel inventory labels. Create printable garment label sheets and export PDF, PNG, SVG, or ZIP files.',
+    h1: 'Free Garment Barcode Generator for Clothing Labels',
+    subtitle:
+      'Generate barcodes for clothing SKUs, sizes, colors, and apparel inventory labels. Create printable label sheets for garments, products, and stock rooms.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'TSHIRT-BLK-M',
+    sections: [
+      {
+        title: 'How to create garment barcode labels',
+        body: 'Enter a clothing SKU, product name, color, size, and style number, then preview a garment label before exporting PNG, SVG, ZIP, or a printable PDF sheet.'
+      },
+      {
+        title: 'Best barcode type for clothing SKUs',
+        body: 'Code 128 is recommended for garment labels because apparel SKUs often include letters, numbers, dashes, colors, and sizes.',
+        links: [code128Tool, skuTool]
+      },
+      {
+        title: 'Clothing barcode label use cases',
+        body: 'Use garment barcode labels for stock rooms, product packaging, size variants, handmade apparel, pop-up shops, and small retail inventory.',
+        items: ['T-shirt size labels', 'Color and style labels', 'Back room inventory labels', 'Marketplace product organization']
+      },
+      {
+        title: 'Bulk clothing barcode generation',
+        body: 'Paste clothing SKU rows from Excel or Google Sheets to generate multiple labels with product names, colors, sizes, and style numbers.',
+        links: [excelTool, bulkTool, labelTool]
+      }
+    ],
+    faqs: [
+      {
+        question: 'What is a garment barcode?',
+        answer: 'A garment barcode is a scannable code used on clothing labels, tags, or inventory stickers to identify a SKU, size, color, or style.'
+      },
+      {
+        question: 'What barcode type should I use for clothing SKUs?',
+        answer: 'Use Code 128 for most clothing SKUs because it supports letters, numbers, dashes, and variant codes such as TSHIRT-BLK-M.'
+      },
+      {
+        question: 'Can I create barcode labels for clothing sizes and colors?',
+        answer: 'Yes. The garment template includes product name, style, color, size, barcode image, and barcode value.'
+      },
+      {
+        question: 'Can I paste clothing SKUs from Excel?',
+        answer: 'Yes. Paste rows with barcode value, product name, color, size, style, and optional price from Excel or Google Sheets.'
+      },
+      {
+        question: 'Can I print garment barcode labels as PDF?',
+        answer: 'Yes. Valid garment rows can be exported as printable PDF label sheets for US Letter or A4 paper.'
+      },
+      {
+        question: 'Do I need a UPC barcode for clothing products?',
+        answer: 'Not for internal inventory labels. UPC or EAN codes may be required by some retailers, but this tool does not issue official GS1 product identifiers.'
+      }
+    ],
+    relatedTools: [skuTool, labelTool, excelTool, printableTool, bulkTool]
+  },
+  mrp: {
+    path: '/mrp-sticker-with-barcode-generator',
+    title: 'Free MRP Sticker with Barcode Generator - Create Printable Price Labels',
+    description:
+      'Create printable MRP stickers with barcodes for products, SKUs, and price labels. Add product name, price, and barcode, then export as PDF.',
+    h1: 'Free MRP Sticker with Barcode Generator',
+    subtitle:
+      'Create printable MRP stickers with product names, prices, pack details, and barcodes. Export price label sheets as PDF, PNG, SVG, or ZIP.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'SKU-001',
+    sections: [
+      {
+        title: 'What is an MRP sticker with barcode?',
+        body: 'An MRP sticker with barcode is a printable price label that combines a product identifier, price information, and a scannable barcode.'
+      },
+      {
+        title: 'How to create an MRP barcode sticker',
+        body: 'Enter a SKU, product name, MRP or price, optional sale price, pack size, and batch. Preview the sticker, then export a printable PDF sheet.'
+      },
+      {
+        title: 'Barcode type for price stickers',
+        body: 'Code 128 works well for internal product SKUs and price stickers. Use UPC-A or EAN-13 only when you already have official numeric retail product codes.',
+        links: [code128Tool, skuTool]
+      },
+      {
+        title: 'Printing price stickers',
+        body: 'Print at 100% scale, disable Fit to page, and test one sticker before printing a full sheet. This tool helps create printable barcode price stickers. Please make sure your product labels meet the pricing and labeling rules that apply in your market.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Can I create an MRP sticker with a barcode online?',
+        answer: 'Yes. Enter product and price fields in the browser, preview the sticker, and export printable files.'
+      },
+      {
+        question: 'Can I add product name and price to the sticker?',
+        answer: 'Yes. The MRP template supports product name, MRP or price, optional sale price, pack size, batch, barcode, and barcode value.'
+      },
+      {
+        question: 'Can I export MRP barcode stickers as PDF?',
+        answer: 'Yes. Valid sticker rows can be exported as PDF label sheets for US Letter or A4 paper.'
+      },
+      {
+        question: 'What barcode type should I use for price stickers?',
+        answer: 'Use Code 128 for custom SKU price stickers. Use UPC-A or EAN-13 only for standard numeric retail product codes you already own.'
+      },
+      {
+        question: 'Can I paste product and price data from Excel?',
+        answer: 'Yes. Paste product rows with barcode value, product name, MRP, sale price, pack size, and optional batch.'
+      },
+      {
+        question: 'Are these labels compliant for retail use?',
+        answer: 'This tool creates printable sticker files only. You are responsible for checking the pricing and labeling rules that apply in your market.'
+      }
+    ],
+    relatedTools: [labelTool, printableTool, skuTool, excelTool, bulkTool]
+  },
+  lpn: {
+    path: '/lpn-barcode-generator',
+    title: 'Free LPN Barcode Generator for Warehouse and Inventory Labels',
+    description:
+      'Generate LPN barcodes for warehouse labels, pallets, cartons, and inventory tracking. Create Code 128 LPN labels and export printable PDF sheets.',
+    h1: 'Free LPN Barcode Generator',
+    subtitle:
+      'Generate LPN barcodes for warehouse labels, pallets, cartons, and inventory tracking. Create Code 128 LPN labels and export printable PDF sheets.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'LPN-000001',
+    sections: [
+      {
+        title: 'What is an LPN barcode?',
+        body: 'An LPN barcode represents a license plate number used to identify pallets, cartons, bins, or inventory handling units in a warehouse.'
+      },
+      {
+        title: 'Best barcode type for LPN labels',
+        body: 'Code 128 is a practical choice for LPN values because it supports prefixes such as LPN- and compact warehouse identifiers.',
+        links: [code128Tool]
+      },
+      {
+        title: 'LPN barcode examples',
+        body: 'Use the sequence generator to create LPN-000001 through LPN-000100, or paste existing warehouse values from a spreadsheet.',
+        items: ['LPN-000001', 'LPN-000002', 'LPN-000003']
+      },
+      {
+        title: 'Warehouse label printing tips',
+        body: 'Use larger labels for pallets and cartons, print at 100% scale, and test scan the output before applying labels in an active warehouse.',
+        links: [inventoryLabelTool, bulkTool]
+      }
+    ],
+    faqs: [
+      {
+        question: 'What does LPN mean in warehouse labels?',
+        answer: 'LPN usually means license plate number, a unique identifier for a pallet, carton, bin, or handling unit.'
+      },
+      {
+        question: 'What barcode type should I use for LPN barcodes?',
+        answer: 'Code 128 is recommended for LPN barcodes because it supports alphanumeric warehouse prefixes and compact label printing.'
+      },
+      {
+        question: 'Can I generate multiple LPN barcodes at once?',
+        answer: 'Yes. Use the LPN sequence generator or paste up to 100 LPN values from a spreadsheet.'
+      },
+      {
+        question: 'Can I create pallet and carton barcode labels?',
+        answer: 'Yes. The LPN template supports warehouse or location text and a pallet, carton, or bin unit type.'
+      },
+      {
+        question: 'Can I export LPN labels as PDF?',
+        answer: 'Yes. Valid LPN rows can be exported as printable PDF label sheets.'
+      },
+      {
+        question: 'Can I paste LPN values from Excel?',
+        answer: 'Yes. Paste LPN value, warehouse or location, unit type, and optional batch from Excel or Google Sheets.'
+      }
+    ],
+    relatedTools: [inventoryLabelTool, bulkTool, excelTool, labelTool, skuTool]
+  },
+  inventoryLabel: {
+    path: '/inventory-barcode-label-generator',
+    title: 'Free Inventory Barcode Label Generator for Products and Stock',
+    description:
+      'Create printable inventory barcode labels for products, SKUs, stock rooms, and warehouse items. Generate labels in bulk and export as PDF.',
+    h1: 'Free Inventory Barcode Label Generator',
+    subtitle:
+      'Create printable inventory barcode labels for products, SKUs, stock rooms, and warehouse items. Generate labels in bulk and export as PDF.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'INV-1001',
+    sections: [
+      {
+        title: 'How to create inventory barcode labels',
+        body: 'Enter an inventory code, item name, location, quantity, and category, then preview and export barcode labels for stock rooms and warehouse shelves.'
+      },
+      {
+        title: 'Inventory barcode examples',
+        body: 'Inventory labels often use Code 128 values with internal prefixes, item numbers, or shelf identifiers.',
+        items: ['INV-1001', 'INV-1002', 'SHELF-03-BOX-8']
+      },
+      {
+        title: 'Inventory vs SKU vs LPN barcode comparison',
+        body: 'SKU barcodes identify sellable products, inventory barcodes identify internal stock or assets, and LPN barcodes identify warehouse handling units.',
+        table: {
+          headers: ['Label type', 'Common use', 'Example'],
+          rows: [
+            ['SKU', 'Product variant', 'TSHIRT-BLK-M'],
+            ['Inventory', 'Stock room item', 'INV-1001'],
+            ['LPN', 'Pallet or carton', 'LPN-000001']
+          ]
+        }
+      },
+      {
+        title: 'Bulk inventory barcode labels',
+        body: 'Paste rows from Excel or Google Sheets to create many inventory labels with item names, locations, quantities, and categories.',
+        links: [excelTool, bulkTool, labelTool]
+      }
+    ],
+    faqs: [
+      {
+        question: 'What is an inventory barcode label?',
+        answer: 'An inventory barcode label is a scannable label used to identify products, supplies, shelves, stock room items, or warehouse assets.'
+      },
+      {
+        question: 'What barcode type should I use for inventory labels?',
+        answer: 'Code 128 is usually best for inventory labels because it supports letters, numbers, dashes, and internal item codes.'
+      },
+      {
+        question: 'Can I create inventory barcode labels in bulk?',
+        answer: 'Yes. Paste up to 100 rows from Excel or Google Sheets and export the valid rows as label sheets.'
+      },
+      {
+        question: 'Can I add item names and locations to labels?',
+        answer: 'Yes. The inventory template supports item name, location, quantity, category, barcode image, and barcode value.'
+      },
+      {
+        question: 'Can I export inventory labels as PDF?',
+        answer: 'Yes. Valid inventory rows can be exported as printable PDF label sheets.'
+      },
+      {
+        question: 'What is the difference between SKU, inventory, and LPN barcodes?',
+        answer: 'SKU barcodes identify product variants, inventory barcodes identify internal stock or assets, and LPN barcodes identify warehouse handling units such as pallets or cartons.'
+      }
+    ],
+    relatedTools: [lpnTool, skuTool, excelTool, bulkTool, labelTool]
   }
 } satisfies Record<string, ToolPageContent>
 

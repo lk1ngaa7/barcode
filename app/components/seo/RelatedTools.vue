@@ -17,9 +17,9 @@ function trackRelatedToolClick(tool: RelatedTool): void {
 </script>
 
 <template>
-  <section class="space-y-4">
+  <section class="space-y-4" aria-labelledby="related-tools-title">
     <div>
-      <h2 class="text-2xl font-bold tracking-normal text-gray-950">
+      <h2 id="related-tools-title" class="text-2xl font-bold tracking-normal text-gray-950">
         Related tools
       </h2>
       <p class="mt-2 text-sm leading-6 text-gray-600">
