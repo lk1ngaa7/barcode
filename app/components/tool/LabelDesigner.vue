@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<{
 })
 
 const selectedType = ref<BarcodeType>('code128')
-const barcodeValue = ref('SKU001')
+const barcodeValue = ref('SKU-001')
 const template = ref<LabelTemplate>(props.defaultTemplate)
 const labelSize = ref<LabelSize>(props.defaultLabelSize)
 const paperSize = ref<PaperSize>(props.defaultPaper)

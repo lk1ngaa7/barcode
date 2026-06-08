@@ -11,7 +11,7 @@ import BulkBarcodeInput from './BulkBarcodeInput.vue'
 import BulkBarcodeTable from './BulkBarcodeTable.vue'
 
 const BULK_LIMIT = 100
-const sampleInput = 'SKU001\nSKU002\nSKU003'
+const sampleInput = 'SKU-001\nSKU-002\nSKU-003'
 
 const selectedType = ref<BarcodeType>('code128')
 const draftInput = ref(sampleInput)

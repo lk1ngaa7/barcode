@@ -48,7 +48,7 @@ function handlePaste(event: ClipboardEvent): void {
         class="min-h-48 rounded-xl border bg-white px-3 py-3 text-base leading-6 text-gray-950 shadow-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         :class="overLimit ? 'border-red-500' : 'border-gray-300'"
         :value="modelValue"
-        placeholder="SKU001&#9;Black T-Shirt&#9;$19.99&#10;SKU002&#9;White Mug&#9;$12.99&#10;SKU003&#9;Phone Case&#9;$9.99"
+        placeholder="SKU-001&#9;Black T-Shirt&#9;$19.99&#10;SKU-002&#9;White Mug&#9;$12.99&#10;SKU-003&#9;Phone Case&#9;$9.99"
         aria-describedby="spreadsheet-barcode-help spreadsheet-barcode-limit"
         spellcheck="false"
         @input="handleInput"

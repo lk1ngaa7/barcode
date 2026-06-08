@@ -4,9 +4,12 @@
       <NuxtLink to="/" class="inline-flex min-h-11 items-center text-base font-semibold text-gray-950">
         Barcode Generator
       </NuxtLink>
-      <nav class="hidden items-center gap-6 text-sm font-medium text-gray-600 md:flex" aria-label="Main navigation">
-        <NuxtLink to="/" class="hover:text-blue-600">
-          Barcode Generator
+      <nav class="hidden items-center gap-5 text-sm font-medium text-gray-600 lg:flex" aria-label="Main navigation">
+        <NuxtLink to="/printable-barcode-generator" class="hover:text-blue-600">
+          Printable
+        </NuxtLink>
+        <NuxtLink to="/sku-barcode-generator" class="hover:text-blue-600">
+          SKU Generator
         </NuxtLink>
         <NuxtLink to="/bulk-barcode-generator" class="hover:text-blue-600">
           Bulk Generator
@@ -17,9 +20,6 @@
         <NuxtLink to="/barcode-label-generator" class="hover:text-blue-600">
           Label Generator
         </NuxtLink>
-        <span class="text-gray-400">
-          Guides
-        </span>
       </nav>
     </div>
   </header>

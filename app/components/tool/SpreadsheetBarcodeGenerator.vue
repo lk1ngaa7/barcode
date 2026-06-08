@@ -12,7 +12,7 @@ import SpreadsheetBarcodeTable from './SpreadsheetBarcodeTable.vue'
 import SpreadsheetPasteInput from './SpreadsheetPasteInput.vue'
 
 const ROW_LIMIT = 100
-const sampleInput = 'SKU001\tBlack T-Shirt\t$19.99\nSKU002\tWhite Mug\t$12.99\nSKU003\tPhone Case\t$9.99'
+const sampleInput = 'SKU-001\tBlack T-Shirt\t$19.99\nSKU-002\tWhite Mug\t$12.99\nSKU-003\tPhone Case\t$9.99'
 
 const selectedType = ref<BarcodeType>('code128')
 const draftInput = ref(sampleInput)

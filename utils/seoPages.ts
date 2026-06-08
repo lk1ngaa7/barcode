@@ -23,9 +23,16 @@ export interface ToolPageContent {
   sections: Array<{
     title: string
     body: string
+    items?: string[]
+    links?: RelatedTool[]
+    table?: {
+      headers: string[]
+      rows: string[][]
+    }
   }>
   faqs: FaqItem[]
   relatedTools: RelatedTool[]
+  featuredTools?: RelatedTool[]
 }
 
 export const SITE_URL = 'https://www.barcode-mint.com'
@@ -70,26 +77,32 @@ const itfTool: RelatedTool = {
 
 const bulkTool: RelatedTool = {
   title: 'Bulk Barcode Generator',
-  description: 'Paste up to 100 values and generate barcode previews in one batch.',
+  description: 'Generate multiple barcodes from a list of values and export them for printing.',
   path: '/bulk-barcode-generator'
 }
 
 const excelTool: RelatedTool = {
   title: 'Barcode Generator for Excel',
-  description: 'Paste rows from Excel or Google Sheets and generate barcodes from spreadsheet columns.',
+  description: 'Paste rows from Excel or Google Sheets and generate barcodes in bulk.',
   path: '/barcode-generator-for-excel'
 }
 
 const labelTool: RelatedTool = {
   title: 'Barcode Label Generator',
-  description: 'Design product and inventory barcode labels with template fields.',
+  description: 'Create printable barcode labels for products, SKUs, inventory, and retail items.',
   path: '/barcode-label-generator'
 }
 
 const printableTool: RelatedTool = {
   title: 'Printable Barcode Generator',
-  description: 'Create print-ready barcode PDFs for US Letter or A4 paper.',
+  description: 'Generate and print barcodes online as PNG, SVG, or PDF.',
   path: '/printable-barcode-generator'
+}
+
+const skuTool: RelatedTool = {
+  title: 'SKU Barcode Generator',
+  description: 'Create Code 128 barcodes for custom SKU and inventory codes.',
+  path: '/sku-barcode-generator'
 }
 
 export const toolPages = {
@@ -104,6 +117,33 @@ export const toolPages = {
     trustNote: commonTrustNote,
     defaultType: 'code128',
     defaultValue: 'SKU-001',
+    featuredTools: [
+      {
+        title: 'Printable Barcode Generator',
+        description: 'Generate and print barcodes online as PNG, SVG, or PDF.',
+        path: '/printable-barcode-generator'
+      },
+      {
+        title: 'Barcode Label Generator',
+        description: 'Create printable barcode labels for products, SKUs, inventory, and retail items.',
+        path: '/barcode-label-generator'
+      },
+      {
+        title: 'SKU Barcode Generator',
+        description: 'Create Code 128 barcodes for custom SKU and inventory codes.',
+        path: '/sku-barcode-generator'
+      },
+      {
+        title: 'Barcode Generator for Excel',
+        description: 'Paste rows from Excel or Google Sheets and generate barcodes in bulk.',
+        path: '/barcode-generator-for-excel'
+      },
+      {
+        title: 'Bulk Barcode Generator',
+        description: 'Generate multiple barcodes from a list of values and export them for printing.',
+        path: '/bulk-barcode-generator'
+      }
+    ],
     sections: [
       {
         title: 'How to use this barcode generator',
@@ -144,7 +184,7 @@ export const toolPages = {
         answer: 'Use Code 128 for custom SKUs and inventory IDs, UPC-A for 12-digit US retail product codes, and EAN-13 for 13-digit international product codes.'
       }
     ],
-    relatedTools: [code128Tool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
+    relatedTools: [printableTool, labelTool, skuTool, bulkTool, excelTool, code128Tool, upcATool, ean13Tool]
   },
   code128: {
     path: '/code-128-barcode-generator',
@@ -193,7 +233,67 @@ export const toolPages = {
         answer: 'Most modern barcode scanners can read Code 128, but you should test printed labels with the scanner and software used in your workflow.'
       }
     ],
-    relatedTools: [homeTool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
+    relatedTools: [skuTool, homeTool, upcATool, ean13Tool, code39Tool, itfTool, bulkTool, excelTool, labelTool]
+  },
+  sku: {
+    path: '/sku-barcode-generator',
+    title: 'Free SKU Barcode Generator - Create Barcodes for Inventory and Products',
+    description:
+      'Create SKU barcodes online for products, inventory, and warehouse labels. Use Code 128 for custom SKU values and export as PNG, SVG, or PDF.',
+    h1: 'Free SKU Barcode Generator',
+    subtitle: 'Create Code 128 barcodes for custom SKU values, product codes, and inventory labels.',
+    trustNote: commonTrustNote,
+    defaultType: 'code128',
+    defaultValue: 'SKU-001',
+    sections: [
+      {
+        title: 'What is a SKU barcode?',
+        body: 'A SKU barcode is a scannable version of your own stock keeping unit. It helps small businesses, warehouses, and retail teams track products, shelves, assets, and internal inventory without turning the SKU itself into a retail UPC or EAN code.'
+      },
+      {
+        title: 'Best barcode type for SKUs',
+        body: 'Code 128 is usually the best barcode type for custom SKU values because it supports letters, numbers, and symbols.',
+        items: [
+          'Use Code 128 for SKU-001, ITEM-XL-2026, BLACK-TSHIRT-M, and similar internal values.',
+          'Use UPC-A for standard 12-digit US retail product codes.',
+          'Use EAN-13 for standard 13-digit international retail product codes.'
+        ],
+        links: [code128Tool]
+      },
+      {
+        title: 'SKU barcode examples',
+        body: 'These are common SKU and inventory code patterns that work well as Code 128 barcodes.',
+        items: ['SKU-001', 'ITEM-2026-XL', 'BLACK-TSHIRT-M', 'WAREHOUSE-A-1001']
+      },
+      {
+        title: 'Bulk SKU barcode generation',
+        body: 'For product catalogs, warehouse labels, or SKU sheets, paste many SKU values at once and export printable barcode labels or spreadsheet-based batches.',
+        links: [bulkTool, excelTool, labelTool]
+      }
+    ],
+    faqs: [
+      {
+        question: 'What barcode type should I use for SKUs?',
+        answer: 'Code 128 is usually the best choice for SKU barcodes because it supports letters, numbers, dashes, underscores, and other common SKU characters.'
+      },
+      {
+        question: 'Can a SKU contain letters and numbers?',
+        answer: 'Yes. Many SKU values mix letters and numbers, such as SKU-001 or BLACK-TSHIRT-M. Use Code 128 for these custom alphanumeric values.'
+      },
+      {
+        question: 'Can I create SKU barcode labels?',
+        answer: 'Yes. Generate a SKU barcode, then use the Barcode Label Generator to create product, inventory, or warehouse labels as printable PDF sheets.'
+      },
+      {
+        question: 'Can I generate SKU barcodes in bulk?',
+        answer: 'Yes. Use the Bulk Barcode Generator for one SKU per line, or the Barcode Generator for Excel when your SKUs are stored in a spreadsheet.'
+      },
+      {
+        question: 'Should I use Code 128, UPC, or EAN for SKUs?',
+        answer: 'Use Code 128 for your own SKU or inventory codes. Use UPC-A or EAN-13 only when you have standard numeric retail product codes.'
+      }
+    ],
+    relatedTools: [code128Tool, bulkTool, labelTool, excelTool, printableTool]
   },
   upcA: {
     path: '/upc-a-barcode-generator',
@@ -385,25 +485,32 @@ export const toolPages = {
     path: '/bulk-barcode-generator',
     title: 'Bulk Barcode Generator | Create Multiple Barcodes Online',
     description:
-      'Paste multiple barcode values and generate up to 100 Code 128, UPC-A, or EAN-13 barcodes online. Preview valid rows and export a printable PDF.',
+      'Paste multiple barcode values and generate up to 100 Code 128, UPC-A, or EAN-13 barcodes online. Create batches from lists, Excel rows, or SKU values.',
     h1: 'Bulk Barcode Generator',
     subtitle:
-      'Paste one barcode value per line, validate up to 100 rows, preview each barcode, and export a basic printable PDF.',
+      'Generate multiple barcodes from a list of values. Paste one value per line, review invalid rows, and export a printable PDF.',
     trustNote: commonTrustNote,
     defaultType: 'code128',
-    defaultValue: 'SKU001',
+    defaultValue: 'SKU-001',
     sections: [
       {
         title: 'Generate many barcodes at once',
-        body: 'Paste one SKU, inventory ID, UPC-A value, or EAN-13 value per line and generate a batch preview without uploading your data.'
+        body: 'Paste one SKU, inventory ID, UPC-A value, or EAN-13 value per line and generate a batch preview without uploading your data.',
+        items: [
+          'Use one barcode value per line.',
+          'Generate up to 100 rows at a time.',
+          'Fix invalid rows before exporting the final PDF.'
+        ]
       },
       {
-        title: 'Fix invalid rows quickly',
-        body: 'Each row is checked against the selected barcode type, with clear error messages for values that need to be corrected.'
+        title: 'Paste from Excel or Google Sheets',
+        body: 'You can paste a simple list here, or use the Barcode Generator for Excel when your spreadsheet also includes label text, prices, variants, or extra columns.',
+        links: [excelTool]
       },
       {
         title: 'Export a basic printable PDF',
-        body: 'Valid rows can be exported into a simple US Letter PDF with barcode values shown under each barcode.'
+        body: 'Valid rows can be exported into a simple US Letter PDF with barcode values shown under each barcode. For product or inventory label layouts, use the Barcode Label Generator.',
+        links: [labelTool]
       }
     ],
     faqs: [
@@ -428,157 +535,196 @@ export const toolPages = {
         answer: 'Invalid rows are marked with an error message. Valid rows can still be previewed and exported.'
       }
     ],
-    relatedTools: [homeTool, code128Tool, upcATool, ean13Tool, excelTool, labelTool]
+    relatedTools: [excelTool, labelTool, skuTool, printableTool, code128Tool, homeTool]
   },
   excel: {
     path: '/barcode-generator-for-excel',
-    title: 'Barcode Generator for Excel | Paste SKUs and Export Barcodes',
+    title: 'Barcode Generator for Excel - Paste Spreadsheet Rows and Create Barcodes',
     description:
-      'Paste your Excel or Google Sheets product list and generate barcodes in bulk. Map barcode values, label text, and extra text from spreadsheet columns.',
+      'Paste product codes or SKUs from Excel or Google Sheets and generate barcodes in bulk. Export barcode images or printable PDF sheets online.',
     h1: 'Barcode Generator for Excel',
     subtitle: 'Paste your Excel or Google Sheets product list and generate barcodes in bulk.',
     trustNote: commonTrustNote,
     defaultType: 'code128',
-    defaultValue: 'SKU001',
+    defaultValue: 'SKU-001',
     sections: [
       {
         title: 'Paste rows from Excel or Google Sheets',
-        body: 'Copy spreadsheet rows and paste them directly into the tool. Tab-delimited rows from spreadsheet apps and comma-separated rows are parsed automatically.'
+        body: 'Copy and paste rows directly from Excel or Google Sheets. The first column should contain the barcode value, and the second column can be used as optional label text.',
+        table: {
+          headers: ['Barcode Value', 'Label Text'],
+          rows: [
+            ['SKU-001', 'Black T-Shirt'],
+            ['SKU-002', 'White Mug'],
+            ['SKU-003', 'Product Box']
+          ]
+        }
       },
       {
-        title: 'Simple column mapping',
-        body: 'Column 1 is used as the barcode value, column 2 as label text, and column 3 as extra text for product notes such as price or variant.'
+        title: 'How to generate barcodes from Excel',
+        body: 'Prepare your spreadsheet rows, paste them into the bulk barcode input, review the validation result, and export only the valid rows.',
+        items: [
+          'Prepare your product codes or SKUs in Excel.',
+          'Copy the rows from your spreadsheet.',
+          'Paste them into the bulk barcode input.',
+          'Review valid and invalid rows.',
+          'Export valid rows as a PDF sheet or download individual SVG files.'
+        ],
+        links: [bulkTool]
       },
       {
-        title: 'Check spreadsheet rows before exporting',
-        body: 'Each row is validated against the selected barcode type so invalid product codes are marked before you export a printable PDF.'
+        title: 'Excel and Google Sheets support',
+        body: 'This spreadsheet barcode generator supports tab-delimited rows from Excel, copied rows from Google Sheets, and comma-separated rows for simple product lists.',
+        items: [
+          'Column 1 becomes the Barcode Value.',
+          'Column 2 becomes optional Label Text.',
+          'Column 3 becomes optional Extra Text.'
+        ],
+        links: [labelTool, skuTool]
       }
     ],
     faqs: [
       {
-        question: 'Can I paste data from Excel or Google Sheets?',
-        answer: 'Yes. Copy rows from Excel or Google Sheets and paste them directly into the browser-based tool.'
+        question: 'Can I paste barcode values from Excel?',
+        answer: 'Yes. Copy rows from Excel and paste them directly into the browser-based tool. The first column is treated as the barcode value.'
       },
       {
-        question: 'Which Excel column is used as the barcode value?',
-        answer: 'Column 1 is used as the Barcode Value. Column 2 becomes Label Text, and column 3 becomes Extra Text.'
+        question: 'Can I use Google Sheets with this barcode generator?',
+        answer: 'Yes. Copy rows from Google Sheets and paste them into the page. Tab-delimited spreadsheet rows are parsed automatically in your browser.'
       },
       {
-        question: 'Do I need to upload an Excel file?',
-        answer: 'No. The MVP does not upload xlsx files. Copy the spreadsheet rows and paste them into the page instead.'
+        question: 'What column format should I use?',
+        answer: 'Use column 1 for Barcode Value, column 2 for optional Label Text, and column 3 for optional Extra Text such as price, variant, or location.'
       },
       {
-        question: 'Is my spreadsheet data uploaded to your server?',
-        answer: 'No. The pasted rows are parsed and validated in your browser.'
+        question: 'Can I generate barcodes in bulk from a spreadsheet?',
+        answer: 'Yes. Paste up to 100 spreadsheet rows, choose the barcode type, and generate a validated batch preview before export.'
       },
       {
-        question: 'Can I create barcode labels from Excel rows?',
-        answer: 'Yes. Spreadsheet rows can include barcode values, label text, and extra text that can be exported in a basic printable PDF.'
+        question: 'Can I export spreadsheet barcodes as PDF?',
+        answer: 'Yes. Valid spreadsheet rows can be exported as a basic printable PDF sheet. Invalid rows need to be fixed before they are included.'
       }
     ],
-    relatedTools: [homeTool, bulkTool, labelTool, code128Tool, upcATool]
+    relatedTools: [bulkTool, labelTool, skuTool, printableTool, code128Tool]
   },
   label: {
     path: '/barcode-label-generator',
-    title: 'Barcode Label Generator | Printable Barcode Labels PDF',
+    title: 'Free Barcode Label Generator - Create and Print Barcode Labels',
     description:
-      'Create product and inventory barcode labels with product names, SKUs, prices, locations, label sizes, and simple label templates.',
-    h1: 'Barcode Label Generator',
+      'Create printable barcode labels for products, SKUs, and inventory. Generate barcode label sheets for US Letter or A4 paper and export as PDF.',
+    h1: 'Free Barcode Label Generator',
     subtitle:
-      'Design barcode labels for products, inventory, shelves, and assets with template fields such as product name, SKU, price, and location.',
+      'Create printable barcode labels for products, SKUs, inventory, and retail items. Export label sheets as PDF for US Letter or A4 paper.',
     trustNote: commonTrustNote,
     defaultType: 'code128',
-    defaultValue: 'SKU001',
+    defaultValue: 'SKU-001',
     sections: [
       {
-        title: 'Design product and inventory labels',
-        body: 'Choose Simple, Product, or Inventory templates based on what the label needs to show, such as a SKU, product name, or stock location.'
+        title: 'Create printable barcode labels',
+        body: 'Use this barcode label generator for product barcode labels, SKU barcode labels, inventory barcode labels, and retail item labels that need a clean scannable code plus readable text.',
+        items: [
+          'Simple labels for a barcode value.',
+          'Product labels with product names and SKUs.',
+          'Inventory labels with item and location text.'
+        ],
+        links: [skuTool]
       },
       {
-        title: 'Add label details',
-        body: 'Use product or item names for product labels and location text for inventory labels, shelf labels, asset tags, and small warehouse workflows.'
+        title: 'US Letter and A4 label sheets',
+        body: 'Choose US Letter or A4 paper, select a 2 x 1 inch or 3 x 2 inch label size, and export labels as PDF for office printers.',
+        links: [printableTool]
       },
       {
-        title: 'Pick a simple label layout',
-        body: 'Use compact 2 x 1 inch labels for SKUs and small packaging, or 3 x 2 inch labels when product or location text needs more room.'
+        title: 'Print settings for barcode labels',
+        body: 'For best scanning results, print barcode label sheets at 100% scale, disable Fit to page, and test one sheet before printing many labels.',
+        links: [excelTool, bulkTool]
       }
     ],
     faqs: [
       {
-        question: 'What can I include on a barcode label?',
-        answer: 'A label can include a barcode value, product or item name, and location text depending on the selected template.'
+        question: 'Can I print barcode labels on US Letter paper?',
+        answer: 'Yes. Choose US Letter as the paper size, export the label sheet as PDF, and print at 100% scale.'
       },
       {
-        question: 'Can I create product barcode labels?',
-        answer: 'Yes. Use the Product template to show a product name, barcode, and barcode value on the label.'
+        question: 'Can I create barcode labels for SKUs?',
+        answer: 'Yes. Code 128 is recommended for SKU barcode labels because it supports letters, numbers, dashes, and common SKU characters.'
       },
       {
-        question: 'Can I create inventory barcode labels?',
-        answer: 'Yes. Use the Inventory template to show an item name, barcode, location text, and barcode value.'
+        question: 'Can I export barcode labels as PDF?',
+        answer: 'Yes. Valid barcode labels can be exported as a PDF sheet for US Letter or A4 paper.'
       },
       {
-        question: 'Can I add product names or prices to the label?',
-        answer: 'You can add product names in the label field. For price or variant text, use the spreadsheet workflow where extra text can come from a separate column.'
+        question: 'What barcode type should I use for inventory labels?',
+        answer: 'Use Code 128 for most inventory labels and SKU labels. Use UPC-A or EAN-13 only for standard retail product codes.'
       },
       {
-        question: 'What label size should I use for products?',
-        answer: 'Use 2 x 1 inch for compact SKU labels and 3 x 2 inch when the label needs more room for product or inventory text.'
-      },
-      {
-        question: 'Does this include Avery templates?',
-        answer: 'No. Advanced Avery templates are outside the MVP scope.'
+        question: 'Can I paste values from Excel to create labels?',
+        answer: 'Yes. Use the Barcode Generator for Excel when your pasted rows include barcode values, label text, or extra product details.'
       }
     ],
-    relatedTools: [printableTool, homeTool, bulkTool, excelTool, code128Tool]
+    relatedTools: [skuTool, printableTool, excelTool, bulkTool, code128Tool]
   },
   printable: {
     path: '/printable-barcode-generator',
-    title: 'Printable Barcode Generator | Create Print-Ready Barcode PDFs',
+    title: 'Free Printable Barcode Generator - Generate and Print Barcodes Online',
     description:
-      'Generate print-ready barcode PDFs for US Letter or A4 paper. Choose barcode type, label size, and print at 100% scale for clear scanning.',
-    h1: 'Printable Barcode Generator',
-    subtitle:
-      'Create barcode PDF sheets for printing on US Letter or A4, with clear print settings and 100% scale guidance.',
+      'Generate printable barcodes online for products, SKUs, and inventory. Download PNG or SVG files, or export barcodes as print-ready PDF.',
+    h1: 'Free Printable Barcode Generator',
+    subtitle: 'Generate barcodes online and print them as PNG, SVG, or PDF files. No sign-up required.',
     trustNote: commonTrustNote,
     defaultType: 'code128',
-    defaultValue: 'SKU001',
+    defaultValue: 'SKU-001',
     sections: [
       {
-        title: 'Create print-ready barcode PDFs',
-        body: 'Generate repeated barcode labels on a PDF sheet so you can print barcodes from a browser without installing label software.'
+        title: 'How to print a barcode online',
+        body: 'Create a barcode in the browser, download the file format that matches your workflow, and print with scaling turned off.',
+        items: [
+          'Choose a barcode type.',
+          'Enter your barcode value.',
+          'Preview the barcode.',
+          'Download PNG, SVG, or PDF.',
+          'Print at 100% scale for best results.'
+        ]
       },
       {
-        title: 'Use US Letter or A4 paper',
-        body: 'Choose the paper size before exporting so the PDF is prepared for common office printers and print workflows.'
+        title: 'Printable barcode formats',
+        body: 'Choose PNG, SVG, or PDF depending on how you plan to print or reuse the barcode.',
+        items: [
+          'PNG: quick image download for documents and simple labels.',
+          'SVG: scalable barcode for design tools and print layouts.',
+          'PDF: best for printing barcode labels or sheets.'
+        ],
+        links: [labelTool]
       },
       {
-        title: 'Print at 100% scale',
-        body: 'For clearer scans, print the PDF at 100% scale and disable Fit to page so barcode bars are not resized unexpectedly.'
+        title: 'Printing tips',
+        body: 'Use high contrast black bars on a white background, print at 100% scale, disable Fit to page, and test scan one barcode before printing many labels.',
+        links: [bulkTool, excelTool]
       }
     ],
     faqs: [
       {
-        question: 'How do I print a barcode from a PDF?',
-        answer: 'Generate a valid barcode, export the PDF, open it in your PDF viewer, and print it using the selected paper size.'
+        question: 'Can I print a barcode from this generator?',
+        answer: 'Yes. Generate a valid barcode, download PNG or SVG, or export a print-ready PDF and print it from your browser or PDF viewer.'
       },
       {
-        question: 'Should I print barcodes at 100% scale?',
-        answer: 'Yes. Print at 100% scale and disable Fit to page so the barcode is not stretched or compressed.'
+        question: 'What is the best file format for printing barcodes?',
+        answer: 'PDF is usually best for direct printing, SVG is best for scalable design layouts, and PNG is useful for quick image downloads.'
       },
       {
-        question: 'Can I export barcodes for US Letter or A4 paper?',
-        answer: 'Yes. The printable generator supports US Letter and A4 paper in the MVP.'
+        question: 'Can I export a barcode as PDF?',
+        answer: 'Yes. Use the Export PDF button after the barcode value is valid.'
       },
       {
-        question: 'Why does my printed barcode look blurry?',
-        answer: 'Blurry barcodes are often caused by printer scaling, low-quality print settings, or resizing the PDF. Use 100% scale and a clean print mode when possible.'
+        question: 'Why should I print barcodes at 100% scale?',
+        answer: 'Printer scaling can stretch or compress barcode bars. Printing at 100% scale helps keep the barcode easier for scanners to read.'
       },
       {
-        question: 'Can I print multiple barcodes on one page?',
-        answer: 'Yes. The PDF export repeats the barcode label across the selected paper size when the barcode value is valid.'
+        question: 'Can I generate and print barcodes without signing up?',
+        answer: 'Yes. Barcode Mint works in your browser and does not require sign-up or login.'
       }
     ],
-    relatedTools: [labelTool, homeTool, bulkTool, excelTool, code128Tool]
+    relatedTools: [labelTool, bulkTool, excelTool, skuTool, code128Tool]
   }
 } satisfies Record<string, ToolPageContent>
 
