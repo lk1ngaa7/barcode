@@ -1,0 +1,230 @@
+[
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/home-desktop.png",
+    "viewport": "desktop",
+    "url": "/",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Choose the right barcode tool",
+        "found": true
+      },
+      {
+        "text": "SKU Barcode Generator",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/printable-desktop.png",
+    "viewport": "desktop",
+    "url": "/printable-barcode-generator/",
+    "title": "Free Printable Barcode Generator - Generate and Print Barcodes Online",
+    "h1": [
+      "Free Printable Barcode Generator"
+    ],
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Free Printable Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/sku-desktop.png",
+    "viewport": "desktop",
+    "url": "/sku-barcode-generator/",
+    "title": "Free SKU Barcode Generator - Create Barcodes for Inventory and Products",
+    "h1": [
+      "Free SKU Barcode Generator"
+    ],
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Free SKU Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Best barcode type for SKUs",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/label-desktop.png",
+    "viewport": "desktop",
+    "url": "/barcode-label-generator/",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Free Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Label Sheet",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/excel-desktop.png",
+    "viewport": "desktop",
+    "url": "/barcode-generator-for-excel/",
+    "title": "Barcode Generator for Excel - Paste Spreadsheet Rows and Create Barcodes",
+    "h1": [
+      "Barcode Generator for Excel"
+    ],
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Barcode Generator for Excel",
+        "found": true
+      },
+      {
+        "text": "Excel Paste",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/home-mobile.png",
+    "viewport": "mobile",
+    "url": "/",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Choose the right barcode tool",
+        "found": true
+      },
+      {
+        "text": "SKU Barcode Generator",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/printable-mobile.png",
+    "viewport": "mobile",
+    "url": "/printable-barcode-generator/",
+    "title": "Free Printable Barcode Generator - Generate and Print Barcodes Online",
+    "h1": [
+      "Free Printable Barcode Generator"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Free Printable Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/sku-mobile.png",
+    "viewport": "mobile",
+    "url": "/sku-barcode-generator/",
+    "title": "Free SKU Barcode Generator - Create Barcodes for Inventory and Products",
+    "h1": [
+      "Free SKU Barcode Generator"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Free SKU Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Best barcode type for SKUs",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/label-mobile.png",
+    "viewport": "mobile",
+    "url": "/barcode-label-generator/",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Free Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Label Sheet",
+        "found": true
+      }
+    ]
+  },
+  {
+    "file": "reports/gsc-upgrade-2026-06-08/excel-mobile.png",
+    "viewport": "mobile",
+    "url": "/barcode-generator-for-excel/",
+    "title": "Barcode Generator for Excel - Paste Spreadsheet Rows and Create Barcodes",
+    "h1": [
+      "Barcode Generator for Excel"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "must": [
+      {
+        "text": "Barcode Generator for Excel",
+        "found": true
+      },
+      {
+        "text": "Excel Paste",
+        "found": true
+      }
+    ]
+  }
+]

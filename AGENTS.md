@@ -291,6 +291,53 @@ EAN-13 requires 13 numeric digits, or 12 digits if you want us to calculate the 
 - Bulk 表格在移动端要转成卡片或可读布局。
 - 每次修改 UI、布局、样式、组件视觉状态或响应式行为后，必须提供桌面端和移动端截图，并并行调用 `zai-mcp-server` 对截图进行 UI/UX 审计。
 
+### 截图验证固定流程
+
+本项目发生 UI、布局、样式、组件视觉状态、响应式行为、导航、SEO 内链模块或工具首屏展示变化时，必须优先使用个人 skill：
+
+```text
+$visual-qa-screenshots
+```
+
+固定脚本：
+
+```bash
+node ~/.codex/skills/visual-qa-screenshots/scripts/capture_web_screenshots.mjs
+```
+
+执行原则：
+
+- 不要重新探索截图工具链。
+- 不要反复尝试 `pnpm dlx`、`npx`、Playwright/Puppeteer 临时安装变体。
+- 不要使用全盘 `find /Users/...` 查找浏览器或 node_modules。
+- 静态站优先先运行 `pnpm generate`，再对 `dist` 截图。
+- 如已有本地 dev server，则用脚本的 `baseUrl` 配置。
+- 每次至少覆盖桌面端和移动端视口。
+- 截图时必须同时做机器断言：关键文案存在、每页 H1 数量正确、无横向溢出、关键 selector 存在。
+- 变更模块不在首屏时，必须使用 selector 截取模块局部截图。
+- 多张截图需要一次性并行调用 `zai-mcp-server` 进行 UI/UX 审计。
+- 生产验证使用简短布尔检查，不要输出整页 HTML。
+
+推荐配置示例：
+
+```bash
+node ~/.codex/skills/visual-qa-screenshots/scripts/capture_web_screenshots.mjs --config-json '{
+  "siteDir": "dist",
+  "outDir": "reports/visual-qa",
+  "pages": [
+    {
+      "name": "home",
+      "path": "/",
+      "must": ["Free Barcode Generator", "Download PNG"]
+    }
+  ],
+  "viewports": [
+    { "name": "desktop", "width": 1440, "height": 1100 },
+    { "name": "mobile", "width": 390, "height": 1200 }
+  ]
+}'
+```
+
 视觉建议：
 
 - 主色：蓝色或靛蓝色
