@@ -236,11 +236,11 @@ function sanitizeFilePart(value: string): string {
             <span class="sm:hidden">Single</span>
             <span class="hidden sm:inline">Single Barcode</span>
           </button>
-          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-3 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator">
+          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-3 py-3 text-gray-600 hover:text-blue-700" to="/bulk-barcode-generator/">
             <span class="sm:hidden">Bulk</span>
             <span class="hidden sm:inline">Bulk Barcodes</span>
           </NuxtLink>
-          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-3 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator">
+          <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-3 py-3 text-gray-600 hover:text-blue-700" to="/barcode-label-generator/">
             <span class="sm:hidden">Labels</span>
             <span class="hidden sm:inline">Label Sheet</span>
           </NuxtLink>

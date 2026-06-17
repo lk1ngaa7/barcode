@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAnalytics } from '../../composables/useAnalytics'
-import type { RelatedTool } from '../../../utils/seoPages'
+import { canonicalPath, type RelatedTool } from '../../../utils/seoPages'
 
 defineProps<{
   tools: RelatedTool[]
@@ -10,7 +10,7 @@ const analytics = useAnalytics()
 
 function trackRelatedToolClick(tool: RelatedTool): void {
   analytics.track('related_tool_click', {
-    target_path: tool.path,
+    target_path: canonicalPath(tool.path),
     target_title: tool.title
   })
 }
@@ -31,7 +31,7 @@ function trackRelatedToolClick(tool: RelatedTool): void {
       <NuxtLink
         v-for="tool in tools"
         :key="tool.path"
-        :to="tool.path"
+        :to="canonicalPath(tool.path)"
         class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md"
         @click="trackRelatedToolClick(tool)"
       >

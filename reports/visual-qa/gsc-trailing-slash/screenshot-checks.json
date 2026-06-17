@@ -1,0 +1,306 @@
+[
+  {
+    "page": "home",
+    "viewport": "desktop",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/home-desktop.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Choose the right barcode generator",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "featured-tools",
+        "selector": "#featured-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/home-featured-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "code-39",
+    "viewport": "desktop",
+    "path": "/code-39-barcode-generator/",
+    "url": "http://127.0.0.1:4173/code-39-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/code-39-desktop.png",
+    "title": "Free Code 39 Barcode Generator | Barcode Mint",
+    "h1": [
+      "Free Code 39 Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Code 39 Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Related tools",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "#related-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/code-39-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "printable",
+    "viewport": "desktop",
+    "path": "/printable-barcode-generator/",
+    "url": "http://127.0.0.1:4173/printable-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/printable-desktop.png",
+    "title": "Free Printable Barcode Generator - Generate and Print Barcodes Online",
+    "h1": [
+      "Free Printable Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Printable Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      },
+      {
+        "text": "Related tools",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "#related-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/printable-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "barcode-label",
+    "viewport": "desktop",
+    "path": "/barcode-label-generator/",
+    "url": "http://127.0.0.1:4173/barcode-label-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/barcode-label-desktop.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "#related-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/barcode-label-related-tools-desktop.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "home",
+    "viewport": "mobile",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/home-mobile.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Choose the right barcode generator",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "featured-tools",
+        "selector": "#featured-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/home-featured-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "code-39",
+    "viewport": "mobile",
+    "path": "/code-39-barcode-generator/",
+    "url": "http://127.0.0.1:4173/code-39-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/code-39-mobile.png",
+    "title": "Free Code 39 Barcode Generator | Barcode Mint",
+    "h1": [
+      "Free Code 39 Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Code 39 Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Related tools",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "#related-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/code-39-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "printable",
+    "viewport": "mobile",
+    "path": "/printable-barcode-generator/",
+    "url": "http://127.0.0.1:4173/printable-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/printable-mobile.png",
+    "title": "Free Printable Barcode Generator - Generate and Print Barcodes Online",
+    "h1": [
+      "Free Printable Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Printable Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      },
+      {
+        "text": "Related tools",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "#related-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/printable-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  },
+  {
+    "page": "barcode-label",
+    "viewport": "mobile",
+    "path": "/barcode-label-generator/",
+    "url": "http://127.0.0.1:4173/barcode-label-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/barcode-label-mobile.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Export PDF",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "name": "related-tools",
+        "selector": "#related-tools-title",
+        "file": "/Users/zyb/barcode/reports/visual-qa/gsc-trailing-slash/barcode-label-related-tools-mobile.png",
+        "found": true
+      }
+    ]
+  }
+]

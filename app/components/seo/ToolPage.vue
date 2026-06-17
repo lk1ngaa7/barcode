@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ToolPageContent } from '../../../utils/seoPages'
+import { canonicalPath, type ToolPageContent } from '../../../utils/seoPages'
 import BarcodeGenerator from '../tool/BarcodeGenerator.vue'
 import SeoContent from './SeoContent.vue'
 
@@ -51,7 +51,7 @@ defineProps<{
             class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
           >
             <NuxtLink
-              :to="tool.path"
+              :to="canonicalPath(tool.path)"
               class="text-base font-semibold text-gray-950 hover:text-blue-700"
             >
               {{ tool.title }}

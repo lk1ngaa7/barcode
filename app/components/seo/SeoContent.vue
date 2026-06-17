@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ToolPageContent } from '../../../utils/seoPages'
+import { canonicalPath, type ToolPageContent } from '../../../utils/seoPages'
 import FaqBlock from './FaqBlock.vue'
 import RelatedTools from './RelatedTools.vue'
 
@@ -65,7 +65,7 @@ defineProps<{
           <NuxtLink
             v-for="link in section.links"
             :key="link.path"
-            :to="link.path"
+            :to="canonicalPath(link.path)"
             class="inline-flex min-h-11 items-center rounded-xl border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-800 transition hover:border-blue-300 hover:text-blue-700"
           >
             {{ link.title }}

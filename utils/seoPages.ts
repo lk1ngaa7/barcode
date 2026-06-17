@@ -993,8 +993,16 @@ export const toolPages = {
   }
 } satisfies Record<string, ToolPageContent>
 
+export function canonicalPath(path: string): string {
+  if (path === '/' || path.endsWith('/') || path.includes('.')) {
+    return path
+  }
+
+  return `${path}/`
+}
+
 export function absoluteUrl(path: string, siteUrl = SITE_URL): string {
-  return new URL(path, siteUrl).toString()
+  return new URL(canonicalPath(path), siteUrl).toString()
 }
 
 export function buildToolPageSchema(page: ToolPageContent, siteUrl = SITE_URL): unknown[] {
