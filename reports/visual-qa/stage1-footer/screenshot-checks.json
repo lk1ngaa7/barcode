@@ -1,0 +1,138 @@
+[
+  {
+    "page": "footer",
+    "viewport": "desktop",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1-footer/footer-desktop.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode tools",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "0": "f",
+        "1": "o",
+        "2": "o",
+        "3": "t",
+        "4": "e",
+        "5": "r",
+        "file": "/Users/zyb/barcode/reports/visual-qa/stage1-footer/footer-undefined-desktop.png",
+        "found": false,
+        "error": "Selector not found: undefined"
+      },
+      {
+        "0": "[",
+        "1": "a",
+        "2": "r",
+        "3": "i",
+        "4": "a",
+        "5": "-",
+        "6": "l",
+        "7": "a",
+        "8": "b",
+        "9": "e",
+        "10": "l",
+        "11": "=",
+        "12": "\"",
+        "13": "F",
+        "14": "o",
+        "15": "o",
+        "16": "t",
+        "17": "e",
+        "18": "r",
+        "19": " ",
+        "20": "t",
+        "21": "o",
+        "22": "o",
+        "23": "l",
+        "24": "s",
+        "25": "\"",
+        "26": "]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/stage1-footer/footer-undefined-desktop.png",
+        "found": false,
+        "error": "Selector not found: undefined"
+      }
+    ]
+  },
+  {
+    "page": "footer",
+    "viewport": "mobile",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1-footer/footer-mobile.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode tools",
+        "found": true
+      }
+    ],
+    "selectors": [
+      {
+        "0": "f",
+        "1": "o",
+        "2": "o",
+        "3": "t",
+        "4": "e",
+        "5": "r",
+        "file": "/Users/zyb/barcode/reports/visual-qa/stage1-footer/footer-undefined-mobile.png",
+        "found": false,
+        "error": "Selector not found: undefined"
+      },
+      {
+        "0": "[",
+        "1": "a",
+        "2": "r",
+        "3": "i",
+        "4": "a",
+        "5": "-",
+        "6": "l",
+        "7": "a",
+        "8": "b",
+        "9": "e",
+        "10": "l",
+        "11": "=",
+        "12": "\"",
+        "13": "F",
+        "14": "o",
+        "15": "o",
+        "16": "t",
+        "17": "e",
+        "18": "r",
+        "19": " ",
+        "20": "t",
+        "21": "o",
+        "22": "o",
+        "23": "l",
+        "24": "s",
+        "25": "\"",
+        "26": "]",
+        "file": "/Users/zyb/barcode/reports/visual-qa/stage1-footer/footer-undefined-mobile.png",
+        "found": false,
+        "error": "Selector not found: undefined"
+      }
+    ]
+  }
+]

@@ -1,0 +1,186 @@
+[
+  {
+    "page": "home",
+    "viewport": "desktop",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1/home-desktop.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Barcode tools",
+        "found": true
+      },
+      {
+        "text": "UPC-A Barcode Generator",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "code128",
+    "viewport": "desktop",
+    "path": "/code-128-barcode-generator/",
+    "url": "http://127.0.0.1:4173/code-128-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1/code128-desktop.png",
+    "title": "Free Code 128 Barcode Generator | Barcode Mint",
+    "h1": [
+      "Free Code 128 Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Code 128 Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Barcode tools",
+        "found": true
+      },
+      {
+        "text": "Excel Generator",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "upc-redirect",
+    "viewport": "desktop",
+    "path": "/upc-barcode-generator/",
+    "url": "http://127.0.0.1:4173/upc-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1/upc-redirect-desktop.png",
+    "title": "404 - Page not found: /upc-barcode-generator/ | Nuxt",
+    "h1": [
+      "404"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free UPC-A Barcode Generator",
+        "found": false
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "home",
+    "viewport": "mobile",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1/home-mobile.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Barcode tools",
+        "found": true
+      },
+      {
+        "text": "UPC-A Barcode Generator",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "code128",
+    "viewport": "mobile",
+    "path": "/code-128-barcode-generator/",
+    "url": "http://127.0.0.1:4173/code-128-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1/code128-mobile.png",
+    "title": "Free Code 128 Barcode Generator | Barcode Mint",
+    "h1": [
+      "Free Code 128 Barcode Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Code 128 Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Barcode tools",
+        "found": true
+      },
+      {
+        "text": "Excel Generator",
+        "found": false
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "upc-redirect",
+    "viewport": "mobile",
+    "path": "/upc-barcode-generator/",
+    "url": "http://127.0.0.1:4173/upc-barcode-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage1/upc-redirect-mobile.png",
+    "title": "404 - Page not found: /upc-barcode-generator/ | Nuxt",
+    "h1": [
+      "404"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free UPC-A Barcode Generator",
+        "found": false
+      }
+    ],
+    "selectors": []
+  }
+]

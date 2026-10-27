@@ -1,0 +1,3 @@
+# UPC 克隆页 301 合并到 UPC-A 规范页（消除 99.8% 重复内容）
+/upc-barcode-generator /upc-a-barcode-generator/ 301
+/upc-barcode-generator/* /upc-a-barcode-generator/:splat 301

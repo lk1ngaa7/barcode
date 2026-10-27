@@ -1,0 +1,14 @@
+# 缓存与安全响应头（Cloudflare Pages 会读取 dist/_headers）
+# 指纹化构建产物：文件名随内容变化，可安全设置一年 immutable 缓存
+/_nuxt/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 全站安全头：HSTS 不加 preload（提交后不可逆，先观察）
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# favicon 变化极少，缓存一天
+/favicon.ico
+  Cache-Control: public, max-age=86400

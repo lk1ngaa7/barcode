@@ -129,6 +129,23 @@ const inventoryLabelTool: RelatedTool = {
   path: '/inventory-barcode-label-generator'
 }
 
+// 页脚工具链接清单：覆盖全部生成器，弥补移动端页眉导航缺口并消除孤儿页
+export const FOOTER_TOOLS: RelatedTool[] = [
+  upcATool,
+  ean13Tool,
+  code39Tool,
+  itfTool,
+  garmentTool,
+  mrpTool,
+  lpnTool,
+  inventoryLabelTool,
+  skuTool,
+  printableTool,
+  labelTool,
+  bulkTool,
+  excelTool
+]
+
 export const toolPages = {
   home: {
     path: '/',
