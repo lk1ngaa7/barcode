@@ -25,6 +25,12 @@ import { FOOTER_TOOLS } from '../../../utils/seoPages'
       >
         <p>Free online barcode tools for products, inventory, and labels.</p>
         <nav class="flex flex-wrap gap-3" aria-label="Footer navigation">
+          <NuxtLink to="/about/" class="inline-flex min-h-11 items-center hover:text-blue-600">
+            About
+          </NuxtLink>
+          <NuxtLink to="/contact/" class="inline-flex min-h-11 items-center hover:text-blue-600">
+            Contact
+          </NuxtLink>
           <NuxtLink to="/privacy/" class="inline-flex min-h-11 items-center hover:text-blue-600">
             Privacy
           </NuxtLink>

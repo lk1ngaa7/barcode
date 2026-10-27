@@ -15,7 +15,7 @@ defineProps<{
       :default-value="page.defaultValue"
     >
       <template #intro>
-        <div class="space-y-2 sm:space-y-3">
+        <div class="space-y-1 sm:space-y-3">
           <p class="text-pretty text-xs font-semibold uppercase leading-5 text-blue-600 sm:text-sm">
             {{ page.trustNote }}
           </p>

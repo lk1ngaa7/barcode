@@ -285,12 +285,13 @@ function sanitizeFilePart(value: string): string {
 </script>
 
 <template>
-  <section class="mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
+  <section class="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
     <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-8">
-      <div class="min-w-0 space-y-5 sm:space-y-6">
+      <!-- 移动端：表单卡排在预览/导出卡之前（order 控制），桌面端恢复 DOM 序两列布局 -->
+    <div class="flex min-w-0 flex-col gap-5 sm:gap-6">
         <slot name="intro" />
 
-        <div class="grid gap-4 lg:hidden">
+        <div class="order-2 grid gap-4 lg:order-none">
           <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
             <div class="flex items-start justify-between gap-3">
               <div>
@@ -343,8 +344,8 @@ function sanitizeFilePart(value: string): string {
           />
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-          <div class="mb-5 flex flex-wrap gap-2 border-b border-gray-200 pb-4 text-sm font-medium">
+        <div class="order-1 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 lg:order-none">
+          <div class="mb-4 flex flex-wrap gap-2 border-b border-gray-200 pb-3 text-sm font-medium">
             <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/">
               Single Barcode
             </NuxtLink>
@@ -357,6 +358,23 @@ function sanitizeFilePart(value: string): string {
           </div>
 
           <div class="grid gap-5">
+            <BarcodeTypeSelector v-model="selectedType" />
+
+            <BarcodeInput
+              id="label-barcode-value"
+              v-model="barcodeValue"
+              label="Barcode Value"
+              :placeholder="currentTypeDefinition.placeholder"
+              :hint="currentTypeDefinition.allowedInput"
+              :described-by="inputDescriptionId"
+              :invalid="!validation.isValid"
+            />
+
+            <BarcodeValidationMessage
+              :id="inputDescriptionId"
+              :validation="validation"
+            />
+
             <fieldset class="grid gap-3">
               <legend class="text-sm font-semibold text-gray-800">
                 Label Template
@@ -421,16 +439,6 @@ function sanitizeFilePart(value: string): string {
 
             <BarcodeTypeSelector v-model="selectedType" />
 
-            <BarcodeInput
-              id="label-barcode-value"
-              v-model="barcodeValue"
-              label="Barcode Value"
-              :placeholder="currentTypeDefinition.placeholder"
-              :hint="currentTypeDefinition.allowedInput"
-              :described-by="inputDescriptionId"
-              :invalid="!validation.isValid"
-            />
-
             <label class="grid gap-2 text-sm font-semibold text-gray-800" for="product-name">
               Label Text
               <input
@@ -475,11 +483,6 @@ function sanitizeFilePart(value: string): string {
                 {{ quantityError || 'Repeat this label from 1 to 100 times in the exported PDF.' }}
               </span>
             </label>
-
-            <BarcodeValidationMessage
-              :id="inputDescriptionId"
-              :validation="validation"
-            />
 
             <p v-if="exportError" class="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800" aria-live="polite">
               {{ exportError }}

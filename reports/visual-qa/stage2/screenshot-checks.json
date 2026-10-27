@@ -1,0 +1,242 @@
+[
+  {
+    "page": "home",
+    "viewport": "mobile-fold",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/home-mobile-fold.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Barcode tools",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "label",
+    "viewport": "mobile-fold",
+    "path": "/barcode-label-generator/",
+    "url": "http://127.0.0.1:4173/barcode-label-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/label-mobile-fold.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Barcode Value",
+        "found": true
+      },
+      {
+        "text": "Label Template",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "about",
+    "viewport": "mobile-fold",
+    "path": "/about/",
+    "url": "http://127.0.0.1:4173/about/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/about-mobile-fold.png",
+    "title": "About Barcode Mint | Free Online Barcode Tools",
+    "h1": [
+      "About Barcode Mint"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "About Barcode Mint",
+        "found": true
+      },
+      {
+        "text": "support@barcode-mint.com",
+        "found": false
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "contact",
+    "viewport": "mobile-fold",
+    "path": "/contact/",
+    "url": "http://127.0.0.1:4173/contact/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/contact-mobile-fold.png",
+    "title": "Contact Barcode Mint | Support & Feedback",
+    "h1": [
+      "Contact Barcode Mint"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Contact Barcode Mint",
+        "found": true
+      },
+      {
+        "text": "support@barcode-mint.com",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "home",
+    "viewport": "desktop",
+    "path": "/",
+    "url": "http://127.0.0.1:4173/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/home-desktop.png",
+    "title": "Free Barcode Generator for Products, Inventory, and Labels | Barcode Mint",
+    "h1": [
+      "Free Barcode Generator for Products, Inventory, and Labels"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Generator",
+        "found": true
+      },
+      {
+        "text": "Download PNG",
+        "found": true
+      },
+      {
+        "text": "Barcode tools",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "label",
+    "viewport": "desktop",
+    "path": "/barcode-label-generator/",
+    "url": "http://127.0.0.1:4173/barcode-label-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/label-desktop.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Free Barcode Label Generator",
+        "found": true
+      },
+      {
+        "text": "Barcode Value",
+        "found": true
+      },
+      {
+        "text": "Label Template",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "about",
+    "viewport": "desktop",
+    "path": "/about/",
+    "url": "http://127.0.0.1:4173/about/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/about-desktop.png",
+    "title": "About Barcode Mint | Free Online Barcode Tools",
+    "h1": [
+      "About Barcode Mint"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "About Barcode Mint",
+        "found": true
+      },
+      {
+        "text": "support@barcode-mint.com",
+        "found": false
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "contact",
+    "viewport": "desktop",
+    "path": "/contact/",
+    "url": "http://127.0.0.1:4173/contact/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage2/contact-desktop.png",
+    "title": "Contact Barcode Mint | Support & Feedback",
+    "h1": [
+      "Contact Barcode Mint"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Contact Barcode Mint",
+        "found": true
+      },
+      {
+        "text": "support@barcode-mint.com",
+        "found": true
+      }
+    ],
+    "selectors": []
+  }
+]

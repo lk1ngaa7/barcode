@@ -129,6 +129,13 @@ const inventoryLabelTool: RelatedTool = {
   path: '/inventory-barcode-label-generator'
 }
 
+// GS1 官方外链：权威信任锚点（审计发现 GS1 被多次提及但全站零出链）
+const gs1Tool: RelatedTool = {
+  title: 'GS1 — official UPC/EAN company prefixes',
+  description: 'The global issuing authority for official UPC and EAN numbers.',
+  path: 'https://www.gs1.org/'
+}
+
 // 页脚工具链接清单：覆盖全部生成器，弥补移动端页眉导航缺口并消除孤儿页
 export const FOOTER_TOOLS: RelatedTool[] = [
   upcATool,
@@ -345,7 +352,8 @@ export const toolPages = {
     sections: [
       {
         title: 'Create 12-digit UPC-A barcodes',
-        body: 'UPC-A is commonly used for retail products in the United States and requires numeric input only.'
+        body: 'UPC-A is commonly used for retail products in the United States and requires numeric input only.',
+        links: [gs1Tool]
       },
       {
         title: 'Check digit support',
@@ -393,7 +401,8 @@ export const toolPages = {
     sections: [
       {
         title: 'Generate international product barcodes',
-        body: 'EAN-13 is a 13-digit retail barcode format used for products in many markets outside the United States.'
+        body: 'EAN-13 is a 13-digit retail barcode format used for products in many markets outside the United States.',
+        links: [gs1Tool]
       },
       {
         title: 'Automatic EAN-13 check digit',
@@ -1040,6 +1049,7 @@ export function buildToolPageSchema(page: ToolPageContent, siteUrl = SITE_URL): 
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
       name: page.h1,
+      description: page.description,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       url: absoluteUrl(page.path, siteUrl),
@@ -1070,24 +1080,29 @@ export function buildToolPageSchema(page: ToolPageContent, siteUrl = SITE_URL): 
   ]
 
   if (page.path === '/') {
+    // 首页实体声明：Organization 补联系信息，WebSite 替代冗余的 WebApplication 块
     pageSchemas.push(
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
+        '@id': absoluteUrl('/#organization', siteUrl),
         name: 'Barcode Mint',
-        url: absoluteUrl('/', siteUrl)
+        url: absoluteUrl('/', siteUrl),
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          email: 'support@barcode-mint.com'
+        }
       },
       {
         '@context': 'https://schema.org',
-        '@type': 'WebApplication',
+        '@type': 'WebSite',
+        '@id': absoluteUrl('/#website', siteUrl),
         name: 'Barcode Mint',
-        applicationCategory: 'BusinessApplication',
-        operatingSystem: 'Web',
         url: absoluteUrl('/', siteUrl),
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'USD'
+        inLanguage: 'en',
+        publisher: {
+          '@id': absoluteUrl('/#organization', siteUrl)
         }
       }
     )

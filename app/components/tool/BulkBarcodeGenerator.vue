@@ -174,13 +174,13 @@ function sanitizeFilePart(value: string): string {
 </script>
 
 <template>
-  <section class="mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
+  <section class="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
     <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-8">
       <div class="min-w-0 space-y-5 sm:space-y-6">
         <slot name="intro" />
 
         <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-          <div class="mb-5 flex flex-wrap gap-2 border-b border-gray-200 pb-4 text-sm font-medium">
+          <div class="mb-4 flex flex-wrap gap-2 border-b border-gray-200 pb-3 text-sm font-medium">
             <NuxtLink class="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-3 text-gray-600 hover:text-blue-700" to="/">
               Single Barcode
             </NuxtLink>

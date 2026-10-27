@@ -226,12 +226,12 @@ function sanitizeFilePart(value: string): string {
 </script>
 
 <template>
-  <section class="mx-auto grid max-w-6xl gap-6 px-4 py-5 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-8 lg:px-8 lg:py-12">
+  <section class="mx-auto grid max-w-6xl gap-6 px-4 py-4 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-8 lg:px-8 lg:py-12">
     <div class="min-w-0 space-y-5 sm:space-y-6">
       <slot name="intro" />
 
       <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-        <div class="mb-5 grid grid-cols-3 gap-2 border-b border-gray-200 pb-4 text-sm font-medium">
+        <div class="mb-4 grid grid-cols-3 gap-2 border-b border-gray-200 pb-3 text-sm font-medium">
           <button class="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-3 py-3 text-white" type="button">
             <span class="sm:hidden">Single</span>
             <span class="hidden sm:inline">Single Barcode</span>
@@ -259,10 +259,6 @@ function sanitizeFilePart(value: string): string {
             :invalid="!validation.isValid"
           />
 
-          <p class="rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-sm leading-5 text-blue-900 sm:hidden">
-            Processed in your browser. Not uploaded.
-          </p>
-
           <div class="grid gap-2 sm:grid-cols-3 lg:hidden">
             <button
               class="min-h-11 rounded-xl bg-blue-600 px-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
@@ -289,6 +285,15 @@ function sanitizeFilePart(value: string): string {
               Export PDF
             </button>
           </div>
+
+          <BarcodeValidationMessage
+            :id="inputDescriptionId"
+            :validation="validation"
+          />
+
+          <p class="rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-sm leading-5 text-blue-900 sm:hidden">
+            Processed in your browser. Not uploaded.
+          </p>
 
           <p class="text-xs leading-5 text-gray-500 lg:hidden">
             {{ validation.isValid ? 'Print PDFs at 100% scale.' : 'Fix the barcode value before downloading.' }}
@@ -335,11 +340,6 @@ function sanitizeFilePart(value: string): string {
               </label>
             </div>
           </details>
-
-          <BarcodeValidationMessage
-            :id="inputDescriptionId"
-            :validation="validation"
-          />
 
           <p v-if="downloadError" class="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
             {{ downloadError }}
