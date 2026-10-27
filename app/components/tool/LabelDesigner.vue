@@ -47,6 +47,15 @@ const lastValidationErrorKey = ref('')
 const validation = computed(() => validateBarcode(selectedType.value, barcodeValue.value))
 const currentTypeDefinition = computed(() => BARCODE_TYPES[selectedType.value])
 const currentLabelSize = computed(() => LABEL_SIZES[labelSize.value])
+// 紧凑标签（高度 ≤1 英寸）使用更小的渲染参数：Avery 5160 与 2x1 同高度规格
+const isCompactLabel = computed(() => currentLabelSize.value.heightInches <= 1)
+
+// Avery 5160/8460 预刻线仅适配 US Letter 纸张，选中时自动切换
+watch(labelSize, (size) => {
+  if (size === 'avery5160') {
+    paperSize.value = 'letter'
+  }
+})
 const currentPaperSize = computed(() => PAPER_SIZES[paperSize.value])
 const labelTextLines = computed(() => (
   validation.value.isValid
@@ -64,9 +73,9 @@ const previewSvg = computed(() => {
   }
 
   return exportBarcodeSvg(selectedType.value, validation.value.normalizedValue, {
-    height: labelSize.value === '2x1' ? 42 : 72,
+    height: isCompactLabel.value ? 42 : 72,
     includeText: false,
-    moduleWidth: labelSize.value === '2x1' ? 1.2 : 1.7,
+    moduleWidth: isCompactLabel.value ? 1.2 : 1.7,
     quietZone: 10
   }).svg
 })
@@ -180,9 +189,9 @@ function downloadSvg(): void {
   }
 
   const svg = exportBarcodeSvg(selectedType.value, validation.value.normalizedValue, {
-    height: labelSize.value === '2x1' ? 72 : 96,
+    height: isCompactLabel.value ? 72 : 96,
     includeText: true,
-    moduleWidth: labelSize.value === '2x1' ? 2 : 2.5,
+    moduleWidth: isCompactLabel.value ? 2 : 2.5,
     quietZone: 14,
     text: labelTextLines.value.join(' ')
   }).svg
@@ -204,9 +213,9 @@ async function downloadPng(): Promise<void> {
 
   try {
     const svgResult = exportBarcodeSvg(selectedType.value, validation.value.normalizedValue, {
-      height: labelSize.value === '2x1' ? 72 : 96,
+      height: isCompactLabel.value ? 72 : 96,
       includeText: true,
-      moduleWidth: labelSize.value === '2x1' ? 2 : 2.5,
+      moduleWidth: isCompactLabel.value ? 2 : 2.5,
       quietZone: 14,
       text: labelTextLines.value.join(' ')
     })
@@ -291,7 +300,7 @@ function sanitizeFilePart(value: string): string {
     <div class="flex min-w-0 flex-col gap-5 sm:gap-6">
         <slot name="intro" />
 
-        <div class="order-2 grid gap-4 lg:order-none">
+        <div class="order-2 grid gap-4 lg:hidden">
           <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
             <div class="flex items-start justify-between gap-3">
               <div>
@@ -310,7 +319,7 @@ function sanitizeFilePart(value: string): string {
             <div class="mt-4 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-3">
               <div
                 class="mx-auto grid max-w-full place-items-center rounded-lg border border-gray-300 bg-white p-3 shadow-sm"
-                :style="{ aspectRatio: previewRatio, width: labelSize === '2x1' ? '288px' : '324px' }"
+                :style="{ aspectRatio: previewRatio, width: isCompactLabel ? '288px' : '324px' }"
                 aria-label="Barcode label preview"
               >
                 <template v-if="validation.isValid">
@@ -513,7 +522,7 @@ function sanitizeFilePart(value: string): string {
           <div class="mt-5 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-4">
             <div
               class="mx-auto grid max-w-full place-items-center rounded-xl border border-gray-300 bg-white p-3 shadow-sm"
-              :style="{ aspectRatio: previewRatio, width: labelSize === '2x1' ? '288px' : '324px' }"
+              :style="{ aspectRatio: previewRatio, width: isCompactLabel ? '288px' : '324px' }"
               aria-label="Barcode label preview"
             >
               <template v-if="validation.isValid">

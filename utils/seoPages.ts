@@ -243,6 +243,10 @@ export const toolPages = {
     defaultValue: 'SKU-001',
     sections: [
       {
+        title: 'What is Code 128?',
+        body: 'Code 128 is a high-density linear barcode symbology that encodes all 128 ASCII characters, including uppercase and lowercase letters, digits, spaces, and common symbols. Each character is represented by a pattern of bars and spaces, and a mandatory check character helps scanners detect read errors. It is widely used for shipping labels, warehousing, and internal product codes because it packs more data into less space than Code 39.'
+      },
+      {
         title: 'Best for SKUs and inventory labels',
         body: 'Code 128 supports letters, numbers, spaces, and common symbols, making it a practical choice for internal product and inventory codes.'
       },
@@ -307,7 +311,16 @@ export const toolPages = {
       {
         title: 'SKU barcode examples',
         body: 'These are common SKU and inventory code patterns that work well as Code 128 barcodes.',
-        items: ['SKU-001', 'ITEM-2026-XL', 'BLACK-TSHIRT-M', 'WAREHOUSE-A-1001']
+        items: ['SKU-001', 'ITEM-2026-XL', 'BLACK-TSHIRT-M', 'WAREHOUSE-A-1001'],
+        table: {
+          headers: ['SKU pattern', 'Typical use'],
+          rows: [
+            ['SKU-001', 'Simple sequential product numbers'],
+            ['BLACK-TSHIRT-M', 'Color-product-size apparel codes'],
+            ['WAREHOUSE-A-1001', 'Zone plus bin or shelf location'],
+            ['ITEM-2026-XL', 'Year and size variants']
+          ]
+        }
       },
       {
         title: 'Bulk SKU barcode generation',
@@ -350,6 +363,10 @@ export const toolPages = {
     defaultType: 'upc-a',
     defaultValue: '03600029145',
     sections: [
+      {
+        title: 'What is a UPC-A barcode?',
+        body: 'A UPC-A barcode is the 12-digit retail barcode scanned at checkout in the United States and Canada. The first digits identify a GS1 company prefix, the following digits identify the product, and the final digit is a check digit calculated from the other 11. UPC-A encodes exactly 12 numeric digits — no letters or symbols — and is printed on product packaging, shelf labels, and receipts.'
+      },
       {
         title: 'Create 12-digit UPC-A barcodes',
         body: 'UPC-A is commonly used for retail products in the United States and requires numeric input only.',
@@ -399,6 +416,10 @@ export const toolPages = {
     defaultType: 'ean-13',
     defaultValue: '590123412345',
     sections: [
+      {
+        title: 'What is an EAN-13 barcode?',
+        body: 'An EAN-13 barcode is the 13-digit international retail barcode standard used across Europe, Asia, and most of the world outside North America. The first 2-3 digits are a country prefix, the middle digits combine a GS1 company prefix with a product reference, and the last digit is a check digit calculated from the first 12. EAN-13 encodes exactly 13 numeric digits and scans in every modern point-of-sale system.'
+      },
       {
         title: 'Generate international product barcodes',
         body: 'EAN-13 is a 13-digit retail barcode format used for products in many markets outside the United States.',
@@ -529,7 +550,7 @@ export const toolPages = {
   },
   bulk: {
     path: '/bulk-barcode-generator',
-    title: 'Bulk Barcode Generator | Create Multiple Barcodes Online',
+    title: 'Free Bulk Barcode Generator - Create Multiple Barcodes Online',
     description:
       'Paste multiple barcode values and generate up to 100 Code 128, UPC-A, or EAN-13 barcodes online. Create batches from lists, Excel rows, or SKU values.',
     h1: 'Bulk Barcode Generator',
@@ -569,8 +590,8 @@ export const toolPages = {
         answer: 'This bulk generator supports up to 100 barcode values at a time for the MVP.'
       },
       {
-        question: 'Can I paste barcode values from Excel?',
-        answer: 'Yes. You can paste one value per line here, or use the Excel barcode generator when you need label text and extra spreadsheet columns.'
+        question: 'How do I create a batch from an Excel column?',
+        answer: 'Copy the column of barcode values from Excel or Google Sheets and paste it into the bulk input. Each row becomes one barcode value, and you can paste up to 100 rows at a time.'
       },
       {
         question: 'Can I export bulk barcodes as PDF?',
@@ -627,6 +648,19 @@ export const toolPages = {
           'Column 3 becomes optional Extra Text.'
         ],
         links: [labelTool, skuTool]
+      },
+      {
+        title: 'In-Excel options compared: fonts and add-ins vs online paste tools',
+        body: 'There are three common ways to turn spreadsheet data into barcodes. This generator covers the fastest one — pasting rows into the browser — while fonts and add-ins suit teams that live inside Excel all day.',
+        table: {
+          headers: ['Approach', 'Setup', 'Cost', 'Best for'],
+          rows: [
+            ['This paste tool', 'None — paste rows in the browser', 'Free', 'One-off batches, label PDFs, no install'],
+            ['Excel barcode font', 'Install a Code 39 font per computer', 'Free to paid', 'Live formulas inside spreadsheets'],
+            ['Excel add-in', 'Install and configure an add-in', 'Usually paid', 'Teams generating barcodes daily in Excel']
+          ]
+        },
+        links: [bulkTool]
       }
     ],
     faqs: [
@@ -667,7 +701,7 @@ export const toolPages = {
     sections: [
       {
         title: 'Create printable barcode labels',
-        body: 'Use this barcode label generator for product barcode labels, SKU barcode labels, inventory barcode labels, and retail item labels that need a clean scannable code plus readable text.',
+        body: 'Use this barcode label generator for product barcode labels, SKU barcode labels, inventory barcode labels, and retail item labels that need a clean scannable code plus readable text. Pick a template, enter your barcode value and label text, set the repeat count up to 100 identical labels, and export a print-ready PDF in seconds — all processed locally in your browser.',
         items: [
           'Simple labels for a barcode value.',
           'Product labels with product names and SKUs.',
@@ -676,8 +710,18 @@ export const toolPages = {
         links: [skuTool]
       },
       {
-        title: 'US Letter and A4 label sheets',
-        body: 'Choose US Letter or A4 paper, select a 2 x 1 inch or 3 x 2 inch label size, and export labels as PDF for office printers.',
+        title: 'US Letter, A4, and Avery label sheets',
+        body: 'Choose US Letter or A4 paper, then pick a label size that matches your sheet stock. The Avery 5160 / 8460 preset lays out 30 labels per US Letter sheet on the standard 2.625 x 1 inch die-cut grid, so printed labels line up with the sheet without manual measuring.',
+        table: {
+          headers: ['Label size', 'Best for', 'Per US Letter sheet'],
+          rows: [
+            ['1 x 0.5 inch', 'Tiny shelf and bin tags', 'Up to 96'],
+            ['2 x 1 inch', 'General SKU and product labels', 'Up to 24'],
+            ['Avery 5160 / 8460 (2.625 x 1 inch)', 'Pre-cut Avery label sheets', 'Exactly 30'],
+            ['3 x 2 inch', 'Labels with names and locations', 'Up to 8'],
+            ['4 x 2 inch', 'Shipping and pallet labels', 'Up to 4']
+          ]
+        },
         links: [printableTool]
       },
       {
@@ -700,8 +744,12 @@ export const toolPages = {
         answer: 'Yes. Valid barcode labels can be exported as a PDF sheet for US Letter or A4 paper.'
       },
       {
-        question: 'What barcode type should I use for inventory labels?',
-        answer: 'Use Code 128 for most inventory labels and SKU labels. Use UPC-A or EAN-13 only for standard retail product codes.'
+        question: 'Which label template should I choose?',
+        answer: 'Use Simple for just a barcode, Product when you need the product name above the barcode, and Inventory Label when you also want a location line under the item name.'
+      },
+      {
+        question: 'Can I print on Avery 5160 or 8460 label sheets?',
+        answer: 'Yes. Select the Avery 5160 / 8460 label size, which places exactly 30 labels per US Letter sheet on the standard Avery die-cut grid. Print at 100% scale with Fit to page disabled.'
       },
       {
         question: 'Can I paste values from Excel to create labels?',
@@ -733,18 +781,21 @@ export const toolPages = {
         ]
       },
       {
-        title: 'Printable barcode formats',
-        body: 'Choose PNG, SVG, or PDF depending on how you plan to print or reuse the barcode.',
-        items: [
-          'PNG: quick image download for documents and simple labels.',
-          'SVG: scalable barcode for design tools and print layouts.',
-          'PDF: best for printing barcode labels or sheets.'
-        ],
+        title: 'Printable barcode formats compared',
+        body: 'Choose the export format that matches how you will print or reuse the barcode. All three downloads are free for commercial use with no watermark.',
+        table: {
+          headers: ['Format', 'Scalability', 'Best for'],
+          rows: [
+            ['PNG', 'Fixed resolution', 'Quick inserts into documents, spreadsheets, and emails'],
+            ['SVG', 'Infinitely scalable', 'Design tools, label software, and large-format printing'],
+            ['PDF', 'Print-ready page', 'Direct printing and label sheets at exact size']
+          ]
+        },
         links: [labelTool]
       },
       {
-        title: 'Printing tips',
-        body: 'Use high contrast black bars on a white background, print at 100% scale, disable Fit to page, and test scan one barcode before printing many labels.',
+        title: 'Printing tips for scannable barcodes',
+        body: 'For reliable scans, print barcodes with high-contrast black bars on a white background at 100% scale, and disable Fit to page in the print dialog. Keep the quiet zone — the clear white space on each side of the barcode — free of text, borders, and fold lines. After printing a test sheet, scan one label with the scanner you will actually use in your workflow before committing to a full batch.',
         links: [bulkTool, excelTool]
       }
     ],
@@ -1088,6 +1139,7 @@ export function buildToolPageSchema(page: ToolPageContent, siteUrl = SITE_URL): 
         '@id': absoluteUrl('/#organization', siteUrl),
         name: 'Barcode Mint',
         url: absoluteUrl('/', siteUrl),
+        logo: absoluteUrl('/logo-512.png', siteUrl),
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'customer support',

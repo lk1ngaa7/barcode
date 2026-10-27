@@ -15,7 +15,12 @@ useHead({
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: canonical }
+    { property: 'og:url', content: canonical },
+    { property: 'og:image', content: `${siteUrl}/og-image.png` },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:image', content: `${siteUrl}/og-image.png` }
   ],
   link: [
     { rel: 'canonical', href: canonical }

@@ -50,6 +50,11 @@ export default defineNuxtConfig({
           name: 'yandex-verification',
           content: '1caeb07a6917187c'
         }
+      ],
+      // 站点图标：SVG 主图标 + 512px PNG 兜底
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/logo-512.png' }
       ]
     }
   }

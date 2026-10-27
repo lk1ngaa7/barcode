@@ -1,0 +1,58 @@
+[
+  {
+    "page": "label",
+    "viewport": "desktop",
+    "path": "/barcode-label-generator/",
+    "url": "http://127.0.0.1:4173/barcode-label-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage3-fix/label-desktop.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode Value",
+        "found": true
+      },
+      {
+        "text": "Label Template",
+        "found": true
+      }
+    ],
+    "selectors": []
+  },
+  {
+    "page": "label",
+    "viewport": "mobile",
+    "path": "/barcode-label-generator/",
+    "url": "http://127.0.0.1:4173/barcode-label-generator/",
+    "file": "/Users/zyb/barcode/reports/visual-qa/stage3-fix/label-mobile.png",
+    "title": "Free Barcode Label Generator - Create and Print Barcode Labels",
+    "h1": [
+      "Free Barcode Label Generator"
+    ],
+    "h1Count": 1,
+    "expectedH1Count": 1,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasOverflow": false,
+    "checkOverflow": true,
+    "must": [
+      {
+        "text": "Barcode Value",
+        "found": true
+      },
+      {
+        "text": "Label Template",
+        "found": true
+      }
+    ],
+    "selectors": []
+  }
+]

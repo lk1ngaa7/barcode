@@ -1,7 +1,7 @@
 import type { BarcodeType } from './barcodeTypes'
 
 export type LabelTemplate = 'simple' | 'product' | 'inventory' | 'garment' | 'mrp' | 'lpn'
-export type LabelSize = '2x1' | '3x2' | '1x05' | '25x1' | '4x2' | '4x3'
+export type LabelSize = '2x1' | '3x2' | '1x05' | '25x1' | '4x2' | '4x3' | 'avery5160'
 export type PaperSize = 'letter' | 'a4'
 
 export interface LabelTemplateDefinition {
@@ -113,6 +113,13 @@ export const LABEL_SIZES: Record<LabelSize, LabelSizeDefinition> = {
     label: '4 x 3 inch',
     widthInches: 4,
     heightInches: 3
+  },
+  // Avery 5160/8460 预刻线标签：US Letter 每页 30 张（SERP 竞对均以 Avery 规格描述）
+  avery5160: {
+    id: 'avery5160',
+    label: 'Avery 5160 / 8460 — 30 per sheet',
+    widthInches: 2.625,
+    heightInches: 1
   }
 }
 

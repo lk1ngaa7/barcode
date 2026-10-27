@@ -104,17 +104,35 @@ export function validatePdfLayout(options: ScenarioLabelPdfOptions): string {
   return ''
 }
 
+// 预刻线标签纸的精确网格布局（覆盖默认的自动排布数学）
+interface LabelSheetLayout {
+  marginLeft: number
+  marginTop: number
+  gapX: number
+  gapY: number
+  columns: number
+  rows: number
+}
+
+// Avery 5160/8460：US Letter 3 列 × 10 行 = 30 张
+// 标签 2.625x1 英寸，水平节距 2.75 英寸（间隙 9pt），左右边距 13.5pt，顶边距 36pt
+const LABEL_SHEET_LAYOUTS: Partial<Record<LabelSize, LabelSheetLayout>> = {
+  avery5160: { marginLeft: 13.5, marginTop: 36, gapX: 9, gapY: 0, columns: 3, rows: 10 }
+}
+
 function buildLabelSheetPages(design: LabelDesign, normalizedValue: string, pageWidth: number, pageHeight: number): string[] {
   const labelSize = LABEL_SIZES[design.labelSize]
   const labelWidth = labelSize.widthInches * 72
   const labelHeight = labelSize.heightInches * 72
-  const marginX = 36
-  const marginTop = 36
+  // 预刻线纸使用精确布局，普通尺寸沿用自动计算
+  const preset = LABEL_SHEET_LAYOUTS[design.labelSize]
+  const marginX = preset?.marginLeft ?? 36
+  const marginTop = preset?.marginTop ?? 36
   const marginBottom = 54
-  const gapX = 8
-  const gapY = 8
-  const columns = Math.max(1, Math.floor((pageWidth - marginX * 2 + gapX) / (labelWidth + gapX)))
-  const rows = Math.max(1, Math.floor((pageHeight - marginTop - marginBottom + gapY) / (labelHeight + gapY)))
+  const gapX = preset?.gapX ?? 8
+  const gapY = preset?.gapY ?? 8
+  const columns = preset?.columns ?? Math.max(1, Math.floor((pageWidth - marginX * 2 + gapX) / (labelWidth + gapX)))
+  const rows = preset?.rows ?? Math.max(1, Math.floor((pageHeight - marginTop - marginBottom + gapY) / (labelHeight + gapY)))
   const sheetCapacity = rows * columns
   const labelCount = Math.max(1, Math.min(design.quantity ?? sheetCapacity, 100))
   const pages: string[] = []
